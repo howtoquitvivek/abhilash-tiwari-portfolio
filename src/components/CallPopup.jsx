@@ -30,8 +30,8 @@ const CallPopup = () => {
     }
 
     // Delay before showing (set to 2 minutes for high-intent visitors)
-    const SHOW_DELAY = import.meta.env.DEV ? 10000 : 120000; // 10s in dev, 2m in prod
-    
+    const SHOW_DELAY = import.meta.env.DEV ? 10000 : 10000; // 10s in dev, 10s in prod
+
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, SHOW_DELAY);
@@ -80,7 +80,7 @@ const CallPopup = () => {
     <div className="popup-overlay">
       <div className="popup-content glass-card animate-popup">
         <button className="close-btn" onClick={handleClose} aria-label="Close">&times;</button>
-        
+
         {step === 'form' ? (
           <div className="popup-inner">
             <div className="popup-header">
@@ -88,7 +88,7 @@ const CallPopup = () => {
               <h3>Book a Free Call</h3>
               <p>Drop your details below and we'll reach out to you within 24 hours.</p>
             </div>
-            
+
             <form onSubmit={handleSubmit} className="popup-form">
               <div className="form-group-custom">
                 <input
@@ -139,18 +139,18 @@ const CallPopup = () => {
                   onChange={handleChange}
                 ></textarea>
               </div>
-              
+
               <button type="submit" className="submit-btn" disabled={isSubmitting}>
                 {isSubmitting ? (
-                   <span className="load-spinner"></span>
+                  <span className="load-spinner"></span>
                 ) : (
                   'Request a Callback'
                 )}
               </button>
-              
-              <button 
-                type="button" 
-                className="suppress-btn" 
+
+              <button
+                type="button"
+                className="suppress-btn"
                 onClick={handleSuppressLater}
               >
                 Remind me later
