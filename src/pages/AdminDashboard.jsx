@@ -805,7 +805,21 @@ const AdminDashboard = () => {
             <div className="admin-grid">
               <div className="admin-panel glass-card p-2">
                 <h3 className="left-panel-title">CONFIGURATION</h3>
-                <p className="small text-muted mb-2">Manage global website information.</p>
+                <p className="small text-muted mb-1">Manage global website information.</p>
+
+                <div className="admin-form">
+                  <div className="admin-help-box">
+                    <div className="help-header">
+                      <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z" /></svg>
+                      <span>INTEGRATION GUIDE</span>
+                    </div>
+                    <ul className="help-steps">
+                      <li>1. Go to <strong>Google Maps</strong></li>
+                      <li>2. Click <strong>Share</strong> → <strong>Embed a map</strong></li>
+                      <li>3. Copy ONLY the <code>src="..."</code> URL</li>
+                    </ul>
+                  </div>
+                </div>
 
                 <form onSubmit={handleUpdateMap} className="admin-form">
                   <div className="form-group mb-2">
@@ -830,17 +844,6 @@ const AdminDashboard = () => {
                       onChange={(e) => setMapUrl(e.target.value)}
                       className="modern-textarea"
                     />
-                    <div className="admin-help-box">
-                      <div className="help-header">
-                        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z" /></svg>
-                        <span>INTEGRATION GUIDE</span>
-                      </div>
-                      <ul className="help-steps">
-                        <li>1. Go to <strong>Google Maps</strong></li>
-                        <li>2. Click <strong>Share</strong> → <strong>Embed a map</strong></li>
-                        <li>3. Copy ONLY the <code>src="..."</code> URL</li>
-                      </ul>
-                    </div>
                   </div>
 
                   <button type="submit" className="button-primary w-100" disabled={actionStatus === 'processing'}>
@@ -1426,7 +1429,7 @@ const AdminDashboard = () => {
           border: 1px solid var(--adm-text);
           border-left: 4px solid var(--adm-p);
           padding: 1.25rem;
-          margin-top: 1rem;
+          margin-bottom: 1.25rem;
         }
         .help-header {
           display: flex;
