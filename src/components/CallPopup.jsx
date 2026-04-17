@@ -29,8 +29,8 @@ const CallPopup = () => {
       return; // Skip showing if suppressed
     }
 
-    // Delay before showing (set to 10 minutes for high-intent visitors)
-    const SHOW_DELAY = import.meta.env.DEV ? 10000 : 600000; // 10s in dev, 10m in prod
+    // Delay before showing (set to 2 minutes for high-intent visitors)
+    const SHOW_DELAY = import.meta.env.DEV ? 10000 : 120000; // 10s in dev, 2m in prod
     
     const timer = setTimeout(() => {
       setIsVisible(true);
@@ -44,9 +44,9 @@ const CallPopup = () => {
   };
 
   const handleSuppressLater = () => {
-    // Suppress for 15 minutes
-    const fifteenMinutes = new Date().getTime() + (15 * 60 * 1000);
-    localStorage.setItem('callPopupSuppressedUntil', fifteenMinutes.toString());
+    // Suppress for 2 minutes
+    const twoMinutes = new Date().getTime() + (2 * 60 * 1000);
+    localStorage.setItem('callPopupSuppressedUntil', twoMinutes.toString());
     handleClose();
   };
 
