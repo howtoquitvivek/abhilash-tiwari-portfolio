@@ -1,0 +1,146 @@
+{
+    "colorScheme": "light",
+    "fonts": [
+        {
+            "family": "sans-serif",
+            "count": 76
+        },
+        {
+            "family": "PPNeueMontreal",
+            "count": 65
+        },
+        {
+            "family": "PPNeueMontreal Fallback",
+            "count": 65
+        },
+        {
+            "family": "Roobert",
+            "count": 10
+        },
+        {
+            "family": "Roobert Fallback",
+            "count": 10
+        },
+        {
+            "family": "ui-sans-serif",
+            "count": 1
+        },
+        {
+            "family": "system-ui",
+            "count": 1
+        },
+        {
+            "family": "Apple Color Emoji",
+            "count": 1
+        },
+        {
+            "family": "Segoe UI Emoji",
+            "count": 1
+        },
+        {
+            "family": "Segoe UI Symbol",
+            "count": 1
+        }
+    ],
+    "colors": {
+        "primary": "#48008C",
+        "secondary": "#C799FF",
+        "accent": "#9CA3AF",
+        "background": "#FFFFFF",
+        "textPrimary": "#0D0D0D",
+        "link": "#9CA3AF"
+    },
+    "typography": {
+        "fontFamilies": {
+            "primary": "ui-sans-serif",
+            "heading": "Roobert"
+        },
+        "fontStacks": {
+            "body": [
+                "ui-sans-serif",
+                "system-ui",
+                "sans-serif",
+                "Apple Color Emoji",
+                "Segoe UI Emoji",
+                "Segoe UI Symbol",
+                "Noto Color Emoji"
+            ],
+            "heading": [
+                "Roobert",
+                "Roobert Fallback",
+                "sans-serif"
+            ],
+            "paragraph": [
+                "PPNeueMontreal",
+                "PPNeueMontreal Fallback",
+                "sans-serif"
+            ]
+        },
+        "fontSizes": {
+            "h1": "80px",
+            "h2": "64px",
+            "body": "14px"
+        }
+    },
+    "spacing": {
+        "baseUnit": 4,
+        "borderRadius": "0px"
+    },
+    "components": {},
+    "images": {
+        "favicon": "https://render.com/icon.svg?e6fbdd2e217c0064",
+        "ogImage": "https://cdn.sanity.io/images/hvk0tap5/production/a3528e77b010804af14908fab79f826d66437620-1600x900.png?fit=max&auto=format"
+    },
+    "__llm_logo_reasoning": {
+        "selectedIndex": -1,
+        "reasoning": "LLM failed",
+        "confidence": 0,
+        "rejected": true,
+        "source": "llm"
+    },
+    "__llm_button_reasoning": {
+        "primary": {
+            "index": -1,
+            "text": "N/A",
+            "reasoning": "LLM failed"
+        },
+        "secondary": {
+            "index": -1,
+            "text": "N/A",
+            "reasoning": "LLM failed"
+        },
+        "confidence": 0
+    },
+    "personality": {
+        "tone": "professional",
+        "energy": "medium",
+        "targetAudience": "unknown"
+    },
+    "designSystem": {
+        "framework": "unknown",
+        "componentLibrary": ""
+    },
+    "confidence": {
+        "buttons": 0,
+        "colors": 0,
+        "overall": 0
+    },
+    "__llm_metadata": {
+        "logoSelection": {
+            "llmCalled": true,
+            "llmSucceeded": false,
+            "finalSource": "fallback",
+            "error": "LLM failed",
+            "rawLogoSelection": {
+                "selectedLogoIndex": -1,
+                "selectedLogoReasoning": "LLM failed",
+                "confidence": 0
+            }
+        },
+        "buttonClassification": {
+            "llmCalled": true,
+            "llmSucceeded": false,
+            "error": "LLM call failed or returned fallback values"
+        }
+    }
+}

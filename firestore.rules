@@ -1,0 +1,52 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // --- HELPER FUNCTIONS ---
+    
+    // Check if user is signed in
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // Get the core site settings document
+    function getSettings() {
+      return get(/databases/$(database)/documents/settings/site).data;
+    }
+
+    // Check if user email is in the admin or superadmin lists
+    function isAdmin() {
+      let email = request.auth.token.email.lower();
+      let settings = getSettings();
+      return email in settings.adminEmails || email in settings.superAdminEmails;
+    }
+
+    // Check if user is a superadmin
+    function isSuperAdmin() {
+      let email = request.auth.token.email.lower();
+      let settings = getSettings();
+      return email in settings.superAdminEmails;
+    }
+
+    // --- COLLECTION RULES ---
+
+    // Projects: Publicly readable, Admin manageable
+    match /projects/{projectId} {
+      allow read: if true;
+      allow create, update, delete: if isSignedIn() && isAdmin();
+    }
+
+    // Queries (Inquiries): Public submission, Admin read/manage
+    match /queries/{queryId} {
+      allow create: if true;
+      allow read, update, delete: if isSignedIn() && isAdmin();
+    }
+
+    // Settings & Admin List: Admin read, SuperAdmin manage
+    match /settings/site {
+      allow read: if isSignedIn() && isAdmin();
+      allow write: if isSignedIn() && isSuperAdmin();
+    }
+  }
+}
