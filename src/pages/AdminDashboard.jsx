@@ -1623,7 +1623,7 @@ const AdminDashboard = () => {
         .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
         @media (max-width: 1100px) {
-          .admin-grid { grid-template-columns: 1fr; overflow-y: auto; }
+          .admin-grid { grid-template-columns: 1fr; overflow-y: auto; align-content: start; }
           .admin-panel { height: auto; overflow: visible; padding: 1.5rem 1.25rem !important; }
           .admin-panel:first-child { border-right: none; border-bottom: 2px solid var(--adm-text); padding-bottom: 0.75rem !important; }
           .admin-panel:last-child { padding-top: 1rem !important; }
