@@ -15,11 +15,11 @@ const CallPopup = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Hidden on admin pages
-  const isAdminPage = location.pathname.startsWith('/admin');
+  // Hidden on admin and project detail pages
+  const isExcludedPage = location.pathname.startsWith('/admin') || location.pathname.startsWith('/project');
 
   useEffect(() => {
-    if (isAdminPage) return;
+    if (isExcludedPage) return;
 
     // Check if user has suppressed the popup for the day
     const suppressedUntil = localStorage.getItem('callPopupSuppressedUntil');
@@ -29,15 +29,15 @@ const CallPopup = () => {
       return; // Skip showing if suppressed
     }
 
-    // Delay before showing (set to 2 minutes for high-intent visitors)
-    const SHOW_DELAY = import.meta.env.DEV ? 10000 : 10000; // 10s in dev, 10s in prod
+    // Delay before showing (set to 20 seconds for high-intent visitors)
+    const SHOW_DELAY = import.meta.env.DEV ? 20000 : 20000; // 20s in dev, 20s in prod
 
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, SHOW_DELAY);
 
     return () => clearTimeout(timer);
-  }, [isAdminPage]);
+  }, [isExcludedPage]);
 
   const handleClose = () => {
     setIsVisible(false);
@@ -74,7 +74,7 @@ const CallPopup = () => {
     }
   };
 
-  if (!isVisible || isAdminPage) return null;
+  if (!isVisible || isExcludedPage) return null;
 
   return (
     <div className="popup-overlay">
@@ -224,7 +224,7 @@ const CallPopup = () => {
           height: 52px;
           background: var(--brand-red);
           color: var(--text-white);
-          border-radius: var(--radius-pro-sm);
+          border-radius: 30%;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -256,23 +256,20 @@ const CallPopup = () => {
           right: 1.2rem;
           background: var(--neutral-100);
           border: none;
-          width: 34px;
-          height: 34px;
-          border-radius: var(--radius-pro-sm);
+          width: 35px;
+          height: 40px;
           display: flex;
           align-items: center;
           justify-content: center;
           font-size: 1.2rem;
-          cursor: pointer;
           color: var(--neutral-400);
-          transition: all 0.3s ease;
           z-index: 10;
+          border-radius: 100px;
         }
 
         .close-btn:hover { 
-          background: var(--brand-red); 
-          color: var(--text-white); 
-          transform: rotate(90deg); 
+          background: rgba(var(--accent-rgb), 0.1); 
+          color: var(--accent); 
         }
 
         .popup-form { display: flex; flex-direction: column; gap: 1rem; }
