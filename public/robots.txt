@@ -1,0 +1,8 @@
+# https://www.robotstxt.org/robotstxt.html
+
+User-agent: *
+Allow: /
+Disallow: /admin
+
+# Host
+Host: https://abhilash-tiwari-portfolio.web.app
