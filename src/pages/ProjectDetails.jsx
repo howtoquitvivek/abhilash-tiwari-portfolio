@@ -51,14 +51,15 @@ const ProjectDetails = () => {
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: #ffffff;
-            color: #111827;
+            background: var(--bg-main);
+            color: var(--text-main);
+
           }
           .spinner {
             width: 50px;
             height: 50px;
-            border: 3px solid #f3f4f6;
-            border-top: 3px solid #ef4444;
+            border: 3px solid var(--border-subtle);
+            border-top: 3px solid var(--brand-red);
             border-radius: 50%;
             animation: spin 1s linear infinite;
             margin-bottom: 1rem;
@@ -103,7 +104,8 @@ const ProjectDetails = () => {
             src={mapSrc}
             width="100%"
             height="450"
-            style={{ border: 0, borderRadius: '12px' }}
+            style={{ border: 0, borderRadius: 'var(--radius-pro-inner)' }}
+
             allowFullScreen=""
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
@@ -159,13 +161,10 @@ const ProjectDetails = () => {
                 <h1 className="project-title-large">{project.title}</h1>
                 <div className="project-meta-strip mt-2">
                   <div className="meta-block">
-                    <span className="meta-label">CLIENT</span>
-                    <span className="meta-value">{project.client || 'N/A'}</span>
-                  </div>
-                  <div className="meta-block">
                     <span className="meta-label">LOCATION</span>
                     <span className="meta-value">{project.location || 'N/A'}</span>
                   </div>
+
                   {project.link && (
                     <div className="meta-block">
                       <span className="meta-label">WEBSITE</span>
@@ -199,9 +198,10 @@ const ProjectDetails = () => {
       <style>{`
 
         .project-details-page {
-          background: #ffffff;
+          background: var(--bg-main);
           padding-top: 80px; /* Header height */
         }
+
 
         .container-full { width: 94%; max-width: 1700px; margin: 0 auto; }
 
@@ -215,9 +215,10 @@ const ProjectDetails = () => {
 
         .gallery-item {
           position: relative;
-          border-radius: 24px;
+          border-radius: var(--radius-pro);
           overflow: hidden;
-          background: #f3f4f6;
+          background: var(--bg-soft);
+
           transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -268,12 +269,13 @@ const ProjectDetails = () => {
           -webkit-backdrop-filter: blur(12px);
           border: 1px solid rgba(255, 255, 255, 0.2);
           padding: 0.8rem 1.8rem;
-          border-radius: 100px;
+          border-radius: var(--radius-pill);
           display: flex;
           align-items: center;
           gap: 1.2rem;
-          color: #ffffff;
+          color: var(--text-white);
           box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+
           transform: translateY(10px);
           transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
@@ -300,7 +302,8 @@ const ProjectDetails = () => {
         }
 
         .category-tag {
-          color: #ef4444;
+          color: var(--brand-red);
+
           font-weight: 800;
           letter-spacing: 0.1em;
           font-size: 0.9rem;
@@ -312,17 +315,20 @@ const ProjectDetails = () => {
           font-weight: 900;
           line-height: 1;
           margin: 0.5rem 0 1.5rem;
-          color: #111827;
+          color: var(--text-main);
+          text-transform: capitalize;
         }
+
 
         .project-meta-strip {
           display: flex;
           flex-wrap: wrap;
           gap: 3rem;
           padding: 2rem 0;
-          border-top: 1px solid #eee;
-          border-bottom: 1px solid #eee;
+          border-top: 1px solid var(--border-subtle);
+          border-bottom: 1px solid var(--border-subtle);
         }
+
 
         .meta-block {
           display: flex;
@@ -332,16 +338,21 @@ const ProjectDetails = () => {
         .meta-label {
           font-size: 0.75rem;
           font-weight: 800;
-          color: #6b7280;
+          color: var(--text-muted);
+
           margin-bottom: 0.4rem;
           letter-spacing: 0.05em;
+          text-transform: uppercase;
         }
 
         .meta-value {
           font-size: 1.1rem;
           font-weight: 700;
-          color: #111827;
+          color: var(--text-main);
+          text-transform: capitalize;
         }
+
+
 
         .meta-value.link {
           color: #2563eb;
@@ -351,29 +362,33 @@ const ProjectDetails = () => {
         .large-text {
           font-size: 1.2rem;
           line-height: 1.8;
-          color: #4b5563;
+          color: var(--text-muted);
           white-space: pre-line;
         }
+
 
         .section-title-sm {
           font-size: 1rem;
           font-weight: 850;
-          color: #111827;
+          color: var(--text-main);
           letter-spacing: 0.02em;
         }
 
+
         .map-wrapper {
           box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-          border-radius: 12px;
+          border-radius: var(--radius-pro-inner);
           overflow: hidden;
         }
 
+
         .contact-cta-box {
-          background: #f9fafb;
+          background: var(--bg-soft);
           padding: 2.5rem;
-          border-radius: 16px;
-          border: 1px solid #f3f4f6;
+          border-radius: var(--radius-pro-inner);
+          border: 1px solid var(--border-subtle);
         }
+
 
         .contact-cta-box h4 {
           font-weight: 800;
@@ -398,7 +413,8 @@ const ProjectDetails = () => {
 
         @media (max-width: 768px) {
           .gallery-masonry { grid-template-columns: 1fr; grid-auto-rows: auto; gap: 1rem; }
-          .gallery-item { border-radius: 16px; min-height: 250px; }
+          .gallery-item { border-radius: var(--radius-pro-inner); min-height: 250px; }
+
           .item-1, .item-2, .item-3, .item-4, .item-5 { grid-column: span 1; grid-row: span 1; }
           .project-title-large { font-size: 2.2rem; }
           .project-meta-strip { gap: 1.5rem; }

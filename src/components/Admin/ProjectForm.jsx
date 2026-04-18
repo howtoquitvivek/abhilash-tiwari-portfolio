@@ -9,12 +9,12 @@ const ProjectForm = ({ onProjectAdded, editingProject, onCancel }) => {
   const [formData, setFormData] = useState({
     title: '',
     category: '',
-    client: '',
     location: '',
     description: '',
     link: '',
     mapEmbedUrl: ''
   });
+
   const [primaryImage, setPrimaryImage] = useState(null); // The mandatory first image
   const [additionalMedia, setAdditionalMedia] = useState([]); // List of { file, type, preview } for new uploads
   const [existingMedia, setExistingMedia] = useState([]); // List of { url, type } from DB
@@ -28,19 +28,20 @@ const ProjectForm = ({ onProjectAdded, editingProject, onCancel }) => {
       setFormData({
         title: editingProject.title || '',
         category: editingProject.category || '',
-        client: editingProject.client || '',
         location: editingProject.location || '',
         description: editingProject.description || '',
         link: editingProject.link || '',
         mapEmbedUrl: editingProject.mapEmbedUrl || ''
       });
+
       setExistingMedia(editingProject.media || []);
       setPrimaryImage(null);
       setAdditionalMedia([]);
       setErrorMessage('');
       setStatus('idle');
     } else {
-      setFormData({ title: '', category: '', client: '', location: '', description: '', link: '', mapEmbedUrl: '' });
+      setFormData({ title: '', category: '', location: '', description: '', link: '', mapEmbedUrl: '' });
+
       setPrimaryImage(null);
       setAdditionalMedia([]);
       setExistingMedia([]);
@@ -172,7 +173,8 @@ const ProjectForm = ({ onProjectAdded, editingProject, onCancel }) => {
 
       setStatus('success');
       if (!editingProject) {
-        setFormData({ title: '', category: '', client: '', location: '', description: '', link: '', mapEmbedUrl: '' });
+        setFormData({ title: '', category: '', location: '', description: '', link: '', mapEmbedUrl: '' });
+
         setPrimaryImage(null);
         setAdditionalMedia([]);
         setExistingMedia([]);
@@ -220,19 +222,6 @@ const ProjectForm = ({ onProjectAdded, editingProject, onCancel }) => {
           />
         </div>
         <div className="form-group" style={{ flex: 1 }}>
-          <label className="section-title-xs">CLIENT</label>
-          <input
-            type="text"
-            id="client"
-            name="client"
-            placeholder="e.g. Simbuilt"
-            value={formData.client}
-            onChange={handleInputChange}
-            disabled={status === 'submitting'}
-            className="modern-input"
-          />
-        </div>
-        <div className="form-group" style={{ flex: 1 }}>
           <label className="section-title-xs">LOCATION</label>
           <input
             type="text"
@@ -246,6 +235,7 @@ const ProjectForm = ({ onProjectAdded, editingProject, onCancel }) => {
           />
         </div>
       </div>
+
 
       <div className="form-group mb-2">
         <label className="section-title-xs">DESCRIPTION (BIO)</label>

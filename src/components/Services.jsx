@@ -78,9 +78,10 @@ const Services = () => {
         }
 
         .service-card {
-          background: white;
+          background: var(--bg-main);
           padding: 3rem 2rem;
-          border-radius: var(--radius-md);
+          border-radius: var(--radius-pro-inner);
+
           border-bottom: 3px solid transparent;
           transition: all 0.3s ease;
           box-shadow: 0 10px 30px rgba(0,0,0,0.03);

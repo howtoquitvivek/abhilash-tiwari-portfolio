@@ -207,13 +207,14 @@ const CallPopup = () => {
           max-width: 440px;
           width: 100%;
           position: relative;
-          background: rgba(255, 255, 255, 0.95);
-          border: 1px solid rgba(255, 255, 255, 1);
-          border-radius: 28px;
+          background: var(--bg-main);
+          border: 1px solid var(--border-subtle);
+          border-radius: var(--radius-pro);
           box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.3);
           overflow: hidden;
           margin: auto;
         }
+
 
         .popup-inner { padding: 1.5rem 2.2rem; }
 
@@ -222,24 +223,26 @@ const CallPopup = () => {
         .icon-badge-premium {
           width: 48px;
           height: 48px;
-          background: linear-gradient(135deg, #f59e0b, #ea580c);
+          background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-dark));
           color: white;
-          border-radius: 14px;
+          border-radius: var(--radius-pro-sm);
           display: flex;
           align-items: center;
           justify-content: center;
           margin: 0 auto 0.8rem;
-          box-shadow: 0 10px 20px -5px rgba(245, 158, 11, 0.5);
+          box-shadow: 0 10px 20px -5px var(--accent-gold-glow);
           transform: rotate(-3deg);
         }
+
 
         .popup-header h3 { 
           font-size: 1.5rem; 
           margin-bottom: 0.3rem; 
-          color: #0f172a; 
+          color: var(--text-main); 
           letter-spacing: -0.02em;
           font-weight: 800;
         }
+
         .popup-header p { 
           font-size: 0.85rem; 
           color: #64748b; 
@@ -256,16 +259,17 @@ const CallPopup = () => {
           border: none;
           width: 36px;
           height: 36px;
-          border-radius: 12px;
+          border-radius: var(--radius-pro-sm);
           display: flex;
           align-items: center;
           justify-content: center;
           font-size: 1.4rem;
           cursor: pointer;
-          color: #94a3b8;
+          color: var(--text-muted);
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           z-index: 10;
         }
+
         .close-btn:hover { 
           background: #ef4444; 
           color: white; 
@@ -285,16 +289,17 @@ const CallPopup = () => {
         .premium-input, .premium-textarea {
           width: 100%;
           padding: 0.8rem 1.1rem;
-          border-radius: 14px;
-          border: 2px solid rgba(15, 23, 42, 0.06);
-          background: #f8fafc;
+          border-radius: var(--radius-pro-inner);
+          border: 2px solid var(--border-subtle);
+          background: var(--bg-soft);
           font-family: inherit;
           font-size: 0.9rem;
           font-weight: 500;
-          color: #1e293b;
+          color: var(--text-main);
           transition: all 0.3s ease;
           box-sizing: border-box;
         }
+
 
         .premium-input::placeholder, .premium-textarea::placeholder {
           color: #94a3b8;
@@ -302,17 +307,19 @@ const CallPopup = () => {
 
         .premium-input:focus, .premium-textarea:focus {
           outline: none;
-          background: white;
-          border-color: #f59e0b;
-          box-shadow: 0 10px 20px -10px rgba(245, 158, 11, 0.15);
+          background: var(--bg-main);
+          border-color: var(--accent-gold);
+          box-shadow: 0 10px 20px -10px var(--accent-gold-glow);
         }
 
+
         .submit-btn-premium {
-          background: linear-gradient(135deg, #f59e0b, #fbbf24);
+          background: linear-gradient(135deg, var(--accent-gold), #fbbf24);
           color: #451a03;
           border: none;
-          border-radius: 16px;
+          border-radius: var(--radius-pro-inner);
           padding: 1rem;
+
           font-weight: 800;
           font-family: 'Outfit', sans-serif;
           font-size: 1.1rem;
@@ -324,14 +331,16 @@ const CallPopup = () => {
           justify-content: center;
           gap: 0.75rem;
           min-height: 56px;
-          box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.4);
+          box-shadow: 0 10px 25px -5px var(--accent-gold-glow);
         }
+
 
         .submit-btn-premium:hover {
           transform: translateY(-4px) scale(1.02);
-          box-shadow: 0 20px 35px -8px rgba(245, 158, 11, 0.5);
+          box-shadow: 0 20px 35px -8px var(--accent-gold-glow);
           filter: brightness(1.05);
         }
+
 
         .submit-btn-premium:active { transform: translateY(-1px); }
 
@@ -348,7 +357,8 @@ const CallPopup = () => {
           transition: all 0.2s;
           text-align: center;
         }
-        .dismiss-btn-premium:hover { color: #475569; }
+        .dismiss-btn-premium:hover { color: var(--text-main); }
+
 
         .success-message-premium { 
           padding: 4rem 2.5rem; 
@@ -401,11 +411,12 @@ const CallPopup = () => {
         }
 
         .button-premium-outline {
-          background: white;
-          border: 2px solid #e2e8f0;
-          color: #475569;
+          background: var(--bg-main);
+          border: 2px solid var(--border-subtle);
+          color: var(--text-muted);
           padding: 0.8rem 2rem;
-          border-radius: 12px;
+          border-radius: var(--radius-pro-sm);
+
           font-weight: 700;
           transition: all 0.2s;
         }

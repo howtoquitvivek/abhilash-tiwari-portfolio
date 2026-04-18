@@ -492,9 +492,7 @@ const AdminDashboard = () => {
                           {project.category && (
                             <span className="source-tag" style={{ borderStyle: 'dashed', opacity: 0.8 }}>{project.category.toUpperCase()}</span>
                           )}
-                          {project.client && (
-                            <span className="source-tag" style={{ background: '#f0f9ff', color: '#0369a1', opacity: 0.8 }}>👤 {project.client.toUpperCase()}</span>
-                          )}
+
                           {project.location && (
                             <span className="source-tag" style={{ background: 'transparent', opacity: 0.8 }}>📍 {project.location}</span>
                           )}

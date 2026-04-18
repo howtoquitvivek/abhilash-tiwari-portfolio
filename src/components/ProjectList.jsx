@@ -3,6 +3,8 @@ import { getProjects } from '../services/projectService';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
 import { Link } from 'react-router-dom';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+
 
 
 // Import Swiper styles
@@ -115,10 +117,9 @@ const ProjectList = () => {
                         <div className="card-meta-left">
                           <h3 className="card-title-main">{project.title}</h3>
                           <div className="card-metadata">
-                            <span className="meta-item">Client: <strong>{project.client || 'Simbuilt'}</strong></span>
-                            <span className="meta-divider">|</span>
                             <span className="meta-item">Location: <strong>{project.location || 'Bhopal, Victoria'}</strong></span>
                           </div>
+
                         </div>
                         <Link to={`/project/${project.id}`} className="read-more-pill">Read More</Link>
                       </div>
@@ -134,34 +135,36 @@ const ProjectList = () => {
 
             {/* Custom Navigation Arrows - Positioned Over Images */}
             <button className="swiper-button-prev-custom">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="19" y1="12" x2="5" y2="12"></line>
-                <polyline points="12 19 5 12 12 5"></polyline>
+              <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="22" y1="12" x2="2" y2="12"></line>
+                <polyline points="9 19 2 12 9 5"></polyline>
               </svg>
             </button>
             <button className="swiper-button-next-custom">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
+              <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <polyline points="15 5 22 12 15 19"></polyline>
               </svg>
             </button>
+
+
+
+
+
 
           </div>
         )}
 
-        {/* Section Footer Buttons */}
-        <div className="projects-footer" data-aos="fade-up">
-          <button className="footer-btn btn-all">All Project</button>
-          <button className="footer-btn btn-contact">Contact Us</button>
-        </div>
+
       </div>
 
       <style>{`
         .projects-section {
-          padding: 8rem 0;
-          background-color: #ffffff;
-          overflow: hidden;
+          padding: 5rem 0 7rem; /* Reduced vertical footprint */
+          background-color: var(--bg-main);
         }
+
+
 
         .container-full {
           width: 100%;
@@ -175,10 +178,12 @@ const ProjectList = () => {
           width: 90%;
           max-width: 1400px;
           margin: 0 auto;
+          margin-bottom: 2rem;
         }
 
         .subtitle-premium {
-          color: #ef4444; 
+          color: var(--brand-red); 
+
           font-weight: 800;
           letter-spacing: 0.1em;
           font-size: 0.85rem;
@@ -187,36 +192,47 @@ const ProjectList = () => {
         }
 
         .title-premium {
-          font-size: 3.5rem;
+          font-size: 2.4rem;
           line-height: 1.1;
-          color: #111827;
+          color: var(--text-main);
+
           max-width: 800px;
           margin: 0 auto;
           font-weight: 900;
           letter-spacing: -0.02em;
         }
 
+
+
         .carousel-wrapper {
           position: relative;
           margin-top: 5rem;
-          padding: 0; /* Full edge-to-edge */
+          padding: 0; 
         }
 
+        /* Essential for preventing shadow clipping */
+        .projects-swiper {
+          overflow: visible !important;
+          padding-bottom: 4rem !important;
+        }
 
         .project-slide-card {
           position: relative;
-          padding-bottom: 8rem; /* Space for the overlapping card */
+          padding-bottom: 10rem; /* Increased space for shadow and overlap */
         }
+
 
         .slide-image-container {
           width: 100%;
-          height: 620px; /* Consistent tall height from reference */
-          border-radius: 12px;
+          height: 480px; /* Reduced from 620px to match high-end proportions */
+          border-radius: var(--radius-pro-inner);
           overflow: hidden;
-          background: #f3f4f6;
+          background: var(--bg-soft);
           box-shadow: 0 4px 12px rgba(0,0,0,0.03);
           display: block;
         }
+
+
 
         .slide-image {
           width: 100%;
@@ -231,15 +247,23 @@ const ProjectList = () => {
 
         .slide-content-card {
           position: absolute;
-          bottom: 2rem; /* Adjusted for better overlap */
-          left: 8%;
-          right: 8%;
-          background: #ffffff;
-          padding: 3rem; /* Generous padding as per reference */
-          border-radius: 16px;
+          bottom: 4.2rem; 
+          left: 3%;
+          right: 3%;
+          background: var(--bg-main);
+          padding: 2rem; 
+          border-radius: var(--radius-pro-inner);
+
           box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.12);
           z-index: 2;
           border: 1px solid rgba(0,0,0,0.03);
+          
+          /* Fixed height and layout for uniform size */
+          height: 220px;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          overflow: hidden;
         }
 
         .card-top-row {
@@ -253,11 +277,14 @@ const ProjectList = () => {
         .card-title-main {
           font-size: 2rem;
           font-weight: 900;
-          color: #111827;
+          color: var(--text-main);
+
           margin-bottom: 0.6rem;
           letter-spacing: -0.01em;
           line-height: 1.2;
+          text-transform: capitalize; /* Auto-correct casing */
         }
+
 
         .card-metadata {
           font-size: 0.95rem;
@@ -270,7 +297,9 @@ const ProjectList = () => {
         .card-metadata strong {
           color: #3b82f6;
           font-weight: 700;
+          text-transform: capitalize; /* Auto-correct casing */
         }
+
 
         .meta-divider {
           color: #e5e7eb;
@@ -279,9 +308,10 @@ const ProjectList = () => {
 
         .read-more-pill {
           padding: 0.8rem 2.5rem;
-          border-radius: 100px;
-          border: 1.5px solid #111827;
-          color: #111827;
+          border-radius: var(--radius-pill);
+          border: 1.5px solid var(--brand-black);
+          color: var(--brand-black);
+
           font-weight: 900;
           text-decoration: none;
           font-size: 0.9rem;
@@ -292,29 +322,33 @@ const ProjectList = () => {
         }
 
         .read-more-pill:hover {
-          background: #111827;
-          color: #ffffff;
+          background: var(--brand-black);
+          color: var(--text-white);
           transform: translateY(-2px);
         }
 
+
         .card-description-main {
-          color: #6b7280;
+          color: var(--text-muted);
+
           font-size: 1.05rem;
           line-height: 1.8;
           display: -webkit-box;
-          -webkit-line-clamp: 2;
+          -webkit-line-clamp: 3; /* Increased slightly */
           -webkit-box-orient: vertical;
           overflow: hidden;
+          margin-top: auto; /* Push to bottom of content area but above pill */
         }
+
 
         /* Custom Arrows - Vertical Center of the Slide */
         .swiper-button-prev-custom, .swiper-button-next-custom {
           position: absolute;
           top: 45%; 
-          transform: translateY(-50%);
-          width: 54px;
-          height: 54px;
-          background: #ffffff;
+          transform: translateY(-150%);
+          width: 70px;
+          height: 70px;
+          background: var(--bg-main);
           border-radius: 50%;
           border: none;
           box-shadow: 0 10px 25px rgba(0,0,0,0.1);
@@ -324,60 +358,24 @@ const ProjectList = () => {
           cursor: pointer;
           z-index: 100;
           transition: all 0.3s ease;
-          color: #111827;
+          color: var(--brand-black);
         }
 
-        .swiper-button-prev-custom { left: 2rem; }
-        .swiper-button-next-custom { right: 2rem; }
+
+        .swiper-button-prev-custom { left: 12rem; }
+        .swiper-button-next-custom { right: 12rem; }
+
 
 
         .swiper-button-prev-custom:hover, .swiper-button-next-custom:hover {
-          background: #111827;
-          color: #ffffff;
-          transform: translateY(-50%) scale(1.1);
+          background: var(--brand-black);
+          color: var(--text-white);
+          transform: translateY(-150%) scale(1.1);
         }
 
-        /* Section Footer */
-        .projects-footer {
-          display: flex;
-          justify-content: center;
-          gap: 1.5rem;
-          margin-top: 6rem;
-        }
 
-        .footer-btn {
-          padding: 1.5rem 5rem;
-          border-radius: 100px;
-          font-weight: 950;
-          font-size: 1.1rem;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          letter-spacing: 0.02em;
-        }
 
-        .btn-all {
-          background: #2563eb;
-          color: #ffffff;
-          border: none;
-        }
 
-        .btn-all:hover {
-          background: #1d4ed8;
-          transform: translateY(-5px);
-          box-shadow: 0 20px 40px rgba(37, 99, 235, 0.25);
-        }
-
-        .btn-contact {
-          background: #f3f4f6;
-          color: #111827;
-          border: 1px solid #e5e7eb;
-        }
-
-        .btn-contact:hover {
-          background: #e5e7eb;
-          transform: translateY(-5px);
-          box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-        }
 
         @media (max-width: 1200px) {
           .slide-content-card { padding: 2.5rem; left: 5%; right: 5%; }
@@ -392,8 +390,7 @@ const ProjectList = () => {
           .card-top-row { flex-direction: column; align-items: flex-start; gap: 1.2rem; }
           .read-more-pill { width: 100%; text-align: center; }
           .slide-content-card { padding: 2rem; bottom: 1rem; }
-          .projects-footer { flex-direction: column; padding: 0 1.5rem; }
-          .footer-btn { width: 100%; padding: 1.2rem; }
+
           .swiper-button-prev-custom, .swiper-button-next-custom { width: 44px; height: 44px; }
         }
       `}</style>

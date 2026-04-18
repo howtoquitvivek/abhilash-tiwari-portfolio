@@ -42,7 +42,8 @@ const Header = () => {
           left: 0;
           right: 0;
           z-index: 1000;
-          padding: 1.5rem 0;
+          padding: 1rem 0;
+
           transition: all 0.3s ease;
           border-bottom: 1px solid transparent;
         }
