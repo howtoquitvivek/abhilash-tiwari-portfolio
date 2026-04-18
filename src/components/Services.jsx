@@ -20,12 +20,12 @@ const services = [
 
 const Services = () => {
   return (
-    <section id="services" className="services-section">
+    <section id="services" className="services-section section-pro">
       <div className="container">
-        <div className="section-header text-center mb-2" data-aos="fade-up">
-          <span className="subtitle">What We Do</span>
-          <h2 className="title">Our Specialized Services</h2>
-          <div className="accent-bar mx-auto"></div>
+        <div className="section-header-pro" data-aos="fade-up">
+          <span className="subtitle-brand">WHAT WE DO</span>
+          <h2 className="title-brand">Our Specialized Services</h2>
+          <div className="brand-accent-line mx-auto"></div>
         </div>
 
         <div className="services-grid">
@@ -49,39 +49,17 @@ const Services = () => {
           background-color: var(--surface);
         }
 
-        .subtitle {
-          color: var(--accent);
-          text-transform: uppercase;
-          font-weight: 600;
-          letter-spacing: 2px;
-          font-size: 0.8rem;
-          display: block;
-          margin-bottom: 0.5rem;
-        }
-
-        .title {
-          font-size: 2.5rem;
-        }
-
-        .accent-bar {
-          width: 60px;
-          height: 4px;
-          background: var(--accent);
-          margin: 1.5rem auto;
-        }
-
         .services-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
           gap: 2rem;
-          margin-top: 3rem;
+          margin-top: 1.5rem; /* Standardized spacing */
         }
 
         .service-card {
           background: var(--bg-main);
           padding: 3rem 2rem;
           border-radius: var(--radius-pro-inner);
-
           border-bottom: 3px solid transparent;
           transition: all 0.3s ease;
           box-shadow: 0 10px 30px rgba(0,0,0,0.03);

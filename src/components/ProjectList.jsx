@@ -3,8 +3,6 @@ import { getProjects } from '../services/projectService';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
-
 
 
 // Import Swiper styles
@@ -67,13 +65,12 @@ const ProjectList = () => {
   }
 
   return (
-    <section id="projects" className="projects-section">
+    <section id="projects" className="projects-section section-pro">
       <div className="container-full">
-        <div className="section-header-wrapper" data-aos="fade-up">
-          <div className="section-header text-center mb-5">
-            <span className="subtitle-premium">OUR PROJECTS —</span>
-            <h2 className="title-premium">We Provide Effective Solution in Construction</h2>
-          </div>
+        <div className="section-header-pro" data-aos="fade-up">
+          <span className="subtitle-brand">OUR PROJECTS</span>
+          <h2 className="title-brand">Effective Solutions in Construction</h2>
+          <div className="brand-accent-line mx-auto"></div>
         </div>
 
 
@@ -160,9 +157,14 @@ const ProjectList = () => {
 
       <style>{`
         .projects-section {
-          padding: 5rem 0 7rem; /* Reduced vertical footprint */
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          padding: 8rem 0;
           background-color: var(--bg-main);
+          overflow: hidden;
         }
+
 
 
 
@@ -174,39 +176,38 @@ const ProjectList = () => {
         }
 
 
-        .section-header-wrapper {
-          width: 90%;
-          max-width: 1400px;
-          margin: 0 auto;
+        .section-header-pro {
           margin-bottom: 2rem;
         }
-
-        .subtitle-premium {
-          color: var(--brand-red); 
-
+        .subtitle-brand {
+          font-size: 0.75rem;
           font-weight: 800;
-          letter-spacing: 0.1em;
-          font-size: 0.85rem;
+          letter-spacing: 0.15em;
+          color: var(--brand-red);
+          text-transform: uppercase;
           display: block;
-          margin-bottom: 1rem;
+          margin-bottom: 0.25rem;
         }
-
-        .title-premium {
-          font-size: 2.4rem;
-          line-height: 1.1;
-          color: var(--text-main);
-
-          max-width: 800px;
-          margin: 0 auto;
+        .title-brand {
+          font-size: 2.2rem;
           font-weight: 900;
+          color: var(--brand-black);
           letter-spacing: -0.02em;
         }
+        .brand-accent-line {
+          width: 40px;
+          height: 3px;
+          background: var(--brand-red);
+          margin-top: 1rem;
+        }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .text-center { text-align: center; }
 
 
 
         .carousel-wrapper {
           position: relative;
-          margin-top: 5rem;
+          margin-top: 1.5rem; /* Reduced from 5rem to match other sections */
           padding: 0; 
         }
 
@@ -224,7 +225,7 @@ const ProjectList = () => {
 
         .slide-image-container {
           width: 100%;
-          height: 480px; /* Reduced from 620px to match high-end proportions */
+          height: 520px; /* Increased from 480px for a taller, more editorial look */
           border-radius: var(--radius-pro-inner);
           overflow: hidden;
           background: var(--bg-soft);
@@ -345,9 +346,9 @@ const ProjectList = () => {
         .swiper-button-prev-custom, .swiper-button-next-custom {
           position: absolute;
           top: 45%; 
-          transform: translateY(-150%);
-          width: 70px;
-          height: 70px;
+          transform: translateY(-6.5rem);
+          width: 55px;
+          height: 55px;
           background: var(--bg-main);
           border-radius: 50%;
           border: none;

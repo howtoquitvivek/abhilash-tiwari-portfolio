@@ -17,96 +17,76 @@ const Hero = () => {
             <a href="#contact" className="cta-button button-outline">Contact Me</a>
           </div>
         </div>
-        
-        <div className="hero-image-wrap" data-aos="fade-left">
-          <div 
-            className="hero-placeholder-image" 
-            role="img" 
-            aria-label="Illustration of a major construction site in Jabalpur"
-          >
-             {/* Phase 2 Requirement: Solid black placeholder */}
-          </div>
-        </div>
       </div>
 
       <style>{`
         .hero {
-          padding: 10rem 0 6rem;
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding: var(--header-height) 1rem 4rem;
           background: radial-gradient(circle at 10% 20%, rgba(245, 158, 11, 0.05) 0%, transparent 50%);
+          text-align: center;
+          position: relative;
         }
+
 
         .hero-container {
-          display: grid;
-          grid-template-columns: 1.2fr 0.8fr;
-          gap: 4rem;
-          align-items: center;
+          max-width: 1000px;
+          margin: 0 auto;
+          width: 100%;
         }
 
+
         .hero-title {
-          font-size: clamp(2.5rem, 5vw, 4rem);
+          font-size: clamp(2.8rem, 6vw, 4.5rem);
           line-height: 1.1;
-          margin-bottom: 1.5rem;
+          margin-bottom: 2rem;
+          font-weight: 900;
+          letter-spacing: -0.02em;
         }
 
         .hero-title span {
-          color: var(--accent);
+          color: var(--brand-red);
         }
 
         .hero-subtitle {
-          font-size: 1.2rem;
+          font-size: 1.35rem;
           color: var(--text-muted);
-          max-width: 500px;
-          margin-bottom: 2.5rem;
+          max-width: 700px;
+          margin: 0 auto 3rem;
+          line-height: 1.6;
         }
 
         .hero-actions {
           display: flex;
           gap: 1.5rem;
+          justify-content: center;
         }
 
-        .hero-image-wrap {
-          position: relative;
-        }
-
-        .hero-placeholder-image {
-          width: 100%;
-          aspect-ratio: 4/5;
-          background-color: var(--primary);
-          border-radius: var(--radius-lg);
-          box-shadow: 20px 20px 60px rgba(0,0,0,0.1);
-          transform: rotate(2deg);
-        }
-
-        .hero-placeholder-image::after {
-          content: '';
-          position: absolute;
-          inset: -10px;
-          border: 2px solid var(--accent);
-          border-radius: var(--radius-lg);
-          z-index: -1;
-          transform: rotate(-4deg);
-          opacity: 0.3;
-        }
-
-        @media (max-width: 992px) {
-          .hero-container {
-            grid-template-columns: 1fr;
-            text-align: center;
+        @media (max-width: 768px) {
+          .hero {
+            padding: 10rem 1rem 5rem;
           }
-
+          .hero-title {
+            font-size: 2.2rem;
+          }
           .hero-subtitle {
-            margin: 0 auto 2.5rem;
+            font-size: 1.1rem;
           }
-
           .hero-actions {
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
           }
-
-          .hero-placeholder-image {
-            max-width: 400px;
-            margin: 0 auto;
+          .cta-button {
+            width: 100%;
+            max-width: 300px;
           }
         }
+
       `}</style>
     </section>
   );

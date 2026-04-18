@@ -199,8 +199,9 @@ const ProjectDetails = () => {
 
         .project-details-page {
           background: var(--bg-main);
-          padding-top: 80px; /* Header height */
+          padding-top: var(--header-height); /* Dynamic header height */
         }
+
 
 
         .container-full { width: 94%; max-width: 1700px; margin: 0 auto; }

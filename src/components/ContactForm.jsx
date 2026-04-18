@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { addQuery } from '../services/projectService';
 import { sendContactEmail } from '../services/emailService';
 import { getSettings } from '../services/settingsService';
-import { Clock, CheckCircle, ShieldCheck } from 'lucide-react';
+import { Clock, CheckCircle, ShieldCheck, MapPin, Navigation } from 'lucide-react';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -96,226 +96,252 @@ const ContactForm = () => {
   };
 
   return (
-    <section id="contact" className="contact-section">
-      <div className="container">
+    <>
+      <section id="contact" className="contact-section section-pro">
+        <div className="container">
+          {/* SECTION HEADER */}
+          <div className="section-header-pro" data-aos="fade-up">
+            <span className="subtitle-brand">GET IN TOUCH</span>
+            <h2 className="title-brand">Contact Us</h2>
+            <div className="brand-accent-line mx-auto"></div>
+          </div>
 
-        {/* PREMIUM MASTER CONTACT CARD */}
-        <div className="master-contact-card" data-aos="zoom-in" data-aos-duration="1200">
-
-          {/* Left Panel: High-Impact Editorial Branding */}
-          <div className="contact-brand-panel">
-            {/* Architectural Blueprint Pattern Overlay */}
-            <div className="blueprint-overlay"></div>
-
-            <div className="panel-content-pro">
-              <div className="status-badge" data-aos="fade-right" data-aos-delay="400">
-                <ShieldCheck size={14} className="mr-min" />
-                TRUSTED BY 200+ CLIENTS
-              </div>
-
-              <h2 className="brand-header">
-                Take the <span className="text-glow-red">first step</span> today, and we'll <span className="text-italic">deliver</span> a day earlier!
-              </h2>
-
-              <p className="brand-subtext">
-                Contact us today for a free consultation or quote. Our technical team is ready to answer all your structural questions and get started on your vision.
-              </p>
-
-              <div className="info-feature-grid mt-4">
-                <div className="feature-item-pro">
-                  <div className="feature-icon-glass"><Clock size={20} /></div>
-                  <div className="feature-text">
-                    <strong>24h Response</strong>
-                    <p>Guaranteed feedback</p>
-                  </div>
+          {/* PREMIUM MASTER CONTACT CARD */}
+          <div className="master-contact-card" data-aos="zoom-in" data-aos-duration="1200">
+            {/* Left Panel: High-Impact Editorial Branding */}
+            <div className="contact-brand-panel">
+              <div className="blueprint-overlay"></div>
+              <div className="panel-content-pro">
+                <div className="status-badge" data-aos="fade-right" data-aos-delay="400">
+                  <ShieldCheck size={14} className="mr-min" />
+                  TRUSTED BY 200+ CLIENTS
                 </div>
-                <div className="feature-item-pro">
-                  <div className="feature-icon-glass"><CheckCircle size={20} /></div>
-                  <div className="feature-text">
-                    <strong>Free Consultation</strong>
-                    <p>On-site expert visit</p>
+                <h2 className="brand-header">
+                  Take the <span className="text-glow-red">first step</span> today, and we'll <span className="text-italic">deliver</span> a day earlier!
+                </h2>
+                <p className="brand-subtext">
+                  Contact us today for a free consultation or quote. Our technical team is ready to answer all your structural questions and get started on your vision.
+                </p>
+                <div className="info-feature-grid mt-4">
+                  <div className="feature-item-pro">
+                    <div className="feature-icon-glass"><Clock size={20} /></div>
+                    <div className="feature-text">
+                      <strong>24h Response</strong>
+                      <p>Guaranteed feedback</p>
+                    </div>
+                  </div>
+                  <div className="feature-item-pro">
+                    <div className="feature-icon-glass"><CheckCircle size={20} /></div>
+                    <div className="feature-text">
+                      <strong>Free Consultation</strong>
+                      <p>On-site expert visit</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Right Panel: Sophisticated Form */}
-          <div className="contact-form-panel">
-
-            <form onSubmit={handleSubmit} className="premium-form">
-              <div style={{ display: 'none' }}>
-                <input type="text" name="honeypot" value={formData.honeypot} onChange={handleChange} tabIndex="-1" />
-              </div>
-
-              <div className="form-row">
-                <div className="form-group flex-1">
-                  <label className="label-pro">FIRST NAME</label>
+            {/* Right Panel: Sophisticated Form */}
+            <div className="contact-form-panel">
+              <form onSubmit={handleSubmit} className="premium-form">
+                <div style={{ display: 'none' }}>
+                  <input type="text" name="honeypot" value={formData.honeypot} onChange={handleChange} tabIndex="-1" />
+                </div>
+                <div className="form-row">
+                  <div className="form-group flex-1">
+                    <label className="label-pro">FIRST NAME</label>
+                    <input
+                      type="text"
+                      name="firstName"
+                      placeholder="Enter first name"
+                      value={formData.firstName}
+                      onChange={handleChange}
+                      disabled={status === 'submitting'}
+                      className="input-pro"
+                    />
+                  </div>
+                  <div className="form-group flex-1">
+                    <label className="label-pro">LAST NAME</label>
+                    <input
+                      type="text"
+                      name="lastName"
+                      placeholder="Enter last name"
+                      value={formData.lastName}
+                      onChange={handleChange}
+                      disabled={status === 'submitting'}
+                      className="input-pro"
+                    />
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label className="label-pro">BUSINESS EMAIL</label>
                   <input
-                    type="text"
-                    name="firstName"
-                    placeholder="Enter first name"
-                    value={formData.firstName}
+                    type="email"
+                    name="email"
+                    placeholder="you@company.com"
+                    value={formData.email}
                     onChange={handleChange}
                     disabled={status === 'submitting'}
                     className="input-pro"
                   />
                 </div>
-                <div className="form-group flex-1">
-                  <label className="label-pro">LAST NAME</label>
+                <div className="form-group">
+                  <label className="label-pro">PHONE NUMBER</label>
                   <input
-                    type="text"
-                    name="lastName"
-                    placeholder="Enter last name"
-                    value={formData.lastName}
+                    type="tel"
+                    name="phone"
+                    placeholder="+91 00000 00000"
+                    value={formData.phone}
                     onChange={handleChange}
                     disabled={status === 'submitting'}
                     className="input-pro"
                   />
                 </div>
-              </div>
-
-              <div className="form-group">
-                <label className="label-pro">BUSINESS EMAIL</label>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="you@company.com"
-                  value={formData.email}
-                  onChange={handleChange}
-                  disabled={status === 'submitting'}
-                  className="input-pro"
-                />
-              </div>
-
-              <div className="form-group">
-                <label className="label-pro">PHONE NUMBER</label>
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="+91 00000 00000"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  disabled={status === 'submitting'}
-                  className="input-pro"
-                />
-              </div>
-
-              <div className="form-group">
-                <label className="label-pro">PROJECT DETAILS</label>
-                <textarea
-                  name="message"
-                  rows="4"
-                  placeholder="Tell us about your project or vision..."
-                  value={formData.message}
-                  onChange={handleChange}
-                  disabled={status === 'submitting'}
-                  className="input-pro h-auto"
-                ></textarea>
-              </div>
-
-              <button
-                type="submit"
-                className="submit-btn-pro"
-                disabled={status === 'submitting'}
-              >
-                {status === 'submitting' ? (
-                  <span className="flex items-center justify-center gap-1">
-                    <div className="spinner-loader"></div> PROCESSING...
-                  </span>
-                ) : 'SEND ENQUIRY'}
-              </button>
-
-              {status === 'success' && (
-                <div className="alert success-alert mt-2 animate-bounce-in">
-                  ✓ Success! We'll be in touch within 24 hours.
+                <div className="form-group">
+                  <label className="label-pro">PROJECT DETAILS</label>
+                  <textarea
+                    name="message"
+                    rows="3"
+                    placeholder="Tell us about your project or vision..."
+                    value={formData.message}
+                    onChange={handleChange}
+                    disabled={status === 'submitting'}
+                    className="input-pro h-auto"
+                  ></textarea>
                 </div>
-              )}
-              {status === 'error' && (
-                <div className="alert error-alert mt-2">
-                  ✕ {errorMessage}
-                </div>
-              )}
-            </form>
-          </div>
-        </div>
-
-        {/* MAP SECTION: FULL-WIDTH ROUNDED */}
-        <div className="map-card-wrapper" data-aos="fade-up" data-aos-duration="1000">
-          <div className="map-header-inner">
-            <span className="location-tag">VISIT OUR STUDIO</span>
-            <h3>Technical HQ – Jabalpur</h3>
-            <div className="map-meta-strip mt-1">
-              <p>📍 {mapData.address}</p>
-              <span className="strip-divider">|</span>
-              <p>⌚ Mon - Sat: 10:00 - 18:00</p>
+                <button
+                  type="submit"
+                  className="submit-btn-pro"
+                  disabled={status === 'submitting'}
+                >
+                  {status === 'submitting' ? (
+                    <span className="flex items-center justify-center gap-1">
+                      <div className="spinner-loader"></div> PROCESSING...
+                    </span>
+                  ) : 'SEND ENQUIRY'}
+                </button>
+                {status === 'success' && (
+                  <div className="alert success-alert mt-2 animate-bounce-in">
+                    ✓ Success! We'll be in touch within 24 hours.
+                  </div>
+                )}
+                {status === 'error' && (
+                  <div className="alert error-alert mt-2">
+                    ✕ {errorMessage}
+                  </div>
+                )}
+              </form>
             </div>
           </div>
-          <div className="google-map-pro">
-            <iframe
-              title="Office Location"
-              src={mapData.url}
-              width="100%"
-              height="400"
+        </div>
+      </section>
 
-              style={{ border: 0, filter: 'grayscale(10%) contrast(110%)' }}
-              allowFullScreen=""
-              loading="lazy"
-            ></iframe>
+      <section id="map-location" className="map-section-dedicated section-pro">
+        <div className="container">
+          <div className="section-header-pro" data-aos="fade-up">
+            <span className="subtitle-brand">VISIT OUR OFFICE</span>
+            <h2 className="title-brand">We are located in Jabalpur</h2>
+            <div className="brand-accent-line mx-auto"></div>
+          </div>
+
+          <div className="map-card-wrapper" data-aos="fade-up" data-aos-duration="1000">
+            <div className="map-grid-pro">
+              {/* Left Side: Editorial Location Info */}
+              <div className="map-info-panel">
+                <div className="blueprint-overlay"></div>
+                <div className="panel-content-pro">
+                  <div className="location-detail-group">
+                    <div className="feature-icon-glass"><MapPin size={22} /></div>
+                    <div className="loc-text-pro">
+                      <h3>Office Address</h3>
+                      <p>{mapData.address}</p>
+                    </div>
+                  </div>
+
+                  <div className="location-detail-group mt-3">
+                    <div className="feature-icon-glass"><Clock size={22} /></div>
+                    <div className="loc-text-pro">
+                      <h3>Working Hours</h3>
+                      <p>Mon - Sat: 10:00 AM - 6:00 PM</p>
+                      <span className="availability-tag">Studio Open</span>
+                    </div>
+                  </div>
+
+                  <div className="map-header-inner mt-4">
+                    <h4 className="loc-header-small">Join us for a <span className="text-glow-red">live discussion</span> about your building vision.</h4>
+                  </div>
+
+                  <div className="map-action-footer mt-4">
+                    <a
+                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapData.address)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="directions-btn-pro"
+                    >
+                      <Navigation size={18} className="mr-min" />
+                      GET DIRECTIONS
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Side: The Map itself */}
+              <div className="map-frame-panel">
+                <div className="google-map-pro">
+                  <iframe
+                    title="Office Location"
+                    src={mapData.url}
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0, filter: 'grayscale(15%) contrast(110%) brightness(95%)' }}
+                    allowFullScreen=""
+                    loading="lazy"
+                  ></iframe>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
       <style>{`
         .contact-section {
-          padding: 5rem 0;
           background-color: var(--bg-soft);
-          font-family: 'Outfit', 'Inter', sans-serif;
         }
 
-
-
-
-        .container {
-          max-width: 1240px;
-          margin: 0 auto;
-          width: 90%;
+        .map-section-dedicated {
+          background-color: var(--bg-main);
         }
 
-        /* MASTER CARD LAYOUT */
         .master-contact-card {
           display: grid;
-          grid-template-columns: 1.1fr 1.3fr;
+          grid-template-columns: 1fr 1.3fr; /* Synced with Map Card */
           background: var(--bg-main);
           border-radius: var(--radius-pro);
           overflow: hidden;
-
-          box-shadow: 0 50px 120px -20px rgba(0, 0, 0, 0.12);
-          margin-bottom: 4rem;
+          box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.1);
+          border: 1px solid var(--border-subtle);
+          max-width: 1100px; /* Synced with Map Card */
+          margin: 1rem auto 0; /* Tightened from 1.5rem */
           position: relative;
+          min-height: 480px; /* Reduced to fit better in viewport */
         }
 
-
-        /* LEFT PANEL: BLACK REDEFINED */
-        .contact-brand-panel {
+        .contact-brand-panel, .map-info-panel {
           background-color: var(--brand-black-panel);
-          padding: 3rem 3rem;
+          padding: 2.5rem;
           color: var(--text-white);
-
           position: relative;
           display: flex;
           flex-direction: column;
-          justify-content: center; /* Centered content for better balance */
+          justify-content: center;
           overflow: hidden;
         }
 
-
-
-        /* Blueprint Grid Effect */
         .blueprint-overlay {
           position: absolute;
           inset: 0;
-          opacity: 0.15;
+          opacity: 0.12;
           background-image: 
             linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
             linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
@@ -323,230 +349,254 @@ const ContactForm = () => {
           pointer-events: none;
         }
 
-        .panel-content-pro { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; }
+        .panel-content-pro { position: relative; z-index: 2; display: flex; flex-direction: column; }
 
         .status-badge {
           display: inline-flex;
           align-items: center;
-          padding: 0.6rem 1.2rem;
+          padding: 0.4rem 0.8rem;
           background: rgba(255, 255, 255, 0.08);
           backdrop-filter: blur(8px);
           border: 1px solid rgba(255, 255, 255, 0.1);
           border-radius: 99px;
-          font-size: 0.7rem;
+          font-size: 0.6rem;
           font-weight: 800;
           letter-spacing: 0.1em;
-          color: rgba(255, 255, 255, 0.9);
-          margin-bottom: 3rem;
+          color: rgba(255, 255, 255, 0.8);
+          margin-bottom: 1rem;
           width: fit-content;
         }
 
         .brand-header {
-          font-size: 2.2rem;
+          font-size: 1.6rem;
           font-weight: 900;
-          line-height: 1.1;
-          letter-spacing: -0.03em;
-          margin-bottom: 2rem;
+          line-height: 1.2;
+          letter-spacing: -0.02em;
+          margin-bottom: 1rem;
           color: var(--text-white);
         }
 
-
-
-
-
         .text-glow-red {
           color: var(--brand-red);
-          text-shadow: 0 0 20px var(--brand-red-glow);
+          text-shadow: 0 0 15px var(--brand-red-glow);
         }
-
 
         .text-italic { font-style: italic; font-family: serif; font-weight: 400; opacity: 0.9; }
 
-        .brand-subtext {
-          font-size: 1.1rem;
-          line-height: 1.7;
-          color: rgba(255, 255, 255, 0.55);
-          max-width: 90%;
+        .brand-subtext, .loc-text-pro p {
+          font-size: 0.95rem;
+          line-height: 1.5;
+          color: rgba(255, 255, 255, 0.5);
+          max-width: 95%;
           font-weight: 400;
+          margin: 0;
         }
 
-
-        /* Feature Info Grid */
         .info-feature-grid {
           display: grid;
           grid-template-columns: 1fr;
-          gap: 1.5rem;
-          margin-top: 3rem; 
+          gap: 1rem;
+          margin-top: 1.5rem; 
         }
 
-
-        .feature-item-pro {
+        .feature-item-pro, .location-detail-group {
           display: flex;
-          align-items: center;
+          align-items: flex-start;
           gap: 1.5rem;
+          margin-bottom: 2.2rem; /* Increased for breathing room */
         }
 
         .feature-icon-glass {
-          width: 52px;
-          height: 52px;
+          width: 42px;
+          height: 42px;
           background: rgba(255, 255, 255, 0.05);
           border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 16px;
+          border-radius: 12px;
           display: flex;
           align-items: center;
           justify-content: center;
           color: var(--brand-red);
           flex-shrink: 0;
-          transition: all 0.3s ease;
         }
 
+        .feature-text strong, .loc-text-pro h3 { 
+          display: block; 
+          font-size: 0.8rem; 
+          font-weight: 850;
+          color: var(--text-white); 
+          margin-bottom: 0.4rem;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          opacity: 1;
+        }
 
-        .feature-text strong { display: block; font-size: 1rem; color: var(--text-white); margin-bottom: 0.2rem; }
-        .feature-text p { font-size: 0.85rem; color: rgba(255, 255, 255, 0.4); margin: 0; }
+        .brand-subtext, .loc-text-pro p {
+          font-size: 0.95rem;
+          line-height: 1.6;
+          color: rgba(255, 255, 255, 0.55);
+          max-width: 100%;
+          font-weight: 400;
+          margin: 0;
+        }
 
+        .feature-text p { font-size: 0.75rem; color: rgba(255, 255, 255, 0.4); margin: 0; }
 
-        /* RIGHT PANEL: FORM REDEFINED */
         .contact-form-panel {
-          padding: 3rem 3rem; /* Increased bottom padding for the button */
+          padding: 2.5rem;
           background: var(--bg-main);
           position: relative;
         }
 
-
-
-
-
-        .form-sub-title {
-          font-size: 0.75rem;
-          font-weight: 850;
-          letter-spacing: 0.2em;
-          color: var(--brand-red);
-          text-transform: uppercase;
-        }
-
-
-        .form-row { display: flex; gap: 1.5rem; }
+        .form-row { display: flex; gap: 1rem; }
         .flex-1 { flex: 1; }
 
-        .form-group { margin-bottom: 1.8rem; }
+        .form-group { margin-bottom: 1rem; }
 
         .label-pro {
           display: block;
-          font-size: 0.7rem;
+          font-size: 0.6rem;
           font-weight: 850;
           color: var(--text-main);
-          margin-bottom: 0.8rem;
+          margin-bottom: 0.5rem;
           letter-spacing: 0.05em;
         }
 
-
         .input-pro {
           width: 100%;
-          padding: 1.1rem 1.4rem;
+          padding: 0.75rem 1.1rem;
           border-radius: var(--radius-pro-inner);
           border: 2px solid var(--border-subtle);
-          font-size: 1rem;
-          transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+          font-size: 0.9rem;
+          transition: all 0.3s ease;
           background: var(--bg-soft);
           font-family: inherit;
         }
-
-
-
-        .input-pro::placeholder { color: #9ca3af; }
 
         .input-pro:focus {
           outline: none;
           border-color: var(--brand-red);
           background: var(--bg-main);
-          box-shadow: 0 10px 30px var(--brand-red-glow);
-          transform: translateY(-2px);
+          box-shadow: 0 8px 20px var(--brand-red-glow);
+          transform: translateY(-1px);
         }
 
+        .h-auto { height: auto; min-height: 70px; resize: none; }
 
-        .h-auto { height: auto; min-height: 80px; resize: none; }
-
-
-
-        /* BUTTON STYLE */
         .submit-btn-pro {
           width: 100%;
-          padding: 1.25rem;
+          padding: 0.9rem;
           background-color: var(--brand-red);
           color: var(--text-white);
           border: none;
           border-radius: var(--radius-pro-inner);
-
-          font-size: 1rem;
+          font-size: 0.9rem;
           font-weight: 900;
           letter-spacing: 0.1em;
           cursor: pointer;
-          transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-          margin-top: 1rem;
-          position: relative;
-          overflow: hidden;
+          transition: all 0.3s ease;
+          margin-top: 0.5rem;
         }
 
         .submit-btn-pro:hover:not(:disabled) {
           background-color: var(--brand-black);
-          transform: translateY(-4px);
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+          transform: translateY(-2px);
+          box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
 
+        /* MULTI-COLUMN MAP SYSTEM - REFINED */
+        .map-card-wrapper {
+          background: var(--bg-main);
+          border-radius: var(--radius-pro);
+          overflow: hidden;
+          box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.1);
+          max-width: 1100px;
+          margin: 1rem auto 0; /* Tightened from 1.5rem */
+          position: relative;
+        }
+
+        .map-grid-pro {
+          display: grid;
+          grid-template-columns: 1fr 1.3fr;
+          min-height: 480px; /* Synchronized reduction */
+        }
+
+        .availability-tag {
+          display: inline-block;
+          margin-top: 0.8rem;
+          font-size: 0.6rem;
+          font-weight: 900;
+          color: #10b981;
+          background: rgba(16, 185, 129, 0.1);
+          padding: 0.2rem 0.6rem;
+          border-radius: 4px;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+        }
+
+        .loc-header-small {
+          font-size: 0.95rem;
+          font-weight: 600;
+          line-height: 1.6;
+          color: var(--text-white);
+          opacity: 0.85;
+          margin-bottom: 0.5rem;
+        }
+
+        .directions-btn-pro {
+          display: inline-flex;
+          align-items: center;
+          padding: 1rem 2rem;
+          background: var(--brand-red);
+          color: var(--text-white);
+          font-weight: 900;
+          font-size: 0.8rem;
+          letter-spacing: 0.1em;
+          border-radius: 12px;
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          width: fit-content;
+        }
+
+        .directions-btn-pro:hover {
+          background: var(--text-white);
+          color: var(--brand-black);
+          transform: translateY(-5px) scale(1.02);
+          box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .map-frame-panel {
+          position: relative;
+          background: #f0f0f0;
+        }
+
+        .google-map-pro { height: 100%; width: 100%; }
+
+        @media (max-width: 1100px) {
+          .master-contact-card { grid-template-columns: 1fr; }
+          .map-grid-pro { grid-template-columns: 1fr; }
+          .contact-brand-panel, .map-info-panel { padding: 4rem 3rem; }
+        }
+
+        @media (max-width: 768px) {
+          .map-info-panel {
+            padding: 3rem 2rem;
+          }
+          .google-map-pro {
+            height: 400px;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .form-row { flex-direction: column; gap: 0; }
+          .master-contact-card, .map-card-wrapper { border-radius: 32px; }
+        }
 
         .spinner-loader {
           width: 16px; height: 16px; border: 2px solid #ffffff55; border-top-color: #fff;
           border-radius: 50%; animation: spin 0.8s linear infinite;
         }
         @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* MAP CARD */
-        .map-card-wrapper {
-          background: var(--bg-main);
-          border-radius: var(--radius-pro);
-          overflow: hidden;
-          box-shadow: 0 30px 80px rgba(0, 0, 0, 0.06);
-        }
-
-
-        .map-header-inner { padding: 3rem 2rem; text-align: center; background: linear-gradient(to bottom, var(--bg-main), var(--bg-soft)); }
-
-
-        .location-tag { font-size: 0.7rem; font-weight: 900; letter-spacing: 0.2em; color: var(--brand-red); margin-bottom: 0.8rem; display: block; }
-        .map-header-inner h3 { font-size: 2.6rem; font-weight: 900; letter-spacing: -0.02em; margin: 0; color: var(--brand-black); }
-
-        
-        .map-meta-strip {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 1.5rem;
-          color: #6b7280;
-          font-weight: 500;
-          font-size: 1rem;
-        }
-        .strip-divider { opacity: 0.3; }
-
-        .google-map-pro { line-height: 0; }
-
-        @media (max-width: 1100px) {
-          .master-contact-card { grid-template-columns: 1fr; }
-          .brand-header { font-size: 3rem; }
-          .contact-brand-panel { padding: 5rem 3rem; }
-          .contact-form-panel { padding: 4rem 3rem; }
-        }
-
-        @media (max-width: 640px) {
-          .contact-section { padding: 6rem 0; }
-          .form-row { flex-direction: column; gap: 0; }
-          .master-contact-card { border-radius: 32px; }
-          .brand-header { font-size: 2.2rem; }
-          .map-card-wrapper { border-radius: 32px; }
-          .map-meta-strip { flex-direction: column; gap: 0.5rem; }
-          .strip-divider { display: none; }
-        }
       `}</style>
-    </section>
+    </>
   );
 };
 

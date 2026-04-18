@@ -6,12 +6,12 @@
   --brand-red-glow: rgba(255, 51, 51, 0.4);
   --brand-black: #000000;
   --brand-black-panel: #030303;
-  
+
   /* Accent/Elite Highlights */
   --accent-gold: #f59e0b;
   --accent-gold-dark: #ea580c;
   --accent-gold-glow: rgba(245, 158, 11, 0.4);
-  
+
   /* Foundation Colors */
 
   --bg-main: #ffffff;
@@ -20,19 +20,23 @@
   --text-muted: #6b7280;
   --text-white: #ffffff;
   --border-subtle: #e5e7eb;
-  
+
   /* Standardized Pro Radii (18px - 24px) */
-  --radius-pro: 22px;        /* Primary containers/cards */
-  --radius-pro-inner: 18px;  /* Panels/Inner cards */
-  --radius-pro-sm: 14px;     /* Interactive elements/buttons */
-  --radius-pill: 100px;      /* Actual pills */
+  --radius-pro: 22px;
+  /* Primary containers/cards */
+  --radius-pro-inner: 18px;
+  /* Panels/Inner cards */
+  --radius-pro-sm: 14px;
+  /* Interactive elements/buttons */
+  --radius-pill: 100px;
+  /* Actual pills */
 
   /* Legacy Mapping (Syncs existing elements to 18-24 range) */
-  --radius-sm: var(--radius-pro-inner); 
+  --radius-sm: var(--radius-pro-inner);
   --radius-md: var(--radius-pro-inner);
   --radius-lg: var(--radius-pro);
 
-  
+
   /* Legacy/Core Variables (Synced to Theme) */
   --primary: var(--brand-black);
   --primary-light: #334155;
@@ -43,11 +47,14 @@
   --text: var(--text-main);
   --text-muted: var(--text-muted);
   --border: var(--border-subtle);
-  
+
   /* Spacing & Layout */
   --container-max: 1400px;
   --spacer: 1rem;
-  
+  --header-height: 108px;
+  --header-height-scrolled: 70px;
+
+
   /* Admin Design System */
   --admin-primary: #48008C;
   --admin-primary-light: #C799FF;
@@ -56,7 +63,7 @@
   --admin-text-main: #0D0D0D;
   --admin-text-muted: #666666;
   --admin-border: #E2E8F0;
-  --admin-radius: 4px; 
+  --admin-radius: 4px;
 
   /* Glassmorphism */
   --glass-bg: rgba(255, 255, 255, 0.7);
@@ -69,7 +76,11 @@
 }
 
 
-h1, h2, h3, h4, .font-display {
+h1,
+h2,
+h3,
+h4,
+.font-display {
   font-family: 'Outfit', sans-serif;
   color: var(--primary);
   margin-top: 0;
@@ -82,7 +93,8 @@ h1, h2, h3, h4, .font-display {
 }
 
 html {
-  font-size: 88%; /* Global zoom adjustment to match high-end proportions */
+  font-size: 88%;
+  /* Global zoom adjustment to match high-end proportions */
   scroll-behavior: smooth;
 }
 
@@ -100,7 +112,8 @@ a {
   transition: color 0.2s ease;
 }
 
-button, .cta-button {
+button,
+.cta-button {
   font-family: 'Outfit', sans-serif;
   cursor: pointer;
   border: none;
@@ -149,20 +162,69 @@ section {
   border: 1px solid var(--glass-border);
 }
 
-/* Utils */
-.text-center { text-align: center; }
-.mb-1 { margin-bottom: var(--spacer); }
-.mb-2 { margin-bottom: calc(var(--spacer) * 2); }
-.mt-4 { margin-top: calc(var(--spacer) * 4); }
+/* --- GLOBAL 'PRO' DESIGN SYSTEM --- */
 
-/* Animation Utility */
-[data-aos] {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+.section-pro {
+  min-height: 100vh;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  /* Top aligned for placement consistency */
+  padding-top: calc(var(--header-height) + 0.5rem) !important;
+  /* Moved up */
+  padding-bottom: 2rem !important;
+  overflow: hidden;
 }
 
-[data-aos].aos-animate {
-  opacity: 1;
-  transform: translateY(0);
+@media (max-width: 640px) {
+  .section-pro {
+    min-height: auto !important;
+    padding-top: 5rem !important;
+  }
+}
+
+.section-header-pro {
+  text-align: center;
+  margin-bottom: 2rem;
+  /* Reduced for vertical clearance */
+  width: 100%;
+}
+
+.subtitle-brand {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: var(--brand-red);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.8rem;
+  /* Increased spacing between subtitle and title */
+}
+
+.title-brand {
+  font-size: 2.22rem;
+  /* Pixel-perfect standardized size */
+  font-weight: 900;
+  color: var(--brand-black);
+  letter-spacing: -0.02em;
+  margin: 0 auto;
+  line-height: 1.2;
+}
+
+.brand-accent-line {
+  width: 60px; /* Increased from 40px */
+  height: 4px; /* Increased from 3px */
+  background: var(--brand-red);
+  margin: 1.5rem auto 0;
+  /* Increased spacing between title and accent line */
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text-center {
+  text-align: center;
 }
