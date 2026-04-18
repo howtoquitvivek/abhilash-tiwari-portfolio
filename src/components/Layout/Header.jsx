@@ -16,7 +16,7 @@ const Header = () => {
       setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
-    
+
     // Fetch settings for dynamic top bar
     const fetchSettings = async () => {
       try {
@@ -111,7 +111,7 @@ const Header = () => {
 
         /* TOP BAR STYLING */
         .top-bar {
-          background-color: var(--brand-red);
+          background-color: var(--accent);
           color: var(--text-white);
           padding: 0.6rem 0;
           font-size: 0.8rem;
@@ -154,7 +154,7 @@ const Header = () => {
         .logo a { display: flex; align-items: center; gap: 0.8rem; }
         
         .logo-icon-box {
-          background: var(--brand-black);
+          background: var(--p-color);
           color: white;
           padding: 0.4rem 0.6rem;
           border-radius: var(--radius-pro-sm);
@@ -164,8 +164,8 @@ const Header = () => {
         }
 
         .logo-text-stack { display: flex; flex-direction: column; line-height: 1; }
-        .logo-brand-main { font-size: 1.4rem; font-weight: 900; color: var(--brand-black); letter-spacing: -0.02em; }
-        .logo-brand-sub { font-size: 0.65rem; font-weight: 800; color: var(--brand-red); letter-spacing: 0.2em; margin-top: 0.1rem; }
+        .logo-brand-main { font-size: 1.4rem; font-weight: 900; color: var(--p-color); letter-spacing: -0.02em; }
+        .logo-brand-sub { font-size: 0.65rem; font-weight: 800; color: var(--accent); letter-spacing: 0.2em; margin-top: 0.1rem; }
 
         /* NAVIGATION LINKS */
         .nav-right-cluster { display: flex; align-items: center; gap: 3rem; }
@@ -185,7 +185,7 @@ const Header = () => {
           left: 0;
           width: 100%;
           height: 2px;
-          background: var(--brand-red);
+          background: var(--accent);
           transform: scaleX(0);
           transform-origin: center;
           transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -198,21 +198,23 @@ const Header = () => {
         /* QUOTE BUTTON */
         .quote-btn-pro {
           background-color: transparent;
-          color: var(--brand-red);
-          padding: 0.5rem 1.6rem;
-          border-radius: var(--radius-pill);
-
-          border: 2px solid var(--brand-red);
+          color: var(--accent);
+          padding: 0.6rem 2rem;
+          border-radius: var(--radius-btn);
+          border: 2px solid var(--accent);
+          font-family: 'Outfit', sans-serif;
           font-weight: 700;
           font-size: 0.85rem;
-          letter-spacing: 0.03em;
+          letter-spacing: 0.05em;
           transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+          text-transform: uppercase;
         }
 
         .quote-btn-pro:hover {
-          background-color: var(--brand-red);
+          background-color: var(--accent);
           color: var(--text-white);
-          box-shadow: 0 8px 20px var(--brand-red-glow);
+          box-shadow: 0 10px 25px var(--accent-glow);
+          transform: translateY(-2px);
         }
 
 

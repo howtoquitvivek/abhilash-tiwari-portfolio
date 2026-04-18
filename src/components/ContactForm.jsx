@@ -298,7 +298,7 @@ const ContactForm = () => {
 
       <style>{`
         .contact-section {
-          background-color: var(--bg-soft);
+          background-color: var(--bg-main);
         }
 
         .map-section-dedicated {
@@ -320,7 +320,7 @@ const ContactForm = () => {
         }
 
         .contact-brand-panel, .map-info-panel {
-          background-color: var(--brand-black-panel);
+          background-color: var(--p-color);
           padding: 2.5rem;
           color: var(--text-white);
           position: relative;
@@ -369,8 +369,8 @@ const ContactForm = () => {
         }
 
         .text-glow-red {
-          color: var(--brand-red);
-          text-shadow: 0 0 15px var(--brand-red-glow);
+          color: var(--accent);
+          text-shadow: 0 0 15px var(--accent-glow);
         }
 
         .text-italic { font-style: italic; font-family: serif; font-weight: 400; opacity: 0.9; }
@@ -407,7 +407,7 @@ const ContactForm = () => {
           display: flex;
           align-items: center;
           justify-content: center;
-          color: var(--brand-red);
+          color: var(--accent);
           flex-shrink: 0;
         }
 
@@ -466,9 +466,9 @@ const ContactForm = () => {
 
         .input-pro:focus {
           outline: none;
-          border-color: var(--brand-red);
+          border-color: var(--accent);
           background: var(--bg-main);
-          box-shadow: 0 8px 20px var(--brand-red-glow);
+          box-shadow: 0 8px 20px var(--accent-glow);
           transform: translateY(-1px);
         }
 
@@ -476,21 +476,22 @@ const ContactForm = () => {
 
         .submit-btn-pro {
           width: 100%;
-          padding: 0.9rem;
-          background-color: var(--brand-red);
+          padding: 1rem;
+          background-color: var(--accent);
           color: var(--text-white);
           border: none;
-          border-radius: var(--radius-pro-inner);
+          border-radius: var(--radius-btn);
           font-size: 0.9rem;
-          font-weight: 900;
+          font-weight: 700;
           letter-spacing: 0.1em;
           cursor: pointer;
           transition: all 0.3s ease;
           margin-top: 0.5rem;
+          text-transform: uppercase;
         }
 
         .submit-btn-pro:hover:not(:disabled) {
-          background-color: var(--brand-black);
+          background-color: var(--p-color);
           transform: translateY(-2px);
           box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
@@ -538,12 +539,12 @@ const ContactForm = () => {
           display: inline-flex;
           align-items: center;
           padding: 1rem 2rem;
-          background: var(--brand-red);
+          background: var(--accent);
           color: var(--text-white);
           font-weight: 900;
           font-size: 0.8rem;
           letter-spacing: 0.1em;
-          border-radius: 12px;
+          border-radius: var(--radius-btn);
           transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
           width: fit-content;
         }
@@ -551,7 +552,6 @@ const ContactForm = () => {
         .directions-btn-pro:hover {
           background: var(--text-white);
           color: var(--brand-black);
-          transform: translateY(-5px) scale(1.02);
           box-shadow: 0 15px 30px rgba(0,0,0,0.2);
         }
 

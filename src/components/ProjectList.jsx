@@ -42,7 +42,7 @@ const ProjectList = () => {
             width: 40px;
             height: 40px;
             border: 3px solid var(--neutral-200);
-            border-top: 3px solid var(--brand-red);
+            border-top: 3px solid var(--accent);
             border-radius: 50%;
             animation: spin 1s linear infinite;
             margin: 0 auto;
@@ -157,16 +157,25 @@ const ProjectList = () => {
 
       <style>{`
         .projects-section {
-          min-height: 100vh;
-          display: flex;
-          align-items: center;
+          min-height: auto;
           padding: 8rem 0;
           background-color: var(--bg-main);
           overflow: hidden;
         }
 
+        /* MASTER SECTION HEADER */
+        .section-header-pro {
+          text-align: center;
+          margin-bottom: 2.5rem; /* Reduced from 3.5rem to push content closer */
+          width: 100%;
+        }
 
-
+        .brand-accent-line {
+          width: 60px;
+          height: 4px;
+          background: var(--accent);
+          margin: 1.2rem auto 0; /* Reduced from 1.5rem */
+        }
 
         .container-full {
           width: 100%;
@@ -176,38 +185,9 @@ const ProjectList = () => {
         }
 
 
-        .section-header-pro {
-          margin-bottom: 2rem;
-        }
-        .subtitle-brand {
-          font-size: 0.75rem;
-          font-weight: 800;
-          letter-spacing: 0.15em;
-          color: var(--brand-red);
-          text-transform: uppercase;
-          display: block;
-          margin-bottom: 0.25rem;
-        }
-        .title-brand {
-          font-size: 2.2rem;
-          font-weight: 900;
-          color: var(--brand-black);
-          letter-spacing: -0.02em;
-        }
-        .brand-accent-line {
-          width: 40px;
-          height: 3px;
-          background: var(--brand-red);
-          margin-top: 1rem;
-        }
-        .mx-auto { margin-left: auto; margin-right: auto; }
-        .text-center { text-align: center; }
-
-
-
         .carousel-wrapper {
+          margin-top: 2.5rem; /* Reduced from 3.5rem to push content closer */
           position: relative;
-          margin-top: 1.5rem; /* Reduced from 5rem to match other sections */
           padding: 0; 
         }
 
@@ -308,14 +288,14 @@ const ProjectList = () => {
         }
 
         .read-more-pill {
-          padding: 0.8rem 2.5rem;
+          padding: 0.8rem 1.8rem;
           border-radius: var(--radius-pill);
-          border: 1.5px solid var(--brand-black);
-          color: var(--brand-black);
+          border: 1px solid var(--p-color);
+          color: var(--text-grey);
 
-          font-weight: 900;
+          font-weight: 400;
           text-decoration: none;
-          font-size: 0.9rem;
+          font-size: 0.85rem;
           white-space: nowrap;
           transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
           text-transform: uppercase;
@@ -323,7 +303,7 @@ const ProjectList = () => {
         }
 
         .read-more-pill:hover {
-          background: var(--brand-black);
+          background: var(--p-color);
           color: var(--text-white);
           transform: translateY(-2px);
         }
@@ -359,7 +339,7 @@ const ProjectList = () => {
           cursor: pointer;
           z-index: 100;
           transition: all 0.3s ease;
-          color: var(--brand-black);
+          color: var(--p-color);
         }
 
 
@@ -369,7 +349,7 @@ const ProjectList = () => {
 
 
         .swiper-button-prev-custom:hover, .swiper-button-next-custom:hover {
-          background: var(--brand-black);
+          background: var(--p-color);
           color: var(--text-white);
           transform: translateY(-150%) scale(1.1);
         }

@@ -87,7 +87,7 @@ const Footer = () => {
 
       <style>{`
         .footer {
-          background-color: var(--brand-black);
+          background-color: var(--p-color);
           color: var(--text-white);
 
           padding: 4.5rem 0 3rem;
@@ -117,7 +117,7 @@ const Footer = () => {
         .logo-accent {
           width: 6px;
           height: 38px;
-          background-color: var(--brand-red); /* Construction Red */
+          background-color: var(--accent); /* Construction Red */
           border-radius: 2px;
 
         }
@@ -136,7 +136,7 @@ const Footer = () => {
           font-size: 0.65rem;
           font-weight: 800;
           letter-spacing: 0.25em;
-          color: var(--brand-red);
+          color: var(--accent);
           margin: 0.2rem 0 0;
 
           text-transform: uppercase;
@@ -172,7 +172,7 @@ const Footer = () => {
 
         .social-pill:hover {
           background: var(--text-white);
-          color: var(--brand-black);
+          color: var(--p-color);
           border-color: var(--text-white);
           transform: translateY(-5px);
         }
@@ -234,7 +234,7 @@ const Footer = () => {
         }
 
         .contact-icon {
-          color: var(--brand-red);
+          color: var(--accent);
           margin-top: 0.3rem;
           flex-shrink: 0;
         }

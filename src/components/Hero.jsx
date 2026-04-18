@@ -3,58 +3,57 @@ import React from "react";
 const Hero = () => {
   return (
     <section className="hero">
-      
-     
-      <div className="overlay"></div>
+      <div className="hero-cinematic-overlay"></div>
 
       <div className="hero-container">
         <div className="hero-content">
 
-          {/* Badge */}
-          <div className="hero-badge">
-            <span className="dot"></span>
-            Trusted Builder Since 2005
+          {/* BADGE: Standardized Pro Style */}
+          <div className="hero-badge-pro" data-aos="fade-down" data-aos-duration="1000">
+            <span className="dot-red pulse"></span>
+            TRUSTED BUILDER SINCE 2005
           </div>
 
-          {/* Title */}
-          <h1 className="hero-title">
+          {/* TITLE: Outfit Bold High-Contrast */}
+          <h1 className="hero-title-pro" data-aos="fade-up" data-aos-delay="200">
             Building Excellence,
             <br />
-            <span className="highlight">
+            <span className="text-accent-pro">
               Redefining Jabalpur's Skyline
             </span>
           </h1>
 
-          {/* Subtitle */}
-          <p className="hero-subtitle">
-            Expert Builder, Promoter, and Civil Contractor dedicated to delivering{" "}
-            <strong>premium residential</strong> and{" "}
-            <strong>commercial spaces</strong>.
+          {/* SUBTITLE: Refined Inter spacing */}
+          <p className="hero-subtitle-pro" data-aos="fade-up" data-aos-delay="400">
+            Expert Builder, Promoter, and Civil Contractor dedicated to delivering
+            <strong> premium residential</strong> and <strong>commercial spaces</strong>.
           </p>
 
-          {/* Stats */}
-          <div className="hero-stats">
-            <div>
+          {/* STATS: Outfit Semibold */}
+          <div className="hero-stats-pro" data-aos="fade-up" data-aos-delay="600">
+            <div className="stat-item-pro">
               <h3>150+</h3>
-              <p>Projects</p>
+              <p>PROJECTS</p>
             </div>
-            <div>
+            <div className="stat-divider"></div>
+            <div className="stat-item-pro">
               <h3>18+</h3>
-              <p>Years</p>
+              <p>YEARS</p>
             </div>
-            <div>
+            <div className="stat-divider"></div>
+            <div className="stat-item-pro">
               <h3>500+</h3>
-              <p>Happy Families</p>
+              <p>FAMILIES</p>
             </div>
           </div>
 
-          {/* Buttons */}
-          <div className="hero-actions">
-            <a href="#projects" className="btn primary">
-              View Portfolio →
+          {/* ACTIONS: Synced with Header Pro Button */}
+          <div className="hero-actions-pro" data-aos="fade-up" data-aos-delay="800">
+            <a href="#projects" className="btn-pro primary">
+              VIEW PORTFOLIO →
             </a>
-            <a href="#contact" className="btn secondary">
-              Contact Me
+            <a href="#contact" className="btn-pro outline">
+              CONTACT ME
             </a>
           </div>
 
@@ -62,7 +61,6 @@ const Hero = () => {
       </div>
 
       <style>{`
-
         .hero {
           position: relative;
           min-height: 100vh;
@@ -70,133 +68,154 @@ const Hero = () => {
           align-items: center;
           justify-content: center;
           text-align: center;
-          color: white;
-
+          color: var(--text-white);
           background: url("https://images.unsplash.com/photo-1503387762-592deb58ef4e");
           background-size: cover;
           background-position: center;
+          background-attachment: fixed;
+          padding-top: var(--header-height);
         }
 
-        /* DARK OVERLAY */
-        .overlay {
+        .hero-cinematic-overlay {
           position: absolute;
           inset: 0;
           background: linear-gradient(
-            rgba(0,0,0,0.7),
-            rgba(0,0,0,0.85)
+            rgba(var(--p-color-rgb), 0.4) 0%,
+            rgba(var(--p-color-rgb), 0.85) 100%
           );
+          z-index: 1;
         }
 
-        /* CENTER CONTAINER */
         .hero-container {
           position: relative;
           z-index: 2;
           width: 100%;
-          max-width: 1100px;
+          max-width: var(--container-max);
           margin: 0 auto;
+          padding: 0 1.5rem;
         }
 
-        /* CONTENT */
         .hero-content {
-          text-align: center;
+          max-width: 900px;
+          margin: 0 auto;
+          padding-top: 2rem; /* Added space above the glass pill badge */
         }
 
-        /* TITLE */
-        .hero-title {
-          font-size: clamp(2.8rem, 5vw, 4.5rem);
-          font-weight: 700;
-          line-height: 1.2;
-        }
-
-        .highlight {
-          color: #f59e0b;
-          position: relative;
-        }
-
-        .highlight::after {
-          content: "";
-          position: absolute;
-          left: 0;
-          bottom: -8px;
-          width: 100%;
-          height: 5px;
-          background: #f59e0b;
-          border-radius: 10px;
-          opacity: 0.6;
-        }
-
-        /* SUBTITLE */
-        .hero-subtitle {
-          margin: 1.5rem auto;
-          max-width: 650px;
-          font-size: 1.2rem;
-          color: #cbd5e1;
-        }
-
-        /* BADGE */
-        .hero-badge {
+        /* BADGE PRO */
+        .hero-badge-pro {
           display: inline-flex;
           align-items: center;
-          gap: 8px;
-          padding: 8px 16px;
-          border-radius: 50px;
-          background: rgba(245,158,11,0.15);
-          color: #f59e0b;
-          font-size: 0.85rem;
-          margin-bottom: 25px;
+          gap: 0.8rem;
+          padding: 0.6rem 1.4rem;
+          background: rgba(var(--s-color-rgb), 0.08);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(var(--s-color-rgb), 0.1);
+          border-radius: var(--radius-pill);
+          color: var(--text-white);
+          font-size: 0.7rem;
+          font-weight: 700;
+          letter-spacing: 0.15em;
+          margin-bottom: 1.5rem; /* Reduced from 2.5rem */
         }
 
-        .dot {
+        .dot-red {
           width: 8px;
           height: 8px;
-          background: #f59e0b;
+          background: var(--accent);
           border-radius: 50%;
+          box-shadow: 0 0 12px var(--accent-glow);
         }
 
-        /* STATS */
-        .hero-stats {
+        .pulse { animation: heroPulse 1.5s infinite ease-in-out; }
+        @keyframes heroPulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.3); opacity: 0.7; } 100% { transform: scale(1); opacity: 1; } }
+
+        /* TITLE PRO */
+        .hero-title-pro {
+          font-family: 'Outfit', sans-serif;
+          font-size: clamp(3rem, 7vw, 5.2rem);
+          font-weight: 900;
+          line-height: 1.1;
+          letter-spacing: -0.03em;
+          margin-bottom: 1rem; /* Reduced from 1.5rem */
+          color: var(--text-white);
+        }
+
+        .text-accent-pro {
+          color: var(--accent);
+          position: relative;
+          text-shadow: 0 10px 30px var(--accent-glow);
+        }
+
+        /* SUBTITLE PRO */
+        .hero-subtitle-pro {
+          font-size: 1.25rem;
+          line-height: 1.6;
+          color: rgba(255, 255, 255, 0.7);
+          max-width: 680px;
+          margin: 0 auto 2.5rem; /* Reduced from 3.5rem */
+          font-weight: 400;
+        }
+
+        .hero-subtitle-pro strong {
+          color: var(--text-white);
+          font-weight: 700;
+        }
+        .hero-actions-pro {
           display: flex;
           justify-content: center;
-          gap: 3rem;
-          margin: 2rem 0;
+          gap: 1.5rem;
         }
 
-        .hero-stats h3 {
-          color: #f59e0b;
-          font-size: 2rem;
+        .hero-actions-pro .btn-pro.primary:hover {
+          background: var(--text-white);
+          color: var(--p-color);
+          box-shadow: 0 15px 40px rgba(255, 255, 255, 0.2);
         }
 
-        .hero-stats p {
-          color: #cbd5e1;
+        /* STATS PRO */
+        .hero-stats-pro {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 3.5rem;
+          margin-bottom: 2.8rem; /* Reduced from 3.5rem */
         }
 
-        /* BUTTONS */
-        .btn {
-          padding: 12px 26px;
-          border-radius: 10px;
-          font-weight: 600;
-          text-decoration: none;
-          transition: 0.3s;
+        .stat-item-pro h3 {
+          font-family: 'Outfit', sans-serif;
+          font-size: 2.5rem;
+          font-weight: 900;
+          color: var(--text-white);
+          margin-bottom: 0.2rem;
+          line-height: 1;
         }
 
-        .primary {
-          background: linear-gradient(135deg, #f59e0b, #fbbf24);
-          color: black;
+        .stat-item-pro p {
+          font-size: 0.75rem;
+          font-weight: 850;
+          letter-spacing: 0.12em;
+          color: rgba(255, 255, 255, 0.4);
+          margin: 0;
         }
 
-        .secondary {
-          margin-left: 15px;
-          color: white;
-          border: 1px solid rgba(255,255,255,0.4);
+        .stat-divider {
+          width: 1px;
+          height: 40px;
+          background: rgba(255, 255, 255, 0.15);
         }
 
-        @media(max-width:768px){
-          .hero-stats{
+        @media (max-width: 768px) {
+          .hero-stats-pro {
+            flex-direction: column;
+            gap: 2rem;
+          }
+          .stat-divider { display: none; }
+          .hero-actions-pro {
             flex-direction: column;
             gap: 1rem;
           }
+          .hero-title-pro { font-size: 3.2rem; }
         }
-
       `}</style>
     </section>
   );

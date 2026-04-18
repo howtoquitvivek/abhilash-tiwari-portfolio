@@ -1,12 +1,47 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap');
 
 :root {
-  /* 1. PRIMARY BRAND IDENTITY */
-  --brand-red: #ff3333;
-  --brand-red-glow: rgba(255, 51, 51, 0.4);
-  --brand-black: #000000;
-  --brand-black-panel: #030303;
-  --brand-white: #ffffff;
+  /* ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+     MASTER THEME CONFIGURATION (Edit these to change site-wide look)
+     ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ */
+  --p-color-rgb: 0, 0, 0;
+  /* Primary (Black/Dark) */
+  --s-color-rgb: 255, 255, 255;
+  /* Secondary (White/Light) */
+  --accent-rgb: 255, 51, 51;
+  /* Brand Accent (Red) */
+
+  --p-color: rgb(var(--p-color-rgb));
+  --s-color: rgb(var(--s-color-rgb));
+  --accent: rgb(var(--accent-rgb));
+  --accent-glow: rgba(var(--accent-rgb), 0.4);
+
+  --text-main: #0f172a;
+  /* Primary Text */
+  --text-muted: #64748b;
+  /* Muted/Secondary Text */
+  --text-white: var(--s-color);
+
+  --radius-pro: 22px;
+  --radius-pro-inner: 18px;
+  --radius-btn: 0px;
+  /* Applied to interactive components */
+  --radius-pill: 100px;
+
+  --bg-main: var(--s-color);
+  --bg-soft: #f8fafc;
+  --border-subtle: #e2e8f0;
+
+  /* LEGACY & COMPATIBILITY ALIASES */
+  --brand-red: var(--accent);
+  --brand-black: var(--p-color);
+  --brand-white: var(--s-color);
+  --primary: var(--p-color);
+  --background: var(--bg-main);
+  --surface: var(--bg-soft);
+  --border: var(--border-subtle);
+
+  /* ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ */
 
   /* 2. SEMANTIC CORE (Success, Error, Notice) */
   --brand-success: #10b981;
@@ -31,35 +66,13 @@
   --neutral-900: #0f172a;
   --neutral-950: #020617;
 
-  /* 4. FOUNDATION MAPPING */
-  --bg-main: var(--brand-white);
-  --bg-soft: var(--neutral-50);
-  --text-main: var(--neutral-900);
-  --text-muted: var(--neutral-500);
-  --text-white: var(--brand-white);
-  --border-subtle: var(--neutral-200);
-
-  /* 5. ARCHITECTURAL EFFECTS (Editorial Style) */
+  /* 4. ARCHITECTURAL EFFECTS */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-pro: 0 20px 50px -12px rgba(0, 0, 0, 0.12);
-  --shadow-pro-red: 0 15px 30px -5px var(--brand-red-glow);
+  --shadow-pro-red: 0 15px 30px -5px var(--accent-glow);
   --glass-bg: rgba(255, 255, 255, 0.8);
   --glass-border: rgba(255, 255, 255, 0.3);
   --glass-blur: blur(16px);
-
-  /* 6. RADIUS SYSTEM */
-  --radius-pro: 22px;
-  --radius-pro-inner: 18px;
-  --radius-pro-sm: 12px;
-  --radius-pill: 100px;
-
-  /* LEGACY COMPATIBILITY (Synced to Tokens) */
-  --primary: var(--brand-black);
-  --accent: var(--brand-red);
-  --background: var(--bg-main);
-  --surface: var(--bg-soft);
-  --text: var(--text-main);
-  --border: var(--border-subtle);
 
   /* SPACING & LAYOUT */
   --container-max: 1400px;
@@ -160,60 +173,92 @@ section {
 
 /* --- GLOBAL 'PRO' DESIGN SYSTEM --- */
 
+/* --- GLOBAL 'PRO' DESIGN SYSTEM --- */
+
 .section-pro {
-  min-height: 100vh;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: flex-start !important;
-  /* Top aligned for placement consistency */
-  padding-top: calc(var(--header-height) + 0.5rem) !important;
-  /* Moved up */
-  padding-bottom: 2rem !important;
+  min-height: auto;
+  padding: 8rem 0;
+  background-color: var(--bg-main);
+  position: relative;
   overflow: hidden;
 }
 
-@media (max-width: 640px) {
-  .section-pro {
-    min-height: auto !important;
-    padding-top: 5rem !important;
-  }
-}
-
+/* MASTER SECTION HEADER */
 .section-header-pro {
   text-align: center;
-  margin-bottom: 2rem;
-  /* Reduced for vertical clearance */
+  margin-bottom: 3.5rem; /* Standardized spacing to content */
   width: 100%;
 }
 
 .subtitle-brand {
+  font-family: 'Outfit', sans-serif;
   font-size: 0.75rem;
-  font-weight: 800;
+  font-weight: 850;
   letter-spacing: 0.15em;
-  color: var(--brand-red);
+  color: var(--accent);
   text-transform: uppercase;
   display: block;
   margin-bottom: 0.8rem;
-  /* Increased spacing between subtitle and title */
 }
 
 .title-brand {
+  font-family: 'Outfit', sans-serif;
   font-size: 2.22rem;
-  /* Pixel-perfect standardized size */
   font-weight: 900;
-  color: var(--brand-black);
+  color: var(--p-color);
   letter-spacing: -0.02em;
-  margin: 0 auto;
   line-height: 1.2;
+  margin: 0 auto;
 }
 
 .brand-accent-line {
-  width: 60px; /* Increased from 40px */
-  height: 4px; /* Increased from 3px */
-  background: var(--brand-red);
+  width: 60px;
+  height: 4px;
+  background: var(--accent);
   margin: 1.5rem auto 0;
-  /* Increased spacing between title and accent line */
+}
+
+/* MASTER BUTTON SYSTEM */
+.btn-pro {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1.1rem 2.6rem;
+  border-radius: var(--radius-btn);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+}
+
+.btn-pro.primary {
+  background: var(--accent);
+  color: var(--text-white);
+  box-shadow: 0 15px 35px var(--accent-glow);
+}
+
+.btn-pro.primary:hover {
+  background: var(--p-color);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(var(--p-color-rgb), 0.2);
+}
+
+.btn-pro.outline {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: transparent;
+}
+
+.btn-pro.outline:hover {
+  background: var(--accent);
+  color: var(--text-white);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px var(--accent-glow);
 }
 
 .mx-auto {
