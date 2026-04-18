@@ -41,8 +41,8 @@ const ProjectList = () => {
           .spinner {
             width: 40px;
             height: 40px;
-            border: 3px solid #e5e7eb;
-            border-top: 3px solid #ef4444;
+            border: 3px solid var(--neutral-200);
+            border-top: 3px solid var(--brand-red);
             border-radius: 50%;
             animation: spin 1s linear infinite;
             margin: 0 auto;
@@ -58,7 +58,7 @@ const ProjectList = () => {
       <div className="container text-center py-5" role="alert">
         <p className="error-message">{error}</p>
         <style jsx>{`
-          .error-message { color: #ef4444; font-weight: 500; }
+          .error-message { color: var(--brand-error); font-weight: 500; }
         `}</style>
       </div>
     );
@@ -289,21 +289,21 @@ const ProjectList = () => {
 
         .card-metadata {
           font-size: 0.95rem;
-          color: #3b82f6; /* Soft blue metadata from reference */
+          color: var(--brand-info); /* Centralized Info color */
           display: flex;
           align-items: center;
           gap: 1rem;
         }
 
         .card-metadata strong {
-          color: #3b82f6;
+          color: var(--brand-info);
           font-weight: 700;
           text-transform: capitalize; /* Auto-correct casing */
         }
 
 
         .meta-divider {
-          color: #e5e7eb;
+          color: var(--neutral-200);
           font-weight: 300;
         }
 

@@ -1,76 +1,72 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap');
 
 :root {
-  /* Configurable Brand Palette - The "Pro" Theme */
+  /* 1. PRIMARY BRAND IDENTITY */
   --brand-red: #ff3333;
   --brand-red-glow: rgba(255, 51, 51, 0.4);
   --brand-black: #000000;
   --brand-black-panel: #030303;
+  --brand-white: #ffffff;
 
-  /* Accent/Elite Highlights */
-  --accent-gold: #f59e0b;
-  --accent-gold-dark: #ea580c;
-  --accent-gold-glow: rgba(245, 158, 11, 0.4);
+  /* 2. SEMANTIC CORE (Success, Error, Notice) */
+  --brand-success: #10b981;
+  --brand-success-bg: rgba(16, 185, 129, 0.1);
+  --brand-error: #ef4444;
+  --brand-error-bg: rgba(239, 68, 68, 0.1);
+  --brand-warning: #f59e0b;
+  --brand-warning-bg: rgba(245, 158, 11, 0.1);
+  --brand-info: #3b82f6;
+  --brand-info-bg: rgba(59, 130, 246, 0.1);
 
-  /* Foundation Colors */
+  /* 3. NEUTRAL SCALE (Refined Pro Palette) */
+  --neutral-50: #f8fafc;
+  --neutral-100: #f1f5f9;
+  --neutral-200: #e2e8f0;
+  --neutral-300: #cbd5e1;
+  --neutral-400: #94a3b8;
+  --neutral-500: #64748b;
+  --neutral-600: #475569;
+  --neutral-700: #334155;
+  --neutral-800: #1e293b;
+  --neutral-900: #0f172a;
+  --neutral-950: #020617;
 
-  --bg-main: #ffffff;
-  --bg-soft: #fbfbfc;
-  --text-main: #111827;
-  --text-muted: #6b7280;
-  --text-white: #ffffff;
-  --border-subtle: #e5e7eb;
+  /* 4. FOUNDATION MAPPING */
+  --bg-main: var(--brand-white);
+  --bg-soft: var(--neutral-50);
+  --text-main: var(--neutral-900);
+  --text-muted: var(--neutral-500);
+  --text-white: var(--brand-white);
+  --border-subtle: var(--neutral-200);
 
-  /* Standardized Pro Radii (18px - 24px) */
+  /* 5. ARCHITECTURAL EFFECTS (Editorial Style) */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-pro: 0 20px 50px -12px rgba(0, 0, 0, 0.12);
+  --shadow-pro-red: 0 15px 30px -5px var(--brand-red-glow);
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --glass-blur: blur(16px);
+
+  /* 6. RADIUS SYSTEM */
   --radius-pro: 22px;
-  /* Primary containers/cards */
   --radius-pro-inner: 18px;
-  /* Panels/Inner cards */
-  --radius-pro-sm: 14px;
-  /* Interactive elements/buttons */
+  --radius-pro-sm: 12px;
   --radius-pill: 100px;
-  /* Actual pills */
 
-  /* Legacy Mapping (Syncs existing elements to 18-24 range) */
-  --radius-sm: var(--radius-pro-inner);
-  --radius-md: var(--radius-pro-inner);
-  --radius-lg: var(--radius-pro);
-
-
-  /* Legacy/Core Variables (Synced to Theme) */
+  /* LEGACY COMPATIBILITY (Synced to Tokens) */
   --primary: var(--brand-black);
-  --primary-light: #334155;
   --accent: var(--brand-red);
-  --accent-light: #ff4d4d;
   --background: var(--bg-main);
   --surface: var(--bg-soft);
   --text: var(--text-main);
-  --text-muted: var(--text-muted);
   --border: var(--border-subtle);
 
-  /* Spacing & Layout */
+  /* SPACING & LAYOUT */
   --container-max: 1400px;
-  --spacer: 1rem;
   --header-height: 108px;
   --header-height-scrolled: 70px;
 
-
-  /* Admin Design System */
-  --admin-primary: #48008C;
-  --admin-primary-light: #C799FF;
-  --admin-bg-white: #FFFFFF;
-  --admin-bg-gray: #FAFAFA;
-  --admin-text-main: #0D0D0D;
-  --admin-text-muted: #666666;
-  --admin-border: #E2E8F0;
-  --admin-radius: 4px;
-
-  /* Glassmorphism */
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.3);
-  --glass-blur: blur(12px);
-
-  /* Fonts */
+  /* GLOBAL FONTS */
   font-family: 'Inter', system-ui, sans-serif;
   line-height: 1.6;
 }

@@ -18,6 +18,18 @@ import {
 } from '../services/settingsService';
 import ProjectForm from '../components/Admin/ProjectForm';
 import { THEME_MAP } from '../themeConfig';
+import { 
+  Building2, 
+  Clock, 
+  MapPin, 
+  Share2, 
+  Users, 
+  Settings, 
+  LogOut,
+  Mail,
+  Phone,
+  Globe
+} from 'lucide-react';
 
 const AdminDashboard = () => {
   const { user, loading, isAdmin, isSuperAdmin, login, logout } = useAuth();
@@ -39,6 +51,22 @@ const AdminDashboard = () => {
   const [mapShape, setMapShape] = useState('rectangle'); // 'rectangle' | 'square'
   const [editingProject, setEditingProject] = useState(null);
   const [themeKey, setThemeKey] = useState(localStorage.getItem('adm-theme') || 'DEFAULT');
+
+  // SITE CONTENT SETTINGS
+  const [sitePhone, setSitePhone] = useState('');
+  const [siteEmail, setSiteEmail] = useState('');
+  const [siteAddress, setSiteAddress] = useState('');
+  const [workingHours, setWorkingHours] = useState('');
+  const [isStudioOpen, setIsStudioOpen] = useState(true);
+
+  // SOCIAL LINKS
+  const [socialFb, setSocialFb] = useState('');
+  const [socialTw, setSocialTw] = useState('');
+  const [socialInsta, setSocialInsta] = useState('');
+  const [socialLinked, setSocialLinked] = useState('');
+  const [socialWa, setSocialWa] = useState('');
+  const [socialWeb, setSocialWeb] = useState('');
+
   const [modalConfig, setModalConfig] = useState({
     isOpen: false, title: '', message: '', type: 'confirm', onConfirm: null
   });
@@ -129,6 +157,21 @@ const AdminDashboard = () => {
       setSuperAdmins(settings.superAdminEmails || []);
       setMapUrl(settings.mapUrl || '');
       setMapAddress(settings.mapAddress || '');
+
+      // Dynamic Site Info
+      setSitePhone(settings.sitePhone || '');
+      setSiteEmail(settings.siteEmail || '');
+      setSiteAddress(settings.siteAddress || '');
+      setWorkingHours(settings.workingHours || '');
+      setIsStudioOpen(settings.isStudioOpen !== undefined ? settings.isStudioOpen : true);
+
+      // Socials
+      setSocialFb(settings.socialFb || '');
+      setSocialTw(settings.socialTw || '');
+      setSocialInsta(settings.socialInsta || '');
+      setSocialLinked(settings.socialLinked || '');
+      setSocialWa(settings.socialWa || '');
+      setSocialWeb(settings.socialWeb || '');
     } catch (err) {
       console.error('Error fetching settings:', err);
     } finally {
@@ -307,15 +350,29 @@ const AdminDashboard = () => {
     );
   };
 
-  const handleUpdateMap = async (e) => {
+  const handleUpdateSettings = async (e) => {
     e.preventDefault();
     setActionStatus('processing');
     try {
-      await updateSettings({ mapUrl, mapAddress });
-      showAlert('Success', 'Map settings updated successfully!');
+      await updateSettings({
+        mapUrl,
+        mapAddress,
+        sitePhone,
+        siteEmail,
+        siteAddress,
+        workingHours,
+        isStudioOpen,
+        socialFb,
+        socialTw,
+        socialInsta,
+        socialLinked,
+        socialWa,
+        socialWeb
+      });
+      showAlert('Success', 'Site settings updated successfully!');
     } catch (err) {
       console.error(err);
-      showAlert('Error', 'Failed to update map settings.');
+      showAlert('Error', 'Failed to update site settings.');
     } finally {
       setActionStatus('idle');
     }
@@ -444,7 +501,10 @@ const AdminDashboard = () => {
               </button>
             )}
           </div>
-          <button onClick={logout} className="action-btn pro">LOGOUT</button>
+          <button onClick={logout} className="action-btn pro" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <LogOut size={14} />
+            LOGOUT
+          </button>
         </div>
       </header>
 
@@ -811,42 +871,105 @@ const AdminDashboard = () => {
           ) : activeTab === 'settings' ? (
             <div className="admin-grid">
               <div className="admin-panel glass-card p-2">
-                <h3 className="left-panel-title">CONFIGURATION</h3>
-                <p className="small text-muted mb-1">Manage global website information.</p>
+                <h3 className="left-panel-title">DYNAMIC CONTENT</h3>
+                <p className="small text-muted mb-2">Centralized controls for site-wide business info.</p>
 
-                <div className="admin-form">
-                  <div className="admin-help-box">
-                    <div className="help-header">
-                      <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z" /></svg>
-                      <span>INTEGRATION GUIDE</span>
-                    </div>
-                    <ul className="help-steps">
-                      <li>1. Go to <strong>Google Maps</strong></li>
-                      <li>2. Click <strong>Share</strong> → <strong>Embed a map</strong></li>
-                      <li>3. Copy ONLY the <code>src="..."</code> URL</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <form onSubmit={handleUpdateMap} className="admin-form">
+                <form onSubmit={handleUpdateSettings} className="admin-form">
+                  {/* GROUP 1: ESSENTIALS */}
+                  <label className="section-title-xs" style={{ marginBottom: '1.2rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <Building2 size={16} /> BUSINESS ESSENTIALS
+                  </label>
+                  
                   <div className="form-group mb-2">
-                    <label className="section-title-xs">PHYSICAL OFFICE ADDRESS</label>
+                    <label className="section-title-xs">OFFICE PHONE NUMBERS</label>
                     <input
                       type="text"
-                      placeholder="Street, City, Zip"
-                      required
-                      value={mapAddress}
-                      onChange={(e) => setMapAddress(e.target.value)}
+                      placeholder="+91 99812 34567, +91 ..."
+                      value={sitePhone}
+                      onChange={(e) => setSitePhone(e.target.value)}
                       className="modern-input"
                     />
                   </div>
 
                   <div className="form-group mb-2">
+                    <label className="section-title-xs">PUBLIC EMAIL ADDRESS</label>
+                    <input
+                      type="email"
+                      placeholder="business@example.com"
+                      value={siteEmail}
+                      onChange={(e) => setSiteEmail(e.target.value)}
+                      className="modern-input"
+                    />
+                  </div>
+
+                  <div className="form-group mb-4">
+                    <label className="section-title-xs">PHYSICAL BUSINESS ADDRESS</label>
+                    <textarea
+                      rows="2"
+                      placeholder="Full address for map and footer..."
+                      value={siteAddress}
+                      onChange={(e) => setSiteAddress(e.target.value)}
+                      className="modern-textarea"
+                    />
+                  </div>
+
+                  {/* GROUP 2: OPERATIONS */}
+                  <label className="section-title-xs" style={{ margin: '1.5rem 0 1.2rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <Clock size={16} /> OPERATIONS & TIMING
+                  </label>
+                  
+                  <div className="form-group mb-2">
+                    <label className="section-title-xs">WORKING HOURS TEXT</label>
+                    <input
+                      type="text"
+                      placeholder="Mon - Sat: 10AM - 6PM"
+                      value={workingHours}
+                      onChange={(e) => setWorkingHours(e.target.value)}
+                      className="modern-input"
+                    />
+                  </div>
+
+                  <div className="form-group mb-4" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <div style={{ position: 'relative', width: '36px', height: '18px' }}>
+                      <input 
+                        type="checkbox" 
+                        checked={isStudioOpen}
+                        onChange={(e) => setIsStudioOpen(e.target.checked)}
+                        style={{ cursor: 'pointer', width: '100%', height: '100%', opacity: 0, position: 'absolute', zIndex: 2 }}
+                      />
+                      <div style={{ 
+                        width: '100%', 
+                        height: '100%', 
+                        background: isStudioOpen ? 'var(--adm-p)' : '#ddd',
+                        borderRadius: '20px',
+                        transition: '0.2s'
+                      }}></div>
+                      <div style={{ 
+                        position: 'absolute',
+                        top: '2px',
+                        left: isStudioOpen ? '20px' : '2px',
+                        width: '14px',
+                        height: '14px',
+                        background: 'white',
+                        borderRadius: '50%',
+                        transition: '0.2s'
+                      }}></div>
+                    </div>
+                    <label className="section-title-xs" style={{ marginBottom: 0 }}>SHOW "STUDIO OPEN" STATUS</label>
+                  </div>
+
+                  {/* GROUP 3: MAP INTEGRATION */}
+                  <label className="section-title-xs" style={{ margin: '1.5rem 0 1.2rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <MapPin size={16} /> MAP INTEGRATION
+                  </label>
+                  <p className="small text-muted mb-2">
+                    Paste the <strong>Embed URL</strong> from Google Maps (Share {' > '} Embed a map {' > '} src="...").
+                  </p>
+                  <div className="form-group mb-2">
                     <label className="section-title-xs">GOOGLE MAPS EMBED URL</label>
                     <textarea
-                      rows="4"
+                      rows="3"
                       placeholder="https://www.google.com/maps/embed?pb=..."
-                      required
                       value={mapUrl}
                       onChange={(e) => setMapUrl(e.target.value)}
                       className="modern-textarea"
@@ -854,43 +977,68 @@ const AdminDashboard = () => {
                   </div>
 
                   <button type="submit" className="button-primary w-100" disabled={actionStatus === 'processing'}>
-                    {actionStatus === 'processing' ? 'SAVING...' : 'UPDATE MAP SETTINGS'}
+                    {actionStatus === 'processing' ? 'SYNCING DATA...' : 'SAVE ALL SITE SETTINGS'}
                   </button>
                 </form>
               </div>
 
               <div className="admin-panel glass-card p-2">
-                <h3 className="section-title">SITE SETTINGS</h3>
-                <div className="flex items-center justify-between mb-2">
-                  <p className="small text-muted">How map looks on the website.</p>
-                  <div className="shape-toggles">
-                    <button
-                      className={`shape-btn ${mapShape === 'rectangle' ? 'active' : ''}`}
-                      onClick={() => setMapShape('rectangle')}
-                      title="Rectangle View"
-                    >
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="7" width="18" height="10" rx="0"></rect></svg>
-                    </button>
-                    <button
-                      className={`shape-btn ${mapShape === 'square' ? 'active' : ''}`}
-                      onClick={() => setMapShape('square')}
-                      title="Square View"
-                    >
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="5" y="5" width="14" height="14" rx="0"></rect></svg>
-                    </button>
+                <h3 className="section-title">CONNECTIVITY & STYLE</h3>
+                
+                <div style={{ marginBottom: '2rem' }}>
+                  <label className="section-title-xs" style={{ marginBottom: '1.2rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <Share2 size={16} /> SOCIAL PROFILES
+                  </label>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                    <div className="form-group">
+                      <label className="section-title-xs">INSTAGRAM URL</label>
+                      <input type="text" value={socialInsta} onChange={(e) => setSocialInsta(e.target.value)} className="modern-input" placeholder="#" />
+                    </div>
+                    <div className="form-group">
+                      <label className="section-title-xs">LINKEDIN URL</label>
+                      <input type="text" value={socialLinked} onChange={(e) => setSocialLinked(e.target.value)} className="modern-input" placeholder="#" />
+                    </div>
+                    <div className="form-group">
+                      <label className="section-title-xs">WHATSAPP NUMBER</label>
+                      <input type="text" value={socialWa} onChange={(e) => setSocialWa(e.target.value)} className="modern-input" placeholder="919981..." />
+                    </div>
+                    <div className="form-group">
+                      <label className="section-title-xs">FACEBOOK URL</label>
+                      <input type="text" value={socialFb} onChange={(e) => setSocialFb(e.target.value)} className="modern-input" placeholder="#" />
+                    </div>
+                    <div className="form-group">
+                      <label className="section-title-xs">TWITTER / X URL</label>
+                      <input type="text" value={socialTw} onChange={(e) => setSocialTw(e.target.value)} className="modern-input" placeholder="#" />
+                    </div>
+                    <div className="form-group">
+                      <label className="section-title-xs">WEBSITE URL</label>
+                      <input type="text" value={socialWeb} onChange={(e) => setSocialWeb(e.target.value)} className="modern-input" placeholder="https://..." />
+                    </div>
                   </div>
                 </div>
-                <div className={`map-preview-container ${mapShape}`}>
-                  {mapUrl ? (
-                    <iframe src={mapUrl} title="Map Preview" width="100%" height="100%" style={{ border: 0 }} allowFullScreen="" loading="lazy"></iframe>
-                  ) : (
-                    <div className="flex items-center justify-center h-full text-muted">No map configured</div>
-                  )}
-                </div>
-                <div className="admin-panel glass-card p-2" style={{ marginTop: '1.5rem' }}>
-                  <h3 className="section-title">THEME PRESETS</h3>
-                  <p className="small text-muted mb-2">Change the visual atmosphere of the dashboard.</p>
 
+                {mapUrl && (
+                  <div className="map-preview-wrapper mb-4">
+                    <label className="section-title-xs" style={{ marginBottom: '0.8rem' }}>
+                       <MapPin size={16} /> LIVE MAP PREVIEW
+                    </label>
+                    <div className="map-preview-container rectangle" style={{ height: '320px', boxShadow: '8px 8px 0px var(--adm-text)' }}>
+                      <iframe
+                        src={mapUrl}
+                        width="100%"
+                        height="100%"
+                        style={{ border: 0 }}
+                        allowFullScreen=""
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                        title="Map Preview"
+                      ></iframe>
+                    </div>
+                  </div>
+                )}
+
+                <div className="admin-panel glass-card p-2" style={{ marginTop: '1rem', border: 'none', boxShadow: 'none', padding: '0 !important' }}>
+                  <h3 className="section-title">THEME PRESETS</h3>
                   <div className="theme-grid">
                     {Object.keys(THEME_MAP).map(key => (
                       <button
@@ -1150,7 +1298,7 @@ const AdminDashboard = () => {
         
         .admin-grid { 
           display: grid; 
-          grid-template-columns: 380px 1fr; 
+          grid-template-columns: 360px 1fr; 
           gap: 0; 
           flex: 1;
           min-height: 0; 
@@ -1159,7 +1307,7 @@ const AdminDashboard = () => {
 
         .admin-panel {
           background: var(--adm-card);
-          padding: 2rem;
+          padding: 1.5rem;
           overflow-y: auto;
           height: 100%;
         }
@@ -1168,10 +1316,11 @@ const AdminDashboard = () => {
           border-right: 2px solid var(--adm-text);
           background: var(--adm-bg);
           scrollbar-gutter: stable;
+          padding: 1.5rem 1.25rem;
         }
         
         .admin-panel:first-child .admin-form {
-          max-width: 320px; 
+          width: 100%;
         }
 
         .glass-card { 
@@ -1217,6 +1366,7 @@ const AdminDashboard = () => {
           background: var(--adm-card);
           box-sizing: border-box;
           transition: border-color 0.2s;
+          margin-bottom: 0.5rem; /* Added margin below input for separation from help text/next label */
         }
         .modern-textarea {
           resize: vertical;
@@ -1427,8 +1577,15 @@ const AdminDashboard = () => {
           text-transform: uppercase;
           color: var(--adm-text);
           letter-spacing: 0.08em;
-          margin-bottom: 0.4rem;
-          display: block;
+          margin-bottom: 0.6rem;
+          margin-top: 1.5rem; /* Gap above headings */
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        .section-title-xs:first-of-type {
+          margin-top: 0;
         }
         
         .admin-help-box {

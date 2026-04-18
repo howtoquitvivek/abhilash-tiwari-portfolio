@@ -13,28 +13,20 @@ const ContactForm = () => {
     message: '',
     honeypot: ''
   });
-  const [mapData, setMapData] = useState({
-    url: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14670.33441544431!2d79.9912773!3d23.18536!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3981ae1767070707%3A0x123456789abcdef!2sSobhapur%20Greens!5e0!3m2!1sen!2sin!4v1713254400000!5m2!1sen!2sin",
-    address: "Sobhapur Greens, Near Chhawani, Jabalpur, MP 482011"
-  });
+  const [settings, setSettings] = useState(null);
   const [status, setStatus] = useState('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    const fetchMapSettings = async () => {
+    const fetchSiteSettings = async () => {
       try {
-        const settings = await getSettings();
-        if (settings.mapUrl && settings.mapAddress) {
-          setMapData({
-            url: settings.mapUrl,
-            address: settings.mapAddress
-          });
-        }
+        const data = await getSettings();
+        setSettings(data);
       } catch (err) {
-        console.error('Error fetching map settings:', err);
+        console.error('Error fetching site settings:', err);
       }
     };
-    fetchMapSettings();
+    fetchSiteSettings();
   }, []);
 
   const handleChange = (e) => {
@@ -254,7 +246,7 @@ const ContactForm = () => {
                     <div className="feature-icon-glass"><MapPin size={22} /></div>
                     <div className="loc-text-pro">
                       <h3>Office Address</h3>
-                      <p>{mapData.address}</p>
+                      <p>{settings?.siteAddress || "Sobhapur Greens, Jabalpur, MP 482011"}</p>
                     </div>
                   </div>
 
@@ -262,8 +254,8 @@ const ContactForm = () => {
                     <div className="feature-icon-glass"><Clock size={22} /></div>
                     <div className="loc-text-pro">
                       <h3>Working Hours</h3>
-                      <p>Mon - Sat: 10:00 AM - 6:00 PM</p>
-                      <span className="availability-tag">Studio Open</span>
+                      <p>{settings?.workingHours || "Mon - Sat: 10:00 AM - 6:00 PM"}</p>
+                      {settings?.isStudioOpen && <span className="availability-tag">Studio Open</span>}
                     </div>
                   </div>
 
@@ -273,7 +265,7 @@ const ContactForm = () => {
 
                   <div className="map-action-footer mt-4">
                     <a
-                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapData.address)}`}
+                      href={settings?.mapUrl ? settings.mapUrl.replace('/embed', '/viewer') : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(settings?.siteAddress || "Sobhapur Greens")}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="directions-btn-pro"
@@ -290,7 +282,7 @@ const ContactForm = () => {
                 <div className="google-map-pro">
                   <iframe
                     title="Office Location"
-                    src={mapData.url}
+                    src={settings?.mapUrl || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14670.33441544431!2d79.9912773!3d23.18536!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3981ae1767070707%3A0x123456789abcdef!2sSobhapur%20Greens!5e0!3m2!1sen!2sin!4v1713254400000!5m2!1sen!2sin"}
                     width="100%"
                     height="100%"
                     style={{ border: 0, filter: 'grayscale(15%) contrast(110%) brightness(95%)' }}
@@ -525,8 +517,8 @@ const ContactForm = () => {
           margin-top: 0.8rem;
           font-size: 0.6rem;
           font-weight: 900;
-          color: #10b981;
-          background: rgba(16, 185, 129, 0.1);
+          color: var(--brand-success);
+          background: var(--brand-success-bg);
           padding: 0.2rem 0.6rem;
           border-radius: 4px;
           text-transform: uppercase;
@@ -565,7 +557,7 @@ const ContactForm = () => {
 
         .map-frame-panel {
           position: relative;
-          background: #f0f0f0;
+          background: var(--neutral-100);
         }
 
         .google-map-pro { height: 100%; width: 100%; }
@@ -591,7 +583,7 @@ const ContactForm = () => {
         }
 
         .spinner-loader {
-          width: 16px; height: 16px; border: 2px solid #ffffff55; border-top-color: #fff;
+          width: 16px; height: 16px; border: 2px solid rgba(255, 255, 255, 0.3); border-top-color: var(--text-white);
           border-radius: 50%; animation: spin 0.8s linear infinite;
         }
         @keyframes spin { to { transform: rotate(360deg); } }

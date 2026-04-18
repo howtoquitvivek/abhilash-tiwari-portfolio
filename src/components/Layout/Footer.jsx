@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { Send, Globe, Phone, Mail, MapPin } from 'lucide-react';
 
 import { Facebook, Twitter, Instagram, Linkedin } from '../Shared/Icons';
+import { getSettings } from '../../services/settingsService';
 
 
 const Footer = () => {
+  const [settings, setSettings] = useState(null);
   const location = useLocation();
   const year = new Date().getFullYear();
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const data = await getSettings();
+        setSettings(data);
+      } catch (err) {
+        console.error('Footer settings fetch failed:', err);
+      }
+    };
+    fetchSettings();
+  }, []);
 
   if (location.pathname.startsWith('/admin')) return null;
 
@@ -28,10 +42,10 @@ const Footer = () => {
               Professional Builder & Promoter providing high-quality civil and construction services. Dedicated to structural excellence and high-end residential development in Jabalpur.
             </p>
             <div className="social-icon-row mt-2">
-              <a href="#" className="social-pill"><Facebook size={18} strokeWidth={2.5} /></a>
-              <a href="#" className="social-pill"><Twitter size={18} strokeWidth={2.5} /></a>
-              <a href="#" className="social-pill"><Instagram size={18} strokeWidth={2.5} /></a>
-              <a href="#" className="social-pill"><Send size={18} strokeWidth={2.5} /></a>
+              <a href={settings?.socialFb || "#"} className="social-pill" target="_blank" rel="noreferrer"><Facebook size={18} strokeWidth={2.5} /></a>
+              <a href={settings?.socialTw || "#"} className="social-pill" target="_blank" rel="noreferrer"><Twitter size={18} strokeWidth={2.5} /></a>
+              <a href={settings?.socialInsta || "#"} className="social-pill" target="_blank" rel="noreferrer"><Instagram size={18} strokeWidth={2.5} /></a>
+              <a href={settings?.socialLinked || "#"} className="social-pill" target="_blank" rel="noreferrer"><Linkedin size={18} strokeWidth={2.5} /></a>
             </div>
           </div>
 
@@ -39,10 +53,10 @@ const Footer = () => {
           <div className="footer-section" data-aos="fade-up" data-aos-delay="100">
             <h4 className="section-header">SOCIAL LINKS</h4>
             <ul className="footer-links-list">
-              <li><a href="#"><Instagram size={14} className="inline-icon" /> Instagram</a></li>
-              <li><a href="#"><Linkedin size={14} className="inline-icon" /> LinkedIn</a></li>
-              <li><a href="#"><Globe size={14} className="inline-icon" /> Website</a></li>
-              <li><a href="#"><Send size={14} className="inline-icon" /> WhatsApp</a></li>
+              <li><a href={settings?.socialInsta || "#"} target="_blank" rel="noreferrer"><Instagram size={14} className="inline-icon" /> Instagram</a></li>
+              <li><a href={settings?.socialLinked || "#"} target="_blank" rel="noreferrer"><Linkedin size={14} className="inline-icon" /> LinkedIn</a></li>
+              <li><a href={settings?.socialWeb || "#"} target="_blank" rel="noreferrer"><Globe size={14} className="inline-icon" /> Website</a></li>
+              <li><a href={settings?.socialWa ? `https://wa.me/${settings.socialWa}` : "#"} target="_blank" rel="noreferrer"><Send size={14} className="inline-icon" /> WhatsApp</a></li>
             </ul>
           </div>
 
@@ -52,15 +66,15 @@ const Footer = () => {
             <div className="contact-info-stack">
               <div className="contact-item">
                 <MapPin size={16} className="contact-icon" />
-                <p>Sobhapur Greens, Jabalpur<br />Madhya Pradesh, 482002</p>
+                <p>{settings?.siteAddress || "Sobhapur Greens, Jabalpur\nMadhya Pradesh, 482011"}</p>
               </div>
               <div className="contact-item">
                 <Phone size={16} className="contact-icon" />
-                <p>+91 (998) 123-4567</p>
+                <p>{settings?.sitePhone || "+91 99812 34567"}</p>
               </div>
               <div className="contact-item">
                 <Mail size={16} className="contact-icon" />
-                <p>abhilash1919@gmail.com</p>
+                <p>{settings?.siteEmail || "info@abhilashtiwari.com"}</p>
               </div>
             </div>
           </div>
@@ -235,7 +249,8 @@ const Footer = () => {
 
         /* Footer Bottom */
         .footer-bottom {
-          padding-top: 4rem;
+          padding-top: 3rem;
+          margin-top: 3rem;
           border-top: 1px solid rgba(255, 255, 255, 0.08);
           text-align: center;
         }

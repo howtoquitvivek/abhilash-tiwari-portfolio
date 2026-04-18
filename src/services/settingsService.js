@@ -16,12 +16,26 @@ export const getSettings = async () => {
     if (docSnap.exists()) {
       return docSnap.data();
     } else {
-      // Default settings
       const defaultSettings = {
         adminEmails: [],
         superAdminEmails: ["vivekbarman425@gmail.com"], // Manually set as the first superadmins
         mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14670.33441544431!2d79.9912773!3d23.18536!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3981ae1767070707%3A0x123456789abcdef!2sSobhapur%20Greens!5e0!3m2!1sen!2sin!4v1713254400000!5m2!1sen!2sin",
-        mapAddress: "Sobhapur Greens, Near Chhawani, Jabalpur, MP 482011"
+        mapAddress: "Sobhapur Greens, Near Chhawani, Jabalpur, MP 482011",
+        
+        // Dynamic Site Info
+        sitePhone: "+91 99812 34567, +91 87654 32109",
+        siteEmail: "abhilash1919@gmail.com",
+        siteAddress: "Sobhapur Greens, Near Chhawani, Jabalpur, MP 482011",
+        workingHours: "Mon - Sat: 10:00 AM - 6:00 PM",
+        isStudioOpen: true,
+
+        // Social Links
+        socialFb: "#",
+        socialTw: "#",
+        socialInsta: "#",
+        socialLinked: "#",
+        socialWa: "919981234567",
+        socialWeb: "https://abhilashtiwari.com"
       };
       await setDoc(docRef, defaultSettings);
       return defaultSettings;

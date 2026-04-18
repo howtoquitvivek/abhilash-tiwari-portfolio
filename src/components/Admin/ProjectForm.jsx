@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { uploadProjectMedia } from '../../services/storageService';
 import { addProject, updateProject } from '../../services/projectService';
+import { 
+  Type, 
+  Layers, 
+  MapPin, 
+  Image as ImageIcon, 
+  Link as LinkIcon, 
+  FileText 
+} from 'lucide-react';
 
 /**
  * Functional component for adding or editing a project.
@@ -193,8 +201,8 @@ const ProjectForm = ({ onProjectAdded, editingProject, onCancel }) => {
 
   return (
     <form onSubmit={handleSubmit} className="admin-form">
-      <div className="form-group mb-2">
-        <label className="section-title-xs">PROJECT TITLE</label>
+      <div className="form-group">
+        <label className="section-title-xs"><Type size={14} /> PROJECT TITLE</label>
         <input
           type="text"
           id="title"
@@ -207,9 +215,9 @@ const ProjectForm = ({ onProjectAdded, editingProject, onCancel }) => {
         />
       </div>
 
-      <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
+      <div style={{ display: 'flex', gap: '1.5rem', marginBottom: '1rem' }}>
         <div className="form-group" style={{ flex: 1 }}>
-          <label className="section-title-xs">CATEGORY</label>
+          <label className="section-title-xs"><Layers size={14} /> CATEGORY</label>
           <input
             type="text"
             id="category"
@@ -222,7 +230,7 @@ const ProjectForm = ({ onProjectAdded, editingProject, onCancel }) => {
           />
         </div>
         <div className="form-group" style={{ flex: 1 }}>
-          <label className="section-title-xs">LOCATION</label>
+          <label className="section-title-xs"><MapPin size={14} /> LOCATION</label>
           <input
             type="text"
             id="location"
@@ -237,8 +245,8 @@ const ProjectForm = ({ onProjectAdded, editingProject, onCancel }) => {
       </div>
 
 
-      <div className="form-group mb-2">
-        <label className="section-title-xs">DESCRIPTION (BIO)</label>
+      <div className="form-group">
+        <label className="section-title-xs"><FileText size={14} /> DESCRIPTION (BIO)</label>
         <textarea
           id="description"
           name="description"
@@ -251,8 +259,8 @@ const ProjectForm = ({ onProjectAdded, editingProject, onCancel }) => {
         ></textarea>
       </div>
 
-      <div className="form-group mb-2">
-        <label className="section-title-xs">GOOGLE MAP EMBED LINK (OPTIONAL)</label>
+      <div className="form-group">
+        <label className="section-title-xs"><MapPin size={14} /> GOOGLE MAP EMBED LINK (OPTIONAL)</label>
         <input
           type="text"
           id="mapEmbedUrl"
@@ -266,8 +274,8 @@ const ProjectForm = ({ onProjectAdded, editingProject, onCancel }) => {
         <p className="small text-muted mt-min">Paste the "Embed a map" iframe source or the link. (From Share &gt; Embed map)</p>
       </div>
 
-      <div className="form-group mb-2">
-        <label className="section-title-xs">PRIMARY PROJECT IMAGE (MANDATORY)</label>
+      <div className="form-group">
+        <label className="section-title-xs"><ImageIcon size={14} /> PRIMARY PROJECT IMAGE (MANDATORY)</label>
         <input
           type="file"
           id="primaryImage"
@@ -283,8 +291,8 @@ const ProjectForm = ({ onProjectAdded, editingProject, onCancel }) => {
         )}
       </div>
 
-      <div className="form-group mb-2">
-        <label className="section-title-xs">ADDITIONAL IMAGES (OPTIONAL)</label>
+      <div className="form-group">
+        <label className="section-title-xs"><ImageIcon size={14} /> ADDITIONAL IMAGES (OPTIONAL)</label>
         <input
           type="file"
           id="additionalMedia"
@@ -308,7 +316,7 @@ const ProjectForm = ({ onProjectAdded, editingProject, onCancel }) => {
         {/* Existing Media Previews (Edit Mode) */}
         {existingMedia.length > 0 && (
           <div className="existing-media-section mt-2">
-            <label className="section-title-xs">EXISTING IMAGES</label>
+            <label className="section-title-xs"><ImageIcon size={14} /> EXISTING IMAGES</label>
             <div className="media-preview-grid">
               {existingMedia.map((item, index) => (
                 <div key={`ex-${index}`} className="media-preview-card">
@@ -323,8 +331,8 @@ const ProjectForm = ({ onProjectAdded, editingProject, onCancel }) => {
 
 
 
-      <div className="form-group mb-2">
-        <label className="section-title-xs">VISIT LINK (OPTIONAL)</label>
+      <div className="form-group">
+        <label className="section-title-xs"><LinkIcon size={14} /> VISIT LINK (OPTIONAL)</label>
         <input
           type="text"
           id="link"
@@ -363,6 +371,14 @@ const ProjectForm = ({ onProjectAdded, editingProject, onCancel }) => {
 
 
       <style>{`
+        .admin-form {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem; /* Manage vertical spacing globally */
+        }
+        .form-group {
+          margin-bottom: 0 !important;
+        }
         .media-preview-grid {
           display: grid;
           grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
@@ -373,8 +389,8 @@ const ProjectForm = ({ onProjectAdded, editingProject, onCancel }) => {
           aspect-ratio: 1;
           border-radius: 8px;
           overflow: hidden;
-          background: #f3f4f6;
-          border: 1px solid #e5e7eb;
+          background: var(--neutral-100);
+          border: 1px solid var(--neutral-200);
         }
         .media-preview-card img, .media-preview-card video {
           width: 100%;
@@ -385,7 +401,7 @@ const ProjectForm = ({ onProjectAdded, editingProject, onCancel }) => {
           position: absolute;
           top: 4px;
           right: 4px;
-          background: rgba(239, 68, 68, 0.9);
+          background: var(--brand-error);
           color: white;
           border: none;
           width: 24px;
@@ -397,12 +413,12 @@ const ProjectForm = ({ onProjectAdded, editingProject, onCancel }) => {
           align-items: center;
           justify-content: center;
           transition: 0.2s;
+          opacity: 0.9;
         }
-        .remove-btn:hover { background: #ef4444; transform: scale(1.1); }
-        .existing-media-section { padding-top: 1rem; border-top: 1px solid #eee; }
+        .remove-btn:hover { background: var(--brand-error); transform: scale(1.1); opacity: 1; }
+        .existing-media-section { padding-top: 1rem; border-top: 1px solid var(--neutral-200); }
       `}</style>
     </form>
-
   );
 };
 

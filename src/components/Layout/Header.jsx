@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Phone, Mail, Send } from 'lucide-react';
+import { Phone, Mail } from 'lucide-react';
 import { Facebook, Twitter, Instagram, Linkedin } from '../Shared/Icons';
+import { getSettings } from '../../services/settingsService';
 
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [settings, setSettings] = useState(null);
   const location = useLocation();
   const isAdminPath = location.pathname.startsWith('/admin');
 
@@ -14,6 +16,18 @@ const Header = () => {
       setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
+    
+    // Fetch settings for dynamic top bar
+    const fetchSettings = async () => {
+      try {
+        const data = await getSettings();
+        setSettings(data);
+      } catch (err) {
+        console.error('Header settings fetch failed:', err);
+      }
+    };
+    fetchSettings();
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -27,20 +41,20 @@ const Header = () => {
           <div className="top-info-left">
             <div className="top-item">
               <Phone size={13} className="mr-sm" />
-              <span>+91 99812 34567, +91 87654 32109</span>
+              <span>{settings?.sitePhone || "+91 99812 34567"}</span>
             </div>
             <div className="top-item ml-4">
               <Mail size={13} className="mr-sm" />
-              <span>abhilash1919@gmail.com</span>
+              <span>{settings?.siteEmail || "info@abhilashtiwari.com"}</span>
             </div>
           </div>
           <div className="top-socials-right">
             <span className="social-label">Follow Us On:</span>
             <div className="social-icons">
-              <a href="#" aria-label="Facebook"><Facebook size={14} /></a>
-              <a href="#" aria-label="X"><Twitter size={14} /></a>
-              <a href="#" aria-label="Instagram"><Instagram size={14} /></a>
-              <a href="#" aria-label="LinkedIn"><Linkedin size={14} /></a>
+              <a href={settings?.socialFb || "#"} aria-label="Facebook" target="_blank" rel="noreferrer"><Facebook size={14} /></a>
+              <a href={settings?.socialTw || "#"} aria-label="X" target="_blank" rel="noreferrer"><Twitter size={14} /></a>
+              <a href={settings?.socialInsta || "#"} aria-label="Instagram" target="_blank" rel="noreferrer"><Instagram size={14} /></a>
+              <a href={settings?.socialLinked || "#"} aria-label="LinkedIn" target="_blank" rel="noreferrer"><Linkedin size={14} /></a>
             </div>
           </div>
         </div>

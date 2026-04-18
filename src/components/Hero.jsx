@@ -27,7 +27,7 @@ const Hero = () => {
           justify-content: center;
           align-items: center;
           padding: var(--header-height) 1rem 4rem;
-          background: radial-gradient(circle at 10% 20%, rgba(245, 158, 11, 0.05) 0%, transparent 50%);
+          background: radial-gradient(circle at 10% 20%, var(--brand-red-glow) 0%, transparent 50%);
           text-align: center;
           position: relative;
         }
