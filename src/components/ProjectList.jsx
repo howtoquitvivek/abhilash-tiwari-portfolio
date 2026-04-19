@@ -36,6 +36,18 @@ const ProjectList = () => {
     fetchProjects();
   }, []);
 
+  // Sync scroll on hash load
+  useEffect(() => {
+    if (!isLoading && window.location.hash === '#projects') {
+      const el = document.getElementById('projects');
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }, [isLoading]);
+
   if (isLoading) {
     return (
       <div className="container text-center py-5">
