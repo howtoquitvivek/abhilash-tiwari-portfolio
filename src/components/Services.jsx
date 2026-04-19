@@ -83,7 +83,7 @@ const Services = () => {
           grid-template-columns: 1fr 1fr;
           gap: 3rem; /* Increased for professional breathing room */
           align-items: stretch;
-          margin-top: 3.5rem; /* Synced with standardized header spacing */
+          margin-top: 2rem; /* Synced with standardized header spacing */
           max-width: 1200px;
           width: 90%;
           margin-left: auto;
@@ -106,7 +106,7 @@ const Services = () => {
           transition: transform 0.3s ease, box-shadow 0.3s ease;
           position: relative;
           overflow: hidden;
-          height: 220px; /* Reduced from 230px */
+          height: 230px; /* Reduced from 230px */
           display: flex;
           flex-direction: column;
         }
@@ -147,7 +147,7 @@ const Services = () => {
         /* IMAGE PANEL */
         .services-image-panel {
           position: relative;
-          height: 462px; /* Perfectly synced with 2 rows of 220px cards + 1.5rem gap */
+          height: 480px; /* Perfectly synced with 2 rows of 220px cards + 1.5rem gap */
         }
 
         .image-frame-pro {

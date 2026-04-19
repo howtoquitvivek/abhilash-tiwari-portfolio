@@ -13,6 +13,7 @@ const ProjectList = () => {
   const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -21,6 +22,9 @@ const ProjectList = () => {
       try {
         const data = await getProjects();
         setProjects(data);
+        // Correctly calculate middle index within [1, data.length]
+        const midIdx = Math.floor((data.length - 1) / 2) + 1;
+        setActiveIndex(midIdx);
       } catch (err) {
         setError('Failed to load projects. Please try again later.');
         console.error(err);
@@ -78,16 +82,33 @@ const ProjectList = () => {
           <p className="text-center text-muted py-5">No projects found. Check back soon!</p>
         ) : (
           <div className="carousel-wrapper" data-aos="fade-up">
+            <div className="item-counter-subtle">
+              {activeIndex >= 1 && activeIndex <= projects.length ? (
+                `${activeIndex} / ${projects.length}`
+              ) : (
+                <span className="info-tag">{activeIndex < 1 ? 'START' : 'END'}</span>
+              )}
+            </div>
             <Swiper
               modules={[Navigation, Autoplay]}
               spaceBetween={50}
               slidesPerView={1.2}
               centeredSlides={true}
+              initialSlide={Math.floor((projects.length - 1) / 2) + 1}
               navigation={{
                 prevEl: '.swiper-button-prev-custom',
                 nextEl: '.swiper-button-next-custom',
               }}
-              loop={true}
+              loop={false}
+              onSlideChange={(swiper) => {
+                // Prevent navigating to intro/outro slides
+                if (swiper.activeIndex < 1) {
+                  swiper.slideTo(1);
+                } else if (swiper.activeIndex > projects.length) {
+                  swiper.slideTo(projects.length);
+                }
+                setActiveIndex(swiper.activeIndex);
+              }}
               autoplay={{ delay: 5000, disableOnInteraction: false }}
               breakpoints={{
                 768: { slidesPerView: 1.5, spaceBetween: 40 },
@@ -98,6 +119,25 @@ const ProjectList = () => {
 
               className="projects-swiper"
             >
+              {/* INTRO TYPOGRAPHY SLIDE */}
+              <SwiperSlide>
+                <div className="typography-slide intro">
+                  <div className="typo-glass-shine"></div>
+                  <div className="typo-card-chip">
+                    <svg width="50" height="40" viewBox="0 0 40 30" fill="none">
+                      <rect width="50" height="40" rx="4" fill="rgba(255,255,255,0.1)" />
+                      <path d="M10 0V30M20 0V30M30 0V30M0 10H40M0 20H40" stroke="rgba(255,255,255,0.2)" strokeWidth="0.5" />
+                    </svg>
+                  </div>
+                  <div className="typo-content-wrapper inward">
+                    <span className="typo-subtitle">ESTABLISHED 2005</span>
+                    <h2 className="typo-title">Building<br />Future</h2>
+                    <div className="typo-accent-line intro-line"></div>
+                  </div>
+                  <div className="typo-card-number">EST. 2005 . JBP . IN</div>
+                </div>
+              </SwiperSlide>
+
               {projects.map((project) => (
                 <SwiperSlide key={project.id}>
                   <div className="project-slide-card">
@@ -128,16 +168,38 @@ const ProjectList = () => {
                   </div>
                 </SwiperSlide>
               ))}
+
+              {/* OUTRO TYPOGRAPHY SLIDE */}
+              <SwiperSlide>
+                <div className="typography-slide outro">
+                  <div className="typo-glass-shine"></div>
+                  <div className="typo-card-chip">
+                  </div>
+                  <div className="typo-content-wrapper inward">
+                    <span className="typo-subtitle">CONTACT US</span>
+                    <h2 className="typo-title">Ready To<br />Build?</h2>
+                    <div className="typo-accent-line"></div>
+                    <a href="#contact" className="typo-cta">QUOTE</a>
+                  </div>
+                  <div className="typo-card-number">ABH . CONST . 2024</div>
+                </div>
+              </SwiperSlide>
             </Swiper>
 
             {/* Custom Navigation Arrows - Positioned Over Images */}
-            <button className="swiper-button-prev-custom">
+            <button
+              className={`swiper-button-prev-custom ${activeIndex <= 1 ? 'nav-locked' : ''}`}
+              onClick={(e) => activeIndex <= 1 && e.preventDefault()}
+            >
               <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="22" y1="12" x2="2" y2="12"></line>
                 <polyline points="9 19 2 12 9 5"></polyline>
               </svg>
             </button>
-            <button className="swiper-button-next-custom">
+            <button
+              className={`swiper-button-next-custom ${activeIndex >= projects.length ? 'nav-locked' : ''}`}
+              onClick={(e) => activeIndex >= projects.length && e.preventDefault()}
+            >
               <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="2" y1="12" x2="22" y2="12"></line>
                 <polyline points="15 5 22 12 15 19"></polyline>
@@ -161,6 +223,207 @@ const ProjectList = () => {
           padding: 8rem 0;
           background-color: var(--bg-main);
           overflow: hidden;
+          position: relative;
+        }
+
+        .item-counter-subtle {
+          position: absolute;
+          top: -2.5rem;
+          right: 3%;
+          font-family: 'Outfit', sans-serif;
+          font-size: 0.9rem;
+          font-weight: 600;
+          color: var(--text-muted);
+          opacity: 0.35;
+          letter-spacing: 0.15em;
+          z-index: 10;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        .info-tag {
+          font-size: 0.75rem;
+          background: rgba(var(--accent-rgb), 0.1);
+          color: var(--accent);
+          padding: 0.2rem 0.6rem;
+          letter-spacing: 0.2em;
+          font-weight: 850;
+        }
+
+        /* ULTRA-PREMIUM TYPOGRAPHY SLIDES (VIBRANT CARD DESIGN) */
+        .typography-slide {
+          height: 520px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding: 3rem;
+          background: #000;
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          border-radius: var(--radius-pro-inner);
+          position: relative;
+          overflow: hidden;
+          box-shadow: 0 40px 100px -20px rgba(0,0,0,0.5);
+          transition: all 0.5s ease;
+        }
+
+        /* The "Noise" and "Mesh" background layer */
+        .typography-slide::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: 
+            radial-gradient(circle at 20% 30%, rgba(var(--accent-rgb), 0.2) 0%, transparent 50%),
+            radial-gradient(circle at 80% 70%, rgba(var(--accent-rgb), 0.15) 0%, transparent 50%),
+            url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+          opacity: 0.4;
+          mix-blend-mode: overlay;
+          z-index: 1;
+        }
+
+        .typography-slide.intro {
+          background: linear-gradient(135deg, #050505 0%, #1a0505 100%);
+          align-items: flex-end;
+          text-align: right;
+        }
+
+        .typography-slide.outro {
+          background: linear-gradient(135deg, #1a0505 0%, #050505 100%);
+          align-items: flex-start;
+          text-align: left;
+        }
+
+        /* Glass Shine Effect */
+        .typo-glass-shine {
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 50%;
+          height: 100%;
+          background: linear-gradient(
+            to right,
+            transparent,
+            rgba(255, 255, 255, 0.05),
+            transparent
+          );
+          transform: skewX(-25deg);
+          transition: 0.75s;
+          pointer-events: none;
+          z-index: 2;
+        }
+
+        .typography-slide:hover .typo-glass-shine {
+          left: 150%;
+        }
+
+        /* Card Chip Detail */
+        .typo-card-chip {
+          position: absolute;
+          top: 2rem;
+          left: 2rem;
+          opacity: 0.5;
+          z-index: 2;
+          filter: grayscale(1) brightness(2);
+        }
+
+        .typography-slide.intro .typo-card-chip { left: auto; right: 2rem; }
+
+        .typo-card-number {
+          position: absolute;
+          bottom: 2rem;
+          left: 2.5rem;
+          font-family: 'Space Mono', monospace;
+          font-size: 0.65rem;
+          color: rgba(255, 255, 255, 0.3);
+          letter-spacing: 0.4em;
+          z-index: 2;
+        }
+
+        .typography-slide.intro .typo-card-number { left: auto; right: 2.5rem; }
+
+        .typo-content-wrapper.inward {
+          max-width: 240px; 
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+          position: relative;
+          z-index: 5;
+        }
+
+        .typo-title {
+          font-size: clamp(2rem, 4vw, 2.8rem);
+          font-weight: 900;
+          line-height: 1;
+          color: #ffffff; /* White for dark cards */
+          margin: 0;
+          letter-spacing: -0.04em;
+          text-transform: uppercase;
+          text-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .typo-subtitle {
+          font-size: 0.7rem;
+          font-weight: 850;
+          color: var(--accent);
+          letter-spacing: 0.3em;
+          text-transform: uppercase;
+        }
+
+        .typo-accent-line {
+          width: 60px;
+          height: 5px;
+          background: var(--accent);
+          box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .intro-line {
+          margin-left: auto;
+        }
+
+        .typo-cta {
+          display: inline-flex;
+          padding: 1.1rem 2.8rem;
+          background: rgba(255, 255, 255, 0.05);
+          color: #ffffff;
+          font-weight: 900;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          text-decoration: none;
+          transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+          font-size: 0.8rem;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          backdrop-filter: blur(10px);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .typo-cta::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 50%;
+          height: 100%;
+          background: linear-gradient(
+            to right,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent
+          );
+          transform: skewX(-25deg);
+          transition: 0.5s;
+        }
+
+        .typo-cta:hover::before {
+          left: 150%;
+        }
+
+        .typo-cta:hover {
+          background: var(--accent);
+          border-color: var(--accent);
+          color: #ffffff;
+          transform: translateY(-5px);
+          box-shadow: 0 20px 40px var(--accent-glow);
         }
 
         /* MASTER SECTION HEADER */
@@ -352,6 +615,23 @@ const ProjectList = () => {
           background: var(--p-color);
           color: var(--text-white);
           transform: translateY(-150%) scale(1.1);
+        }
+
+        .swiper-button-disabled,
+        .swiper-button-prev-custom[disabled],
+        .swiper-button-next-custom[disabled] {
+          opacity: 0 !important;
+          cursor: not-allowed !important;
+          pointer-events: none;
+          visibility: hidden;
+        }
+
+        /* Override for our custom boundary logic */
+        .nav-locked {
+          opacity: 0 !important;
+          cursor: not-allowed !important;
+          pointer-events: none;
+          visibility: hidden;
         }
 
 

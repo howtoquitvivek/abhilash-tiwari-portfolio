@@ -122,7 +122,7 @@ const ProjectDetails = () => {
         <title>{project.title} | Projects | Abhilash Tiwari</title>
         <meta name="description" content={project.description?.substring(0, 160)} />
       </Helmet>
-      
+
       <Header />
       <style>{`
         .project-details-page {
@@ -166,21 +166,24 @@ const ProjectDetails = () => {
         }
 
         .hero-desc-pro {
-          font-size: 1.1rem;
-          line-height: 1.7;
+          font-size: 1rem;
+          line-height: 1.6;
           color: var(--text-muted);
-          margin-top: 0.5rem;
-          padding-left: 1.5rem;
-          border-left: 2px solid var(--brand-red);
-          font-style: italic; /* Added Italic */
-          max-width: 600px;
+          margin-top: 0;
+          padding: 1.2rem 1.8rem;
+          background: rgba(var(--p-color-rgb), 0.02);
+          border: 1px solid var(--border-subtle);
+          border-left: 3px solid var(--brand-red);
+          font-style: italic;
+          max-width: 550px;
         }
 
         .title-desc-flex {
           display: flex;
-          align-items: center;
-          gap: 1.5rem; /* Tightened Gap */
+          align-items: flex-start;
+          gap: 2rem;
           margin-bottom: 2.5rem;
+          flex-wrap: wrap; /* Added for mobile responsiveness */
         }
 
         .metadata-grid-pro {
@@ -316,9 +319,6 @@ const ProjectDetails = () => {
           transition: transform 1s ease;
         }
 
-        .masonry-item:hover .masonry-img {
-          transform: scale(1.1);
-        }
 
         /* Masonry Spans */
         .span-2-2 { grid-column: span 2; grid-row: span 2; }
@@ -353,7 +353,7 @@ const ProjectDetails = () => {
             <div className="hero-split-pro">
               <div className="hero-info-pro">
                 <span className="category-pill">{project.category || 'Portfolio'} Project</span>
-                
+
                 <div className="title-desc-flex">
                   <h1 className="project-title-xl">{project.title}</h1>
                   {project.description && (
@@ -362,7 +362,7 @@ const ProjectDetails = () => {
                     </div>
                   )}
                 </div>
-                
+
                 <div className="metadata-grid-pro">
                   <div className="meta-item-pro">
                     <span className="meta-label-pro">Client</span>
@@ -384,8 +384,8 @@ const ProjectDetails = () => {
               {project.mapEmbedUrl && (
                 <div className="hero-map-wrapper" data-aos="fade-left">
                   <iframe
-                    src={project.mapEmbedUrl.includes('<iframe') 
-                      ? project.mapEmbedUrl.match(/src="([^"]+)"/)?.[1] 
+                    src={project.mapEmbedUrl.includes('<iframe')
+                      ? project.mapEmbedUrl.match(/src="([^"]+)"/)?.[1]
                       : project.mapEmbedUrl}
                     className="hero-map-iframe"
                     title="Project Location"
@@ -406,7 +406,7 @@ const ProjectDetails = () => {
                   // Cycle through masonry patterns
                   const patterns = ['span-2-2', 'span-1-2', 'span-1-1', 'span-2-1', 'span-1-2'];
                   const patternClass = patterns[index % patterns.length];
-                  
+
                   return (
                     <div key={index} className={`masonry-item ${patternClass}`}>
                       <img src={item.url} alt={`${project.title} gallery ${index}`} className="masonry-img" />
