@@ -75,21 +75,25 @@ const Header = () => {
 
           <div className="nav-right-cluster">
             <div className="desktop-links">
-              <a
-                href="/"
+              <Link 
+                to="/" 
                 onClick={(e) => {
-                  e.preventDefault();
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                  window.history.pushState(null, '', '/');
+                  if (location.pathname === '/') {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    // Clear hash from URL to update active state
+                    window.history.pushState(null, '', '/');
+                    // Manual event to trigger location update if needed
+                    window.dispatchEvent(new PopStateEvent('popstate'));
+                  }
                 }}
                 className={location.pathname === '/' && !location.hash ? 'active' : ''}
               >
                 Home
-              </a>
-              <a href="/#services">Services</a>
-
-              <a href="/#projects">Our Work</a>
-              <a href="/#map-location">Visit Us</a>
+              </Link>
+              <a href="/#services" className={location.hash === '#services' ? 'active' : ''}>Services</a>
+              <a href="/#projects" className={location.hash === '#projects' ? 'active' : ''}>Our Work</a>
+              <a href="/#map-location" className={location.hash === '#map-location' ? 'active' : ''}>Visit Us</a>
             </div>
 
             <a href="/#contact" className="quote-btn-pro">

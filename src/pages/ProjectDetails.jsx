@@ -12,6 +12,75 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
+const GalleryItem = ({ item, index, projectTitle, patternClass }) => {
+  const [rotation, setRotation] = useState({ x: 0, y: 0 });
+  const [shine, setShine] = useState({ x: 50, y: 50, opacity: 0 });
+  const [isPressed, setIsPressed] = useState(false);
+
+  const handleMouseMove = (e) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    // Calculate rotation (max 8deg for professional feel)
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = (y - centerY) / (rect.height / 2) * -8;
+    const rotateY = (x - centerX) / (rect.width / 2) * 8;
+
+    // Calculate light sweep position
+    const shinePos = (x / rect.width) * 100;
+    const shineY = (y / rect.height) * 100;
+
+    setRotation({ x: rotateX, y: rotateY });
+    setShine({ x: shineX, y: shineY, opacity: 1 });
+  };
+
+  const handleMouseLeave = () => {
+    setRotation({ x: 0, y: 0 });
+    setShine(prev => ({ ...prev, opacity: 0 }));
+    setIsPressed(false);
+  };
+
+  return (
+    <div
+      className={`masonry-item ${patternClass} interactive-card ${isPressed ? 'pressed' : ''}`}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      onMouseDown={() => setIsPressed(true)}
+      onMouseUp={() => setIsPressed(false)}
+      style={{
+        transform: `perspective(1000px) 
+                    rotateX(${rotation.x}deg) 
+                    rotateY(${rotation.y}deg) 
+                    ${isPressed ? 'translateZ(60px) scale(1.05)' : 'translateZ(0) scale(1.02)'}`,
+      }}
+    >
+      <div
+        className="card-shine"
+        style={{
+          background: `linear-gradient(135deg, transparent 0%, rgba(255,255,255,${shine.opacity * 0.15}) ${shine.x}%, transparent ${shine.x + 15}%)`,
+        }}
+      />
+      <div className="card-parallax-container">
+        <img
+          src={item.url}
+          alt={`${projectTitle} gallery ${index}`}
+          className="masonry-img"
+          style={{
+            transform: `translate3d(${rotation.y * -0.3}px, ${rotation.x * 0.3}px, 0) scale(1.12)`
+          }}
+        />
+      </div>
+      <div className="card-info-peek">
+        <span className="peek-index">{String(index + 1).padStart(2, '0')}</span>
+        <span className="peek-label">PROJECT VIEW</span>
+      </div>
+    </div>
+  );
+};
+
 const ProjectDetails = () => {
   useAOS();
   const { projectId } = useParams();
@@ -287,36 +356,103 @@ const ProjectDetails = () => {
         }
 
         .gallery-container-pro {
-          width: 94%;
-          max-width: 1600px;
+          width: 86%;
+          max-width: 1300px;
           margin: 0 auto;
         }
 
         .masonry-grid-pro {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          grid-auto-rows: 280px;
+          grid-auto-rows: 160px;
           gap: 1.5rem;
         }
 
         .masonry-item {
           position: relative;
-          border-radius: 0; /* Removed rounding */
+          border-radius: 0; 
           overflow: hidden;
-          background: var(--bg-soft);
-          transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+          background: #000; /* Darker base for punchier shadow */
+          transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.6s ease;
+          transform-style: preserve-3d;
+          will-change: transform;
         }
 
-        .masonry-item:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        .interactive-card {
+          cursor: pointer;
+          user-select: none;
+          -webkit-tap-highlight-color: transparent;
+          outline: none;
+        }
+
+        .interactive-card:hover {
+          box-shadow: 0 30px 60px -10px rgba(0,0,0,0.4);
+          z-index: 10;
+        }
+
+        .interactive-card.pressed {
+          box-shadow: 0 80px 140px -20px rgba(0,0,0,0.6);
+          transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card-shine {
+          position: absolute;
+          inset: 0;
+          z-index: 5;
+          pointer-events: none;
+          mix-blend-mode: overlay;
+          transition: opacity 0.5s ease;
+        }
+
+        .card-parallax-container {
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          transform-style: preserve-3d;
         }
 
         .masonry-img {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          transition: transform 1s ease;
+          transition: transform 0.1s linear;
+          pointer-events: none;
+          -webkit-user-drag: none;
+        }
+
+        .card-info-peek {
+          position: absolute;
+          bottom: 1.5rem;
+          left: 1.5rem;
+          z-index: 6;
+          display: flex;
+          flex-direction: column;
+          gap: 0.2rem;
+          opacity: 0;
+          transform: translate3d(0, 10px, 20px);
+          transition: all 0.4s ease;
+          pointer-events: none;
+        }
+
+        .interactive-card:hover .card-info-peek {
+          opacity: 1;
+          transform: translate3d(0, 0, 40px);
+        }
+
+        .peek-index {
+          font-family: 'Space Mono', monospace;
+          font-size: 0.75rem;
+          color: var(--accent);
+          font-weight: 850;
+          letter-spacing: 0.05em;
+        }
+
+        .peek-label {
+          font-size: 0.55rem;
+          color: rgba(255,255,255,0.7);
+          letter-spacing: 0.3em;
+          font-weight: 700;
+          text-transform: uppercase;
         }
 
 
@@ -341,7 +477,7 @@ const ProjectDetails = () => {
         @media (max-width: 640px) {
           .masonry-grid-pro { grid-template-columns: 1fr; grid-auto-rows: auto; }
           .span-2-2, .span-1-2, .span-1-1, .span-2-1 { grid-column: span 1; grid-row: span 1; }
-          .masonry-item { height: 300px; }
+          .masonry-item { height: 180px; }
           .project-title-xl { font-size: 2.5rem; }
         }
       `}</style>
@@ -403,20 +539,26 @@ const ProjectDetails = () => {
             <div className="masonry-grid-pro">
               {project.media && project.media.length > 0 ? (
                 project.media.map((item, index) => {
-                  // Cycle through masonry patterns
                   const patterns = ['span-2-2', 'span-1-2', 'span-1-1', 'span-2-1', 'span-1-2'];
                   const patternClass = patterns[index % patterns.length];
 
                   return (
-                    <div key={index} className={`masonry-item ${patternClass}`}>
-                      <img src={item.url} alt={`${project.title} gallery ${index}`} className="masonry-img" />
-                    </div>
+                    <GalleryItem
+                      key={index}
+                      item={item}
+                      index={index}
+                      projectTitle={project.title}
+                      patternClass={patternClass}
+                    />
                   );
                 })
               ) : (
-                <div className="masonry-item span-2-2">
-                  <img src={project.imageUrl} alt={project.title} className="masonry-img" />
-                </div>
+                <GalleryItem
+                  item={{ url: project.imageUrl }}
+                  index={0}
+                  projectTitle={project.title}
+                  patternClass="span-2-2"
+                />
               )}
             </div>
           </div>

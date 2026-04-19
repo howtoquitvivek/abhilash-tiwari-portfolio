@@ -31,19 +31,23 @@ const compressImage = async (file) => {
 export const uploadProjectMedia = async (file) => {
   try {
     let fileToUpload = file;
+    const isImage = file.type.startsWith('image/');
+    const resourceType = isImage ? 'image' : 'video';
 
-    // 1. Compress image before upload
-    fileToUpload = await compressImage(file);
+    // 1. Compress image before upload (only if it's an image)
+    if (isImage) {
+      fileToUpload = await compressImage(file);
+    }
 
     // 2. Prepare FormData
     const formData = new FormData();
     formData.append('file', fileToUpload);
     formData.append('upload_preset', UPLOAD_PRESET);
-    formData.append('resource_type', 'image'); // Explicitly tell Cloudinary this is an image
+    formData.append('resource_type', resourceType);
 
     // 3. Upload to Cloudinary
     const response = await fetch(
-      `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
+      `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${resourceType}/upload`,
       {
         method: 'POST',
         body: formData,
