@@ -262,3 +262,24 @@ export const THEME_MAP = {
   VS_DARK,
   SLATE
 };
+
+// ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+// PORTFOLIO GLOBAL THEME CONFIGURATION
+// ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+export const PORTFOLIO_THEME = {
+  colors: {
+    primaryRgb: '0, 0, 0',       // Main Dark elements
+    secondaryRgb: '255, 255, 255',   // Main Light elements 
+    accentRgb: '255, 51, 51',          // Brand Highlight
+    textMain: '#0f172a',
+    textMuted: '#64748b',
+    bgSoft: '#f8fafc',
+    borderSubtle: '#e2e8f0',
+  },
+  radius: {
+    pro: '22px',
+    proInner: '18px',
+    btn: '0px',
+    pill: '100px'
+  }
+};
