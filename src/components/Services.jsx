@@ -32,7 +32,9 @@ const Services = () => {
         {/* STANDARDIZED PRO HEADER */}
         <div className="section-header-pro" data-aos="fade-up">
           <span className="subtitle-brand">WHAT WE DO</span>
-          <h2 className="title-brand">Our Specialized Services</h2>
+          <h2 className="title-brand">
+            Our Specialized <span className="title-accent-gold">Services</span>
+          </h2>
           <div className="brand-accent-line mx-auto"></div>
         </div>
 
@@ -71,7 +73,7 @@ const Services = () => {
         .services-section {
           background-color: var(--bg-main);
           min-height: auto;
-          padding: 8rem 0; /* Synced with ProjectList padding */
+          padding: 8rem 0;
           position: relative;
           display: flex;
           flex-direction: column;
@@ -81,9 +83,9 @@ const Services = () => {
         .services-content-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 3rem; /* Increased for professional breathing room */
+          gap: 3rem;
           align-items: stretch;
-          margin-top: 2rem; /* Synced with standardized header spacing */
+          margin-top: 3.5rem;
           max-width: 1200px;
           width: 90%;
           margin-left: auto;
@@ -106,7 +108,7 @@ const Services = () => {
           transition: transform 0.3s ease, box-shadow 0.3s ease;
           position: relative;
           overflow: hidden;
-          height: 230px; /* Reduced from 230px */
+          height: 220px;
           display: flex;
           flex-direction: column;
         }
@@ -119,7 +121,7 @@ const Services = () => {
         .service-icon-box {
           width: 48px;
           height: 48px;
-          background: rgba(var(--accent-rgb), 0.08); 
+          background: rgba(var(--accent-rgb), 0.08);
           color: var(--accent);
           border-radius: 12px;
           display: flex;
@@ -147,7 +149,7 @@ const Services = () => {
         /* IMAGE PANEL */
         .services-image-panel {
           position: relative;
-          height: 480px; /* Perfectly synced with 2 rows of 220px cards + 1.5rem gap */
+          height: 462px;
         }
 
         .image-frame-pro {
@@ -155,7 +157,7 @@ const Services = () => {
           border-radius: var(--radius-pro);
           overflow: hidden;
           box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-          height: 100%; 
+          height: 100%;
         }
 
         .editorial-image {
@@ -173,6 +175,12 @@ const Services = () => {
           border: 2px solid rgba(255, 255, 255, 0.25);
           border-radius: 15px;
           pointer-events: none;
+        }
+
+        /* ── NEW: golden italic accent on heading word ── */
+        .title-accent-gold {
+          color: var(--accent);
+          font-style: italic;
         }
 
         @media (max-width: 1024px) {

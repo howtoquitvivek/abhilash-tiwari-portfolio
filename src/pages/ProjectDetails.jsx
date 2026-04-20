@@ -6,13 +6,91 @@ import Header from '../components/Layout/Header';
 import Footer from '../components/Layout/Footer';
 import { useAOS } from '../hooks/useAOS';
 
-
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-const GalleryItem = ({ item, index, projectTitle, patternClass }) => {
+// ── NEW: Lightbox component ──────────────────────────────────────────────────
+const Lightbox = ({ imageUrl, onClose }) => {
+  useEffect(() => {
+    const handleKey = (e) => { if (e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', handleKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', handleKey);
+      document.body.style.overflow = '';
+    };
+  }, [onClose]);
+
+  return (
+    <div className="lightbox-overlay" onClick={onClose}>
+      <button className="lightbox-close" onClick={onClose}>&#10005;</button>
+      <img
+        className="lightbox-img"
+        src={imageUrl}
+        alt="Preview"
+        onClick={(e) => e.stopPropagation()}
+      />
+      <style>{`
+        .lightbox-overlay {
+          position: fixed;
+          inset: 0;
+          z-index: 9999;
+          background: rgba(0, 0, 0, 0.92);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: zoom-out;
+          animation: lb-fade 0.25s ease;
+        }
+        @keyframes lb-fade {
+          from { opacity: 0; }
+          to   { opacity: 1; }
+        }
+        .lightbox-img {
+          max-width: 90vw;
+          max-height: 90vh;
+          object-fit: contain;
+          border-radius: 2px;
+          cursor: default;
+          animation: lb-scale 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+        }
+        @keyframes lb-scale {
+          from { transform: scale(0.88); opacity: 0; }
+          to   { transform: scale(1);    opacity: 1; }
+        }
+        .lightbox-close {
+          position: fixed;
+          top: 1.25rem;
+          right: 1.5rem;
+          z-index: 10000;
+          background: rgba(255,255,255,0.1);
+          border: 1px solid rgba(255,255,255,0.2);
+          color: #fff;
+          font-size: 1rem;
+          width: 2.4rem;
+          height: 2.4rem;
+          border-radius: 50%;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: background 0.2s ease;
+          line-height: 1;
+        }
+        .lightbox-close:hover {
+          background: rgba(255,255,255,0.22);
+        }
+      `}</style>
+    </div>
+  );
+};
+// ── END: Lightbox component ──────────────────────────────────────────────────
+
+const GalleryItem = ({ item, index, projectTitle, patternClass, onImageClick }) => {
+  // ── NEW: onImageClick prop added above — no other change ──
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
   const [shine, setShine] = useState({ x: 50, y: 50, opacity: 0 });
   const [isPressed, setIsPressed] = useState(false);
@@ -23,13 +101,11 @@ const GalleryItem = ({ item, index, projectTitle, patternClass }) => {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    // Calculate rotation (max 8deg for professional feel)
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
     const rotateX = (y - centerY) / (rect.height / 2) * -8;
     const rotateY = (x - centerX) / (rect.width / 2) * 8;
 
-    // Calculate light sweep position
     const shinePos = (x / rect.width) * 100;
     const shineY = (y / rect.height) * 100;
 
@@ -50,6 +126,7 @@ const GalleryItem = ({ item, index, projectTitle, patternClass }) => {
       onMouseLeave={handleMouseLeave}
       onMouseDown={() => setIsPressed(true)}
       onMouseUp={() => setIsPressed(false)}
+      onClick={() => onImageClick(item.url)}
       style={{
         transform: `perspective(1000px) 
                     rotateX(${rotation.x}deg) 
@@ -89,6 +166,10 @@ const ProjectDetails = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // ── NEW: lightbox state ──────────────────────────────────────────────────
+  const [lightboxUrl, setLightboxUrl] = useState(null);
+  // ── END: lightbox state ──────────────────────────────────────────────────
+
   useEffect(() => {
     const fetchProject = async () => {
       setIsLoading(true);
@@ -113,7 +194,6 @@ const ProjectDetails = () => {
         <div className="spinner"></div>
         <p>REFINING DETAILS...</p>
         <style>{`
-
           .loading-screen {
             height: 100vh;
             display: flex;
@@ -122,7 +202,6 @@ const ProjectDetails = () => {
             justify-content: center;
             background: var(--bg-main);
             color: var(--text-main);
-
           }
           .spinner {
             width: 50px;
@@ -146,19 +225,15 @@ const ProjectDetails = () => {
         <p>{error || 'Project not found.'}</p>
         <Link to="/" className="button-primary mt-2">Back to Portfolio</Link>
         <style>{`
-
           .error-screen { height: 70vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         `}</style>
       </div>
     );
   }
 
-  // Helper to render map
   const renderMap = () => {
     if (!project.mapEmbedUrl) return null;
 
-    // If it's an iframe string, we need to extract the src or just dangerously set it
-    // For safety, we'll try to extract the src if it's a full iframe tag
     let mapSrc = project.mapEmbedUrl;
     if (project.mapEmbedUrl.includes('<iframe')) {
       const match = project.mapEmbedUrl.match(/src="([^"]+)"/);
@@ -174,7 +249,6 @@ const ProjectDetails = () => {
             width="100%"
             height="450"
             style={{ border: 0, borderRadius: 'var(--radius-pro-inner)' }}
-
             allowFullScreen=""
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
@@ -193,6 +267,13 @@ const ProjectDetails = () => {
       </Helmet>
 
       <Header />
+
+      {/* ── NEW: render lightbox when an image is selected ─────────────── */}
+      {lightboxUrl && (
+        <Lightbox imageUrl={lightboxUrl} onClose={() => setLightboxUrl(null)} />
+      )}
+      {/* ── END: lightbox render ────────────────────────────────────────── */}
+
       <style>{`
         .project-details-page {
           background: var(--bg-main);
@@ -252,7 +333,7 @@ const ProjectDetails = () => {
           align-items: flex-start;
           gap: 2rem;
           margin-bottom: 2.5rem;
-          flex-wrap: wrap; /* Added for mobile responsiveness */
+          flex-wrap: wrap;
         }
 
         .metadata-grid-pro {
@@ -281,7 +362,7 @@ const ProjectDetails = () => {
           font-size: 1.1rem;
           font-weight: 700;
           color: var(--p-color);
-          text-transform: capitalize; /* Added for Title Case */
+          text-transform: capitalize;
         }
 
         .meta-value-pro.link {
@@ -314,7 +395,6 @@ const ProjectDetails = () => {
           filter: grayscale(1) contrast(1.1) brightness(1.1);
         }
 
-        /* BODY CONTENT */
         .project-body-section {
           padding: 6rem 0;
         }
@@ -349,9 +429,8 @@ const ProjectDetails = () => {
           letter-spacing: -0.01em;
         }
 
-        /* GALLERY SECTION */
         .project-gallery-section {
-          padding: 3rem 0 8rem; /* Space after compact header */
+          padding: 3rem 0 8rem;
           background: var(--bg-main);
         }
 
@@ -365,14 +444,14 @@ const ProjectDetails = () => {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
           grid-auto-rows: 160px;
-          gap: 1.5rem;
+          gap: 1.15rem 1.15rem;
         }
 
         .masonry-item {
           position: relative;
-          border-radius: 0; 
+          border-radius: 0;
           overflow: hidden;
-          background: #000; /* Darker base for punchier shadow */
+          background: #000;
           transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.6s ease;
           transform-style: preserve-3d;
           will-change: transform;
@@ -455,8 +534,6 @@ const ProjectDetails = () => {
           text-transform: uppercase;
         }
 
-
-        /* Masonry Spans */
         .span-2-2 { grid-column: span 2; grid-row: span 2; }
         .span-1-2 { grid-column: span 1; grid-row: span 2; }
         .span-1-1 { grid-column: span 1; grid-row: span 1; }
@@ -465,7 +542,7 @@ const ProjectDetails = () => {
         .map-card-pro {
           background: var(--bg-soft);
           border: 1px solid var(--border-subtle);
-          border-radius: 0; /* Removed rounding */
+          border-radius: 0;
           overflow: hidden;
           box-shadow: var(--shadow-pro);
         }
@@ -479,6 +556,257 @@ const ProjectDetails = () => {
           .span-2-2, .span-1-2, .span-1-1, .span-2-1 { grid-column: span 1; grid-row: span 1; }
           .masonry-item { height: 180px; }
           .project-title-xl { font-size: 2.5rem; }
+        }
+
+        /* ============================================
+           RESPONSIVE MEDIA QUERIES — ADDED AT END
+           Breakpoints: 1024px | 768px | 480px
+        ============================================ */
+
+        /* ── Laptop / Large Tablet (≤ 1024px) ── */
+        @media (max-width: 1024px) {
+          .hero-split-pro {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+          }
+
+          .hero-map-wrapper {
+            width: 100%;
+            height: 260px;
+          }
+
+          .metadata-grid-pro {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.15rem;
+          }
+
+          .project-body-grid {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+          }
+
+          .project-body-section {
+            padding: 4rem 0;
+          }
+
+          .gallery-container-pro {
+            width: 92%;
+          }
+
+          .masonry-grid-pro {
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: 180px;
+            gap: 1.15rem 1.15rem;
+          }
+
+          .span-2-2 { grid-column: span 2; grid-row: span 2; }
+          .span-1-2 { grid-column: span 1; grid-row: span 2; }
+          .span-2-1 { grid-column: span 2; grid-row: span 1; }
+          .span-1-1 { grid-column: span 1; grid-row: span 1; }
+
+          .project-gallery-section {
+            padding: 2.5rem 0 5rem;
+          }
+        }
+
+        /* ── Tablet (≤ 768px) ── */
+        @media (max-width: 768px) {
+          .project-hero-header {
+            padding: 2.5rem 0 2rem;
+          }
+
+          .hero-split-pro {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+          }
+
+          .title-desc-flex {
+            flex-direction: column;
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+          }
+
+          .hero-desc-pro {
+            max-width: 100%;
+            font-size: 0.95rem;
+            padding: 1rem 1.25rem;
+          }
+
+          .project-title-xl {
+            font-size: clamp(1.6rem, 5vw, 2.4rem);
+          }
+
+          .metadata-grid-pro {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem 1.5rem;
+          }
+
+          .meta-value-pro {
+            font-size: 1rem;
+          }
+
+          .hero-map-wrapper {
+            height: 220px;
+          }
+
+          .project-body-section {
+            padding: 3rem 0;
+          }
+
+          .project-body-grid {
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+          }
+
+          .description-editorial {
+            font-size: 1.1rem;
+          }
+
+          .gallery-container-pro {
+            width: 94%;
+          }
+
+          .masonry-grid-pro {
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: 160px;
+            gap: 1.15rem 1.15rem;
+            grid-auto-flow: dense;
+          }
+
+          .span-2-2 { grid-column: span 2; grid-row: span 1; }
+          .span-1-2 { grid-column: span 1; grid-row: span 1; }
+          .span-2-1 { grid-column: span 2; grid-row: span 1; }
+          .span-1-1 { grid-column: span 1; grid-row: span 1; }
+
+          .masonry-item { height: 160px; }
+
+          .project-gallery-section {
+            padding: 2rem 0 4rem;
+          }
+
+          .section-title-editorial {
+            font-size: 1.25rem;
+          }
+        }
+
+        /* ── Mobile (≤ 480px) ── */
+        @media (max-width: 480px) {
+          .project-hero-header {
+            padding: 2rem 0 1.5rem;
+          }
+
+          .hero-split-pro {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+          }
+
+          .category-pill {
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+          }
+
+          .project-title-xl {
+            font-size: clamp(1.4rem, 7vw, 2rem);
+            letter-spacing: -0.01em;
+          }
+
+          .title-desc-flex {
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+          }
+
+          .hero-desc-pro {
+            max-width: 100%;
+            font-size: 0.875rem;
+            padding: 0.875rem 1rem;
+            border-left-width: 3px;
+          }
+
+          .metadata-grid-pro {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.85rem 1rem;
+            padding-top: 1.25rem;
+          }
+
+          .meta-label-pro {
+            font-size: 0.62rem;
+          }
+
+          .meta-value-pro {
+            font-size: 0.9rem;
+          }
+
+          .hero-map-wrapper {
+            height: 180px;
+          }
+
+          .project-body-section {
+            padding: 2.5rem 0;
+          }
+
+          .project-body-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+          }
+
+          .description-editorial {
+            font-size: 1rem;
+            line-height: 1.7;
+          }
+
+          .editorial-accent-line {
+            width: 36px;
+            height: 3px;
+            margin-bottom: 1.5rem;
+          }
+
+          .section-title-editorial {
+            font-size: 1.15rem;
+            margin-bottom: 1rem;
+          }
+
+          .gallery-container-pro {
+            width: 96%;
+          }
+
+          .masonry-grid-pro {
+            grid-template-columns: 1fr;
+            grid-auto-rows: auto;
+            gap: 1.15rem 1.15rem;
+            grid-auto-flow: dense;
+          }
+
+          .span-2-2,
+          .span-1-2,
+          .span-1-1,
+          .span-2-1 {
+            grid-column: span 1;
+            grid-row: span 1;
+          }
+
+          .masonry-item {
+            height: 200px;
+          }
+
+          .project-gallery-section {
+            padding: 1.5rem 0 3.5rem;
+          }
+
+          .card-info-peek {
+            bottom: 1rem;
+            left: 1rem;
+          }
+
+          .peek-index {
+            font-size: 0.65rem;
+          }
+
+          .peek-label {
+            font-size: 0.48rem;
+            letter-spacing: 0.2em;
+          }
         }
       `}</style>
 
@@ -549,6 +877,7 @@ const ProjectDetails = () => {
                       index={index}
                       projectTitle={project.title}
                       patternClass={patternClass}
+                      onImageClick={setLightboxUrl}
                     />
                   );
                 })
@@ -558,6 +887,7 @@ const ProjectDetails = () => {
                   index={0}
                   projectTitle={project.title}
                   patternClass="span-2-2"
+                  onImageClick={setLightboxUrl}
                 />
               )}
             </div>
