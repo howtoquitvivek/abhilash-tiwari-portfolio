@@ -14,6 +14,29 @@ import CallPopup from './components/CallPopup'
 import './App.css'
 import { useLocation } from 'react-router-dom'
 
+import { PORTFOLIO_THEME } from './themeConfig'
+
+const ThemeInjector = () => (
+  <style>{`
+    :root {
+      --p-color-rgb: ${PORTFOLIO_THEME.colors.primaryRgb};
+      --s-color-rgb: ${PORTFOLIO_THEME.colors.secondaryRgb};
+      --accent-rgb: ${PORTFOLIO_THEME.colors.accentRgb};
+      
+      --text-main: ${PORTFOLIO_THEME.colors.textMain};
+      --text-muted: ${PORTFOLIO_THEME.colors.textMuted};
+      
+      --bg-soft: ${PORTFOLIO_THEME.colors.bgSoft};
+      --border-subtle: ${PORTFOLIO_THEME.colors.borderSubtle};
+      
+      --radius-pro: ${PORTFOLIO_THEME.radius.pro};
+      --radius-pro-inner: ${PORTFOLIO_THEME.radius.proInner};
+      --radius-btn: ${PORTFOLIO_THEME.radius.btn};
+      --radius-pill: ${PORTFOLIO_THEME.radius.pill};
+    }
+  `}</style>
+);
+
 // Scroll restoration helper
 const ScrollToTop = () => {
   const { pathname, hash } = useLocation();
@@ -135,6 +158,7 @@ function App() {
   return (
     <HelmetProvider>
       <Router>
+        <ThemeInjector />
         <ScrollToTop />
         <GlobalLoader />
         <div className="App">
