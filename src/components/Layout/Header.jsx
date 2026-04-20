@@ -240,7 +240,11 @@ const Header = () => {
         }
 
         @media (max-width: 768px) {
-          .top-bar { display: none; }
+          /* Show top bar on mobile but optimize it */
+          .top-socials-right { display: none; }
+          .top-item.ml-4 { display: none; } /* hide email to save space */
+          .top-info-left { width: 100%; justify-content: center; }
+          
           .desktop-links { display: none; }
           .logo-brand-main { font-size: 1.2rem; }
           .quote-btn-pro { padding: 0.6rem 1.2rem; font-size: 0.8rem; }
