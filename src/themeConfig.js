@@ -268,13 +268,13 @@ export const THEME_MAP = {
 // ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
 export const PORTFOLIO_THEME = {
   colors: {
-    primaryRgb: '0, 0, 0',       // Main Dark elements
-    secondaryRgb: '255, 255, 255',   // Main Light elements 
-    accentRgb: '255, 51, 51',          // Brand Highlight
-    textMain: '#0f172a',
-    textMuted: '#64748b',
-    bgSoft: '#f8fafc',
-    borderSubtle: '#e2e8f0',
+    primaryRgb: '15, 15, 15',       // Deep rich black 
+    secondaryRgb: '255, 255, 255',   // White
+    accentRgb: '201, 166, 83',       // Premium Gold matching the logo
+    textMain: '#141414',
+    textMuted: '#665e52',
+    bgSoft: '#faf9f6',               // Warm soft white
+    borderSubtle: '#e6dfd1',         // Warmer subtle border
   },
   radius: {
     pro: '22px',

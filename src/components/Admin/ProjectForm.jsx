@@ -28,7 +28,12 @@ const ProjectForm = ({ onProjectAdded, editingProject, onCancel }) => {
   const [existingMedia, setExistingMedia] = useState([]); // List of { url, type } from DB
   const [status, setStatus] = useState('idle'); // idle | submitting | success | error
   const [errorMessage, setErrorMessage] = useState('');
+  const [toastMessage, setToastMessage] = useState(null);
 
+  const triggerToast = (msg) => {
+    setToastMessage(msg);
+    setTimeout(() => setToastMessage(null), 4000);
+  };
 
   // Pre-fill form when in edit mode
   useEffect(() => {
@@ -66,11 +71,13 @@ const ProjectForm = ({ onProjectAdded, editingProject, onCancel }) => {
     const file = e.target.files[0];
     if (file) {
       if (!file.type.startsWith('image/')) {
-        setErrorMessage('Primary file must be an image.');
+        triggerToast('Primary file must be an image.');
+        e.target.value = '';
         return;
       }
-      if (file.size > 2 * 1024 * 1024) {
-        setErrorMessage('File is too large. Max 2MB.');
+      if (file.size > 10 * 1024 * 1024) {
+        triggerToast('Image is too large. Maximum size is 10MB.');
+        e.target.value = '';
         return;
       }
       setPrimaryImage({
@@ -83,17 +90,20 @@ const ProjectForm = ({ onProjectAdded, editingProject, onCancel }) => {
 
   const handleAdditionalMediaChange = (e) => {
     const files = Array.from(e.target.files);
+    let errorTriggered = false;
     const validMedia = files.filter(file => {
       const isImage = file.type.startsWith('image/');
       const maxSize = 10 * 1024 * 1024; // 10MB for images
-      return isImage && file.size <= maxSize;
+      if (!isImage || file.size > maxSize) {
+        errorTriggered = true;
+        return false;
+      }
+      return true;
     });
 
-    if (validMedia.length < files.length) {
-      setErrorMessage('Some files were skipped. Max size: 10MB and only images are allowed.');
+    if (errorTriggered) {
+      triggerToast('Some files were ignored. Maximum size is 10MB per image.');
     }
-
-
 
     const newMediaItems = validMedia.map(file => ({
       file,
@@ -101,8 +111,8 @@ const ProjectForm = ({ onProjectAdded, editingProject, onCancel }) => {
       preview: URL.createObjectURL(file)
     }));
 
-
     setAdditionalMedia(prev => [...prev, ...newMediaItems]);
+    e.target.value = '';
   };
 
   const removeAdditionalMedia = (index) => {
@@ -369,12 +379,34 @@ const ProjectForm = ({ onProjectAdded, editingProject, onCancel }) => {
         <p className="status-msg error mt-min">{errorMessage}</p>
       )}
 
+      {toastMessage && (
+        <div className="toast-error">
+          {toastMessage}
+        </div>
+      )}
 
       <style>{`
         .admin-form {
           display: flex;
           flex-direction: column;
           gap: 1.5rem; /* Manage vertical spacing globally */
+        }
+        .toast-error {
+          position: fixed;
+          bottom: 2rem;
+          right: 2rem;
+          background-color: var(--brand-error, #ef4444);
+          color: white;
+          padding: 1rem 1.5rem;
+          border-radius: var(--radius-pro-sm, 8px);
+          box-shadow: 0 10px 25px rgba(239, 68, 68, 0.4);
+          z-index: 9999;
+          animation: slideUp 0.3s ease-out forwards;
+          font-weight: 600;
+        }
+        @keyframes slideUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
         }
         .form-group {
           margin-bottom: 0 !important;

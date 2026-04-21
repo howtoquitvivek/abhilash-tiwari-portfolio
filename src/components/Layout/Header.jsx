@@ -65,7 +65,7 @@ const Header = () => {
         <div className="container nav-container">
           <div className="logo">
             <Link to="/">
-              <div className="logo-icon-box">AT</div>
+              <img src="/logo.svg" alt="Abhilash Construction Logo" className="logo-img" />
               <div className="logo-text-stack">
                 <span className="logo-brand-main">ABHILASH</span>
                 <span className="logo-brand-sub">CONSTRUCTION</span>
@@ -75,8 +75,8 @@ const Header = () => {
 
           <div className="nav-right-cluster">
             <div className="desktop-links">
-              <Link 
-                to="/" 
+              <Link
+                to="/"
                 onClick={(e) => {
                   if (location.pathname === '/') {
                     e.preventDefault();
@@ -155,16 +155,13 @@ const Header = () => {
         }
 
         /* LOGO STYLING */
-        .logo a { display: flex; align-items: center; gap: 0.8rem; }
+        .logo a { display: flex; align-items: center; gap: 0rem; }
         
-        .logo-icon-box {
-          background: var(--p-color);
-          color: white;
-          padding: 0.4rem 0.6rem;
-          border-radius: var(--radius-pro-sm);
-          font-weight: 900;
-          font-size: 1.2rem;
-          line-height: 1;
+        .logo-img {
+          height: 48px;
+          width: auto;
+          object-fit: contain;
+          margin-right: -0.5rem;
         }
 
         .logo-text-stack { display: flex; flex-direction: column; line-height: 1; }
