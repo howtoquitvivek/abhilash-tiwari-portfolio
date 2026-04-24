@@ -32,9 +32,9 @@ const Services = () => {
         {/* STANDARDIZED PRO HEADER */}
         <div className="section-header-pro" data-aos="fade-up">
           <span className="subtitle-brand">WHAT WE DO</span>
-          <h2 className="title-brand">
-            Trusted Real Estate & Construction <span className="title-accent-gold">Services in Jabalpur (MP)</span>
-          </h2>
+      <h2 className="title-brand">
+  Building Homes & <span className="title-accent-gold">Real Estate Solutions</span> in Jabalpur
+</h2>
           <div className="brand-accent-line mx-auto"></div>
         </div>
 
