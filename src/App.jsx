@@ -62,9 +62,11 @@ const MainSite = () => {
   return (
     <>
       <Helmet>
-        <title>Abhilash Construction | Professional Builder & Promoter in Jabalpur</title>
-        <meta name="description" content="Expert Civil Contractor and Developer specializing in high-quality residential construction at Sobhapur Greens, Jabalpur. Trusted name in Jabalpur real estate." />
-        <meta name="keywords" content="Construction, Civil Contractor, Jabalpur, Real Estate, Builder, Abhilash Tiwari, Sobhapur Greens" />
+        <title>Best Builder in Jabalpur (JBP) | Flats, Villas, Plots | Abhilash Construction</title>
+        <meta name="description" content="Best builder in Jabalpur (MP). Specializing in premium flats, luxury villas, and residential plots. Your trusted partner for real estate in Jabalpur MP and high-quality construction." />
+        <meta name="keywords" content="builder in jabalpur, jabalpur construction, real estate in jabalpur, flats in jabalpur, villa in jabalpur, plots in jabalpur, house in jabalpur, property in jabalpur mp, abhilash tiwari jabalpur, current open site in jbp" />
+        <meta property="og:title" content="Best Builder in Jabalpur (JBP) | Flats, Villas, Plots | Abhilash Construction" />
+        <meta property="og:description" content="Expert Builder and Developer specializing in high-quality residential construction in Jabalpur." />
       </Helmet>
       <Hero />
       <Services />
@@ -78,7 +80,7 @@ const AdminPage = () => {
   return (
     <>
       <Helmet>
-        <title>Admin Portal | Abhilash Tiwari Portfolio</title>
+        <title>Admin Portal | Abhilash Construction</title>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       <AdminDashboard />

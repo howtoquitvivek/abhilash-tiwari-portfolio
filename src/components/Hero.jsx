@@ -16,17 +16,16 @@ const Hero = () => {
 
           {/* TITLE: Outfit Bold High-Contrast */}
           <h1 className="hero-title-pro" data-aos="fade-up" data-aos-delay="200">
-            Building Excellence,
+            Crafting Premium Living Spaces in Jabalpur
             <br />
             <span className="text-accent-pro">
-              Redefining Jabalpur's Skyline
+              Luxury Villas, Modern Flats & Prime Plots
             </span>
           </h1>
 
           {/* SUBTITLE: Refined Inter spacing */}
           <p className="hero-subtitle-pro" data-aos="fade-up" data-aos-delay="400">
-            Expert Builder, Promoter, and Civil Contractor dedicated to delivering
-            <strong> premium residential</strong> and <strong>commercial spaces</strong>.
+            We are a trusted builder in Jabalpur creating modern flats, villas, and plots with quality construction and thoughtful design.
           </p>
 
           {/* STATS: Outfit Semibold */}
@@ -50,7 +49,7 @@ const Hero = () => {
           {/* ACTIONS: Synced with Header Pro Button */}
           <div className="hero-actions-pro" data-aos="fade-up" data-aos-delay="800">
             <a href="#projects" className="btn-pro primary">
-              VIEW PORTFOLIO →
+              VIEW PROJECTS →
             </a>
             <a href="#contact" className="btn-pro outline">
               CONTACT ME
@@ -133,9 +132,9 @@ const Hero = () => {
         .hero-title-pro {
           font-family: 'Outfit', sans-serif;
           font-size: clamp(3rem, 7vw, 5.2rem);
-          font-weight: 900;
-          line-height: 1.1;
-          letter-spacing: -0.03em;
+          font-weight: 700;
+          line-height: 1.2;
+          letter-spacing: -0.5px;
           margin-bottom: 1rem; /* Reduced from 1.5rem */
           color: var(--text-white);
         }
@@ -143,22 +142,26 @@ const Hero = () => {
         .text-accent-pro {
           color: var(--accent);
           position: relative;
-          text-shadow: 0 10px 30px var(--accent-glow);
+          font-weight: 600;
+          font-size: 0.82em;
+          opacity: 0.92;
+          text-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         /* SUBTITLE PRO */
         .hero-subtitle-pro {
           font-size: 1.25rem;
-          line-height: 1.6;
-          color: rgba(255, 255, 255, 0.7);
+          line-height: 1.7;
+          color: rgba(255, 255, 255, 0.65);
           max-width: 680px;
           margin: 0 auto 2.5rem; /* Reduced from 3.5rem */
           font-weight: 400;
+          letter-spacing: 0.2px;
         }
 
         .hero-subtitle-pro strong {
-          color: var(--text-white);
-          font-weight: 700;
+          color: rgba(255, 255, 255, 0.9);
+          font-weight: 500;
         }
         .hero-actions-pro {
           display: flex;

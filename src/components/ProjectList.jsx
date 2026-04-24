@@ -85,8 +85,11 @@ const ProjectList = () => {
       <div className="container-full">
         <div className="section-header-pro" data-aos="fade-up">
           <span className="subtitle-brand">OUR PROJECTS</span>
-          <h2 className="title-brand">Effective Solutions in Construction</h2>
+          <h2 className="title-brand">Top Residential Projects in Jabalpur | Flats, Villas, Plots</h2>
           <div className="brand-accent-line mx-auto"></div>
+          <p style={{ maxWidth: '800px', margin: '1.5rem auto 0', color: 'var(--text-muted)', fontSize: '1rem', lineHeight: '1.6' }}>
+            Explore our <strong>residential projects in Jabalpur</strong>. As the <strong>best builder in Jabalpur</strong>, we offer a range of <strong>budget friendly homes in Jabalpur</strong> as well as <strong>luxury villas in Jabalpur</strong>. Find the perfect <strong>property investment in Jabalpur</strong> today.
+          </p>
         </div>
 
 
@@ -155,7 +158,7 @@ const ProjectList = () => {
                   <div className="project-slide-card">
                     <Link to={`/project/${project.id}`} className="slide-image-container">
                       {project.imageUrl ? (
-                        <img src={project.imageUrl} alt={project.title} className="slide-image" />
+                        <img src={project.imageUrl} alt={`${project.title} - Flats and villas project in Jabalpur MP`} className="slide-image" />
                       ) : (
                         <div className="slide-placeholder"></div>
                       )}
@@ -164,9 +167,9 @@ const ProjectList = () => {
                     <div className="slide-content-card">
                       <div className="card-top-row">
                         <div className="card-meta-left">
-                          <h3 className="card-title-main">{project.title}</h3>
+                          <h3 className="card-title-main">{project.title}, Jabalpur</h3>
                           <div className="card-metadata">
-                            <span className="meta-item">Location: <strong>{project.location || 'Bhopal, Victoria'}</strong></span>
+                            <span className="meta-item">Location: <strong>{project.location || 'Jabalpur, MP'}</strong></span>
                           </div>
 
                         </div>
@@ -174,7 +177,7 @@ const ProjectList = () => {
                       </div>
 
                       <p className="card-description-main">
-                        {project.description || 'This structural renovation project included installing technology and study pods, a custom-built stage made of Tasmanian oak, community spaces and an outdoor deck.'}
+                        {project.description || 'Prime property investment in Jabalpur. Our latest development features affordable flats in Jabalpur, premium plots, and luxury villas designed for superior living.'}
                       </p>
                     </div>
                   </div>
@@ -203,7 +206,7 @@ const ProjectList = () => {
               className={`swiper-button-prev-custom ${activeIndex <= 1 ? 'nav-locked' : ''}`}
               onClick={(e) => activeIndex <= 1 && e.preventDefault()}
             >
-              <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="22" y1="12" x2="2" y2="12"></line>
                 <polyline points="9 19 2 12 9 5"></polyline>
               </svg>
@@ -212,7 +215,7 @@ const ProjectList = () => {
               className={`swiper-button-next-custom ${activeIndex >= projects.length ? 'nav-locked' : ''}`}
               onClick={(e) => activeIndex >= projects.length && e.preventDefault()}
             >
-              <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="2" y1="12" x2="22" y2="12"></line>
                 <polyline points="15 5 22 12 15 19"></polyline>
               </svg>
@@ -600,8 +603,8 @@ const ProjectList = () => {
         /* Custom Arrows - Vertical Center of the Slide */
         .swiper-button-prev-custom, .swiper-button-next-custom {
           position: absolute;
-          top: 45%; 
-          transform: translateY(-6.5rem);
+          top: 50%; 
+          transform: translateY(-50%);
           width: 55px;
           height: 55px;
           background: var(--bg-main);
@@ -612,21 +615,27 @@ const ProjectList = () => {
           align-items: center;
           justify-content: center;
           cursor: pointer;
-          z-index: 100;
+          z-index: 10;
           transition: all 0.3s ease;
           color: var(--p-color);
         }
 
 
-        .swiper-button-prev-custom { left: 12rem; }
-        .swiper-button-next-custom { right: 12rem; }
+        .swiper-button-prev-custom svg, .swiper-button-next-custom svg {
+          width: 20px;
+          height: 20px;
+        }
+
+
+        .swiper-button-prev-custom { left: 10px; }
+        .swiper-button-next-custom { right: 10px; }
 
 
 
         .swiper-button-prev-custom:hover, .swiper-button-next-custom:hover {
           background: var(--p-color);
           color: var(--text-white);
-          transform: translateY(-150%) scale(1.1);
+          transform: translateY(-50%) scale(1.1);
         }
 
         .swiper-button-disabled,
@@ -664,7 +673,9 @@ const ProjectList = () => {
           .read-more-pill { width: 100%; text-align: center; }
           .slide-content-card { padding: 2rem; bottom: 1rem; }
 
-          .swiper-button-prev-custom, .swiper-button-next-custom { width: 44px; height: 44px; }
+          .swiper-button-prev-custom, .swiper-button-next-custom { 
+            display: none !important;
+          }
         }
       `}</style>
 

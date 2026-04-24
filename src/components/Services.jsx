@@ -3,23 +3,23 @@ import { Building2, Handshake, Wrench, ClipboardList } from "lucide-react";
 
 const services = [
   {
-    title: "Professional Builder",
-    desc: "Specialized in high-quality residential construction with attention to structural integrity and premium finishes.",
+    title: "Best Builder in Jabalpur",
+    desc: "The top real estate company in Jabalpur delivering premium residential projects in Jabalpur, including luxury villas and affordable flats.",
     icon: <Building2 size={22} />
   },
   {
-    title: "Real Estate Promoter",
-    desc: "Transforming visions into reality through strategic planning and promotion of premium commercial and housing projects.",
+    title: "Property Investment in Jabalpur",
+    desc: "Secure your future with the finest real estate in Jabalpur MP. We offer prime plots in Jabalpur and high-yield commercial projects.",
     icon: <Handshake size={22} />
   },
   {
-    title: "Civil Contractor",
-    desc: "Reliable civil services including structural development, renovations, and large-scale infrastructure projects.",
+    title: "Civil Contractor & Construction",
+    desc: "Expert civil services to build your dream house in Jabalpur. We ensure top-tier quality for budget friendly homes in Jabalpur.",
     icon: <Wrench size={22} />
   },
   {
-    title: "Project Management",
-    desc: "Seamless coordination from start to finish – ensuring timely delivery and budget control.",
+    title: "Real Estate Promoter",
+    desc: "Seamless project management for flats in Jabalpur and expansive villas in Jabalpur, balancing luxury living and smart investments.",
     icon: <ClipboardList size={22} />
   }
 ];
@@ -33,7 +33,7 @@ const Services = () => {
         <div className="section-header-pro" data-aos="fade-up">
           <span className="subtitle-brand">WHAT WE DO</span>
           <h2 className="title-brand">
-            Our Specialized <span className="title-accent-gold">Services</span>
+            Trusted Real Estate & Construction <span className="title-accent-gold">Services in Jabalpur (MP)</span>
           </h2>
           <div className="brand-accent-line mx-auto"></div>
         </div>
@@ -58,7 +58,7 @@ const Services = () => {
             <div className="image-frame-pro">
               <img
                 src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5"
-                alt="Professional Construction Jabalpur"
+                alt="Real estate and construction services in Jabalpur MP"
                 className="editorial-image"
               />
               {/* Optional Decoration */}
