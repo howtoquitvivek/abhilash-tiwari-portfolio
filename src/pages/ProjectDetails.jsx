@@ -143,7 +143,7 @@ const GalleryItem = ({ item, index, projectTitle, patternClass, onImageClick }) 
       <div className="card-parallax-container">
         <img
           src={item.url}
-          alt={`${projectTitle} gallery ${index}`}
+          alt={`${projectTitle} - real estate project in Jabalpur MP View ${index + 1}`}
           className="masonry-img"
           style={{
             transform: `translate3d(${rotation.y * -0.3}px, ${rotation.x * 0.3}px, 0) scale(1.12)`
@@ -262,8 +262,12 @@ const ProjectDetails = () => {
   return (
     <>
       <Helmet>
-        <title>{project.title} | Projects | Abhilash Tiwari</title>
-        <meta name="description" content={project.description?.substring(0, 160)} />
+        <title>{project.title} in Jabalpur (MP) | Flats, Villas, Plots | Abhilash Construction</title>
+        <meta name="description" content={`Explore ${project.title}. Top real estate in Jabalpur offering budget friendly homes, flats, villas, and plots. Your perfect house in Jabalpur awaits.`} />
+        <meta name="keywords" content={`${project.title}, builder in jabalpur, real estate in jabalpur, flats, villas, plots, house in jabalpur, budget friendly homes in jabalpur, affordable flats in jabalpur, plots in jabalpur mp`} />
+        <link rel="canonical" href={`https://abhilashtiwari.com/project/${project.id}`} />
+        <meta property="og:title" content={`${project.title} in Jabalpur (MP) | Flats, Villas, Plots | Abhilash Construction`} />
+        <meta property="og:description" content={`Explore ${project.title}. Top real estate in Jabalpur offering budget friendly homes, flats, villas, and plots. Your perfect house in Jabalpur awaits.`} />
       </Helmet>
 
       <Header />
@@ -819,10 +823,13 @@ const ProjectDetails = () => {
                 <span className="category-pill">{project.category || 'Portfolio'} Project</span>
 
                 <div className="title-desc-flex">
-                  <h1 className="project-title-xl">{project.title}</h1>
+                  <h1 className="project-title-xl">{project.title}, Jabalpur (MP)</h1>
                   {project.description && (
                     <div className="hero-desc-pro">
                       {project.description}
+                      <span style={{ display: 'block', marginTop: '0.8rem', fontStyle: 'normal', fontSize: '0.9rem', opacity: '0.9' }}>
+                        Brought to you by the <strong>top real estate company in Jabalpur</strong>. Whether you seek <strong>luxury villas in Jabalpur</strong>, <strong>affordable flats in Jabalpur</strong>, or lucrative <strong>commercial projects in Jabalpur</strong>, we offer the finest <strong>property investment in Jabalpur</strong>.
+                      </span>
                     </div>
                   )}
                 </div>
