@@ -9,27 +9,23 @@ const Hero = () => {
         <div className="hero-content">
 
           {/* BADGE: Standardized Pro Style */}
-          <div className="hero-badge-pro" data-aos="fade-down" data-aos-duration="1000">
+          <div className="hero-badge-pro" data-aos="fade-down" data-aos-duration="800" data-aos-easing="ease-in-out">
             <span className="dot-red pulse"></span>
             TRUSTED BUILDER SINCE 2005
           </div>
 
           {/* TITLE: Outfit Bold High-Contrast */}
-          <h1 className="hero-title-pro" data-aos="fade-up" data-aos-delay="200">
-            Crafting Premium Living Spaces in Jabalpur
-            <br />
-            <span className="text-accent-pro">
-              Luxury Villas, Modern Flats & Prime Plots
-            </span>
+          <h1 className="hero-title-pro" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800" data-aos-easing="ease-in-out">
+            Best Builder in Jabalpur for <span className="text-accent-pro">Flats, Villas & Plots</span>
           </h1>
 
           {/* SUBTITLE: Refined Inter spacing */}
-          <p className="hero-subtitle-pro" data-aos="fade-up" data-aos-delay="400">
-            We are a trusted builder in Jabalpur creating modern flats, villas, and plots with quality construction and thoughtful design.
+          <p className="hero-subtitle-pro" data-aos="fade-up" data-aos-delay="400" data-aos-duration="800" data-aos-easing="ease-in-out">
+            We are a trusted builder in Jabalpur offering modern homes, premium flats, villas, and residential plots with quality construction and thoughtful design.
           </p>
 
           {/* STATS: Outfit Semibold */}
-          <div className="hero-stats-pro" data-aos="fade-up" data-aos-delay="600">
+          <div className="hero-stats-pro" data-aos="fade-up" data-aos-delay="600" data-aos-duration="800" data-aos-easing="ease-in-out">
             <div className="stat-item-pro">
               <h3>150+</h3>
               <p>PROJECTS</p>
@@ -47,7 +43,7 @@ const Hero = () => {
           </div>
 
           {/* ACTIONS: Synced with Header Pro Button */}
-          <div className="hero-actions-pro" data-aos="fade-up" data-aos-delay="800">
+          <div className="hero-actions-pro" data-aos="fade-up" data-aos-delay="800" data-aos-duration="800" data-aos-easing="ease-in-out">
             <a href="#projects" className="btn-pro primary">
               VIEW PROJECTS →
             </a>
@@ -68,7 +64,7 @@ const Hero = () => {
           justify-content: center;
           text-align: center;
           color: var(--text-white);
-          background: url("https://images.unsplash.com/photo-1576577610667-c9ea0ac983fd?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+          background: url("https://images.unsplash.com/photo-1576577610667-c9ea0ac983fd?q=80&w=1920&auto=format&fit=crop&fm=webp");
           background-size: cover;
           background-position: center;
           background-attachment: fixed;

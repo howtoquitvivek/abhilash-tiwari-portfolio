@@ -85,10 +85,10 @@ const ProjectList = () => {
       <div className="container-full">
         <div className="section-header-pro" data-aos="fade-up">
           <span className="subtitle-brand">OUR PROJECTS</span>
-          <h2 className="title-brand">Top Residential Projects in Jabalpur | Flats, Villas, Plots</h2>
+          <h2 className="title-brand">Our Projects in Jabalpur</h2>
           <div className="brand-accent-line mx-auto"></div>
           <p style={{ maxWidth: '800px', margin: '1.5rem auto 0', color: 'var(--text-muted)', fontSize: '1rem', lineHeight: '1.6' }}>
-            Explore our <strong>residential projects in Jabalpur</strong>. As the <strong>best builder in Jabalpur</strong>, we offer a range of <strong>budget friendly homes in Jabalpur</strong> as well as <strong>luxury villas in Jabalpur</strong>. Find the perfect <strong>property investment in Jabalpur</strong> today.
+            Explore our premium residential projects. As a trusted builder in Jabalpur, we offer a range of budget-friendly flats and luxury villas. Find the perfect property investment for your family today.
           </p>
         </div>
 
@@ -155,10 +155,17 @@ const ProjectList = () => {
 
               {projects.map((project) => (
                 <SwiperSlide key={project.id}>
-                  <div className="project-slide-card">
+                  <div className="project-slide-card" data-aos="fade-up" data-aos-duration="800" data-aos-easing="ease-in-out">
                     <Link to={`/project/${project.id}`} className="slide-image-container">
                       {project.imageUrl ? (
-                        <img src={project.imageUrl} alt={`${project.title} - Flats and villas project in Jabalpur MP`} className="slide-image" />
+                        <img 
+                          src={project.imageUrl} 
+                          alt={`${project.title} - Flats and villas project in Jabalpur MP`} 
+                          className="slide-image" 
+                          width="800"
+                          height="520"
+                          loading="lazy"
+                        />
                       ) : (
                         <div className="slide-placeholder"></div>
                       )}
@@ -177,7 +184,7 @@ const ProjectList = () => {
                       </div>
 
                       <p className="card-description-main">
-                        {project.description || 'Prime property investment in Jabalpur. Our latest development features affordable flats in Jabalpur, premium plots, and luxury villas designed for superior living.'}
+                        {project.description || 'Discover premium flats and prime plots in Jabalpur. Our latest real estate development features modern amenities and luxury villas designed for superior living.'}
                       </p>
                     </div>
                   </div>

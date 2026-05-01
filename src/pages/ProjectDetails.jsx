@@ -826,10 +826,10 @@ const ProjectDetails = () => {
                   <h1 className="project-title-xl">{project.title}, Jabalpur (MP)</h1>
                   {project.description && (
                     <div className="hero-desc-pro">
-                      {project.description}
-                      <span style={{ display: 'block', marginTop: '0.8rem', fontStyle: 'normal', fontSize: '0.9rem', opacity: '0.9' }}>
-                        Brought to you by the <strong>top real estate company in Jabalpur</strong>. Whether you seek <strong>luxury villas in Jabalpur</strong>, <strong>affordable flats in Jabalpur</strong>, or lucrative <strong>commercial projects in Jabalpur</strong>, we offer the finest <strong>property investment in Jabalpur</strong>.
+                      <span style={{ display: 'block', marginBottom: '0.8rem', fontStyle: 'normal', fontSize: '0.9rem', opacity: '0.9' }}>
+                        <strong>{project.title}</strong> represents exceptional real estate in Jabalpur. This project offers modern flats in Jabalpur, alongside beautifully designed plots and villas tailored for premium living.
                       </span>
+                      {project.description}
                     </div>
                   )}
                 </div>
