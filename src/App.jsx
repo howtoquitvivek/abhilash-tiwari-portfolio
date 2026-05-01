@@ -9,6 +9,7 @@ import ProjectList from './components/ProjectList'
 import ContactForm from './components/ContactForm'
 import AdminDashboard from './pages/AdminDashboard'
 import ProjectDetails from './pages/ProjectDetails'
+import NotFound from './pages/NotFound'
 import { useAOS } from './hooks/useAOS'
 import CallPopup from './components/CallPopup'
 import './App.css'
@@ -62,11 +63,11 @@ const MainSite = () => {
   return (
     <>
       <Helmet>
-        <title>Best Builder in Jabalpur (JBP) | Flats, Villas, Plots | Abhilash Construction</title>
-        <meta name="description" content="Best builder in Jabalpur (MP). Specializing in premium flats, luxury villas, and residential plots. Your trusted partner for real estate in Jabalpur MP and high-quality construction." />
-        <meta name="keywords" content="builder in jabalpur, jabalpur construction, real estate in jabalpur, flats in jabalpur, villa in jabalpur, plots in jabalpur, house in jabalpur, property in jabalpur mp, abhilash tiwari jabalpur, current open site in jbp" />
-        <meta property="og:title" content="Best Builder in Jabalpur (JBP) | Flats, Villas, Plots | Abhilash Construction" />
-        <meta property="og:description" content="Expert Builder and Developer specializing in high-quality residential construction in Jabalpur." />
+        <title>Builder in Jabalpur | Flats & Villas | Abhilash Construction</title>
+        <meta name="description" content="Trusted builder in Jabalpur offering flats, villas, plots, and construction services with modern design and quality work." />
+        <meta name="keywords" content="builder in jabalpur, construction, flats, villas, real estate" />
+        <meta property="og:title" content="Builder in Jabalpur | Flats & Villas | Abhilash Construction" />
+        <meta property="og:description" content="Trusted builder in Jabalpur offering flats, villas, plots, and construction services with modern design and quality work." />
       </Helmet>
       <Hero />
       <Services />
@@ -190,6 +191,17 @@ function App() {
             {/* Admin Portal - Full Viewport Experience */}
 
             <Route path="/admin" element={<AdminPage />} />
+            
+            {/* 404 Catch-All Route */}
+            <Route path="*" element={
+              <>
+                <Header />
+                <main>
+                  <NotFound />
+                </main>
+                <Footer />
+              </>
+            } />
           </Routes>
         </div>
       </Router>

@@ -3,23 +3,23 @@ import { Building2, Handshake, Wrench, ClipboardList } from "lucide-react";
 
 const services = [
   {
-    title: "Best Builder in Jabalpur",
-    desc: "The top real estate company in Jabalpur delivering premium residential projects in Jabalpur, including luxury villas and affordable flats.",
+    title: "Premium Residential Projects",
+    desc: "We offer real estate services in Jabalpur including modern luxury villas and affordable flats tailored to your lifestyle.",
     icon: <Building2 size={22} />
   },
   {
-    title: "Property Investment in Jabalpur",
-    desc: "Secure your future with the finest real estate in Jabalpur MP. We offer prime plots in Jabalpur and high-yield commercial projects.",
+    title: "Property Investment",
+    desc: "Secure your future with prime plots in Jabalpur and high-yield commercial spaces designed for excellent returns.",
     icon: <Handshake size={22} />
   },
   {
-    title: "Civil Contractor & Construction",
-    desc: "Expert civil services to build your dream house in Jabalpur. We ensure top-tier quality for budget friendly homes in Jabalpur.",
+    title: "Civil Construction Services",
+    desc: "Expert civil contractors dedicated to building your dream house with top-tier quality and budget-friendly solutions.",
     icon: <Wrench size={22} />
   },
   {
-    title: "Real Estate Promoter",
-    desc: "Seamless project management for flats in Jabalpur and expansive villas in Jabalpur, balancing luxury living and smart investments.",
+    title: "Real Estate Development",
+    desc: "Seamless project management for expansive villas and premium flats, balancing luxury living with smart property investment.",
     icon: <ClipboardList size={22} />
   }
 ];
@@ -33,7 +33,7 @@ const Services = () => {
         <div className="section-header-pro" data-aos="fade-up">
           <span className="subtitle-brand">WHAT WE DO</span>
       <h2 className="title-brand">
-  Building Homes & <span className="title-accent-gold">Real Estate Solutions</span> in Jabalpur
+  Complete Real Estate & Construction Solutions <span className="title-accent-gold">in Jabalpur</span>
 </h2>
           <div className="brand-accent-line mx-auto"></div>
         </div>
@@ -44,7 +44,7 @@ const Services = () => {
           <div className="services-grid-wrapper">
             <div className="services-inner-grid">
               {services.map((item, i) => (
-                <div key={i} className="service-card-pro">
+                <div key={i} className="service-card-pro" data-aos="fade-up" data-aos-delay={(i + 1) * 100} data-aos-duration="800" data-aos-easing="ease-in-out">
                   <div className="service-icon-box">{item.icon}</div>
                   <h3 className="service-card-title">{item.title}</h3>
                   <p className="service-card-desc">{item.desc}</p>
@@ -57,9 +57,12 @@ const Services = () => {
           <div className="services-image-panel">
             <div className="image-frame-pro">
               <img
-                src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5"
+                src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=800&fm=webp"
                 alt="Real estate and construction services in Jabalpur MP"
                 className="editorial-image"
+                width="800"
+                height="600"
+                loading="lazy"
               />
               {/* Optional Decoration */}
               <div className="image-decorator-pro"></div>
@@ -105,7 +108,7 @@ const Services = () => {
           border-radius: var(--radius-pro-inner);
           border: 1px solid var(--border-subtle);
           box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
           position: relative;
           overflow: hidden;
           height: 220px;
@@ -114,7 +117,7 @@ const Services = () => {
         }
 
         .service-card-pro:hover {
-          transform: translateY(-5px);
+          transform: translateY(-5px) scale(1.03);
           box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
