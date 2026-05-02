@@ -64,15 +64,19 @@ const MainSite = () => {
     <>
       <Helmet>
         <title>Builder in Jabalpur | Flats & Villas | Abhilash Construction</title>
-        <meta name="description" content="Trusted builder in Jabalpur offering flats, villas, plots, and construction services with modern design and quality work." />
         <meta name="keywords" content="builder in jabalpur, construction, flats, villas, real estate" />
         <meta property="og:title" content="Builder in Jabalpur | Flats & Villas | Abhilash Construction" />
-        <meta property="og:description" content="Trusted builder in Jabalpur offering flats, villas, plots, and construction services with modern design and quality work." />
       </Helmet>
       <Hero />
       <Services />
       <ProjectList />
       <ContactForm />
+      <section className="seo-content" style={{ padding: '2rem 1.5rem', maxWidth: 'var(--container-max)', margin: '0 auto', color: 'var(--text-muted)' }}>
+        <h2 style={{ fontSize: '1.25rem', color: 'var(--text-main)', marginBottom: '1rem', fontWeight: '600' }}>Real Estate & Construction in Jabalpur</h2>
+        <p style={{ marginBottom: '1rem', lineHeight: '1.7', fontSize: '0.95rem' }}>Abhilash Construction is a trusted builder in Jabalpur offering premium flats, modern villas, and residential plots. We specialize in high-quality construction services in Jabalpur, delivering projects that combine design, durability, and affordability.</p>
+        <p style={{ marginBottom: '1rem', lineHeight: '1.7', fontSize: '0.95rem' }}>Whether you are looking for flats in Jabalpur, villas in Jabalpur, or plots for investment, we provide the best real estate solutions. Our team focuses on creating modern homes and commercial spaces that match your lifestyle and investment goals.</p>
+        <p style={{ lineHeight: '1.7', fontSize: '0.95rem' }}>With years of experience in real estate and construction in Jabalpur, we ensure timely delivery, transparent deals, and premium quality.</p>
+      </section>
     </>
   );
 };
